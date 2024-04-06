@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title></title>
+    <style type="text/css">
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      h4 {
+        margin-bottom: 16px;
+        font-weight: 700;
+      }
+      body,
+      .main {
+        font-family: "Sora", sans-serif;
+        background: white;
+        margin: 0;
+        padding: 0;
+        color: #262626;
+        font-size: 16px;
+        line-height: 32px;
+      }
+
+      p,
+      a,
+      a:visited,
+      a:focus,
+      a:hover {
+        font-size: 16px;
+        color: #262626;
+        line-height: 30px;
+        font: 300;
+      }
+
+      p {
+        margin-bottom: 16px;
+      }
+
+      .mail {
+        max-width: 700px;
+        margin: auto;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .text-right {
+        text-align: right;
+      }
+
+      .mail-container {
+        /* padding: 100%; */
+        padding: 0px 16px;
+      }
+
+      @media (min-width: 600px) {
+        .mail-container {
+          padding: 0px 30px;
+        }
+      }
+
+      .pattern {
+        position: absolute;
+      }
+
+      .pattern.right {
+        right: -65px;
+        top: 0;
+        height: 300px;
+        text-align: right;
+      }
+
+      .pattern svg {
+        height: 100%;
+      }
+
+      .mail-logo {
+        max-width: 150px;
+        height: 100px;
+        margin-bottom: 32px;
+        position: relative;
+      }
+
+      .mail-logo img {
+        height: 100%;
+      }
+
+      .mail-body {
+        position: relative;
+        z-index: 5;
+      }
+
+      table {
+        width: 100%;
+        border-spacing: 0;
+      }
+
+      tr td {
+        border: 0;
+        padding: 15px 20px;
+        margin: 0;
+      }
+
+      .footer {
+        margin-top: 42px;
+        padding-top: 20px;
+
+        font-size: 14px;
+      }
+
+      .footer .title {
+        color: #7d7d89;
+      }
+
+      a.btn {
+        width: auto;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 16px;
+        font-weight: 500;
+        cursor: pointer;
+        border-radius: 4px;
+        border: 1px solid;
+        font-size: 16px;
+        text-decoration: none;
+        background-color: #3f56e3;
+        border: 1px solid #3f56e3;
+        color: white;
+        font-weight: 500;
+        text-align: center;
+      }
+
+      .a-btn {
+        display: block;
+        padding: 24px 32px;
+        border-radius: 8px;
+        background: #256ee5;
+        color: white !important;
+        width: fit-content;
+        text-decoration: none;
+        font-size: 20px;
+      }
+
+      .a-btn:hover {
+        color: white !important;
+        font-size: 20px;
+      }
+
+      .wellat-banner-area {
+        width: 100%;
+        height: 100px;
+        background-image: url("https://wellat-files.s3.eu-north-1.amazonaws.com/email_header.png");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      @media (min-width: 768px) {
+        .wellat-banner-area {
+          height: 80px;
+          background-size: 100%;
+        }
+      }
+
+      .email_header_text {
+        color: #000;
+        text-align: center;
+        font-family: Sora;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        padding: 32px 16px 32px 16px;
+        width: auto;
+        margin: 0 auto;
+      }
+
+      @media (min-width: 768px) {
+        .email_header_text {
+          font-size: 40px;
+          padding: 32px 0px 32px 0px;
+          width: 650px;
+        }
+      }
+
+      .social_media_icon {
+        display: block;
+        margin-right: 16px;
+        width: 40px;
+        height: 40px;
+      }
+
+      .social_media_icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .social_media_icon img.adjust-tiktok-icon {
+        object-fit: cover;
+        width: 49px;
+        height: 40px;
+      }
+
+      .social_media_icon img.adjust-x-icon {
+        object-fit: cover;
+        width: 49px;
+        height: 40px;
+      }
+
+      .social_icon_container {
+        display: flex;
+        justify-content: center;
+        border-bottom: 2px solid #e3e3e4;
+        padding-bottom: 32px;
+      }
+
+      .social_icon_container .social_media_icon:last-child {
+        margin-right: 0;
+      }
+
+      .footer-links {
+        padding: 32px 16px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .footer-links a {
+        color: #05152e;
+        font-size: 16px;
+        font-weight: 400;
+        text-decoration: none;
+        display: block;
+        margin-right: 16px;
+      }
+
+      .footer-links a:last-child {
+        margin-right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="mail">
+        <div class="wellat-banner-area"></div>
+        <div class="email_header_text">
+          Welcome to Wellat - Empower Your Crypto Journey!
+        </div>
+        <div class="mail-container">
+          <div class="mail-body">
+            <!-- Mail content goes here -->
+            <div>
+              <h4>Dear {{fullname}}</h4>
+
+              <p>
+                A warm welcome to Wellat, your gateway to a new era of crypto
+                possibilities! We're thrilled to have you join us on this
+                exciting journey.
+              </p>
+
+              <p>
+                To kickstart your adventure, we've deposited 100 Welts into your
+                account. That’s not all, here's where it gets truly interesting
+                – You can become a Fund Manager and earn performance fees,
+                invest in profitable funds to earn passive income, and earn
+                passively by referring friends.
+              </p>
+
+              <p>Ready to take control of your crypto destiny?</p>
+
+              <p>Your unique referral link: {{ReferralLink}}</p>
+
+              <p>
+                Track your portfolio, monitor earnings, and explore the endless
+                possibilities that Wellat has to offer. If you have any
+                questions or need guidance, our team is here for you – just hit
+                reply.
+              </p>
+
+              <p style="margin-bottom: 40px">
+                To your crypto success, <br />
+                Wellat Team
+              </p>
+            </div>
+            <!-- footer -->
+            <div class="footer">
+              <div class="social_icon_container">
+                <a
+                  class="social_media_icon"
+                  href="https://web.facebook.com/0xwellat"
+                >
+                  <img
+                    src="https://wellat-files.s3.eu-north-1.amazonaws.com/facebook.png"
+                  />
+                </a>
+
+                <a
+                  class="social_media_icon"
+                  href="https://www.instagram.com/0xwellat/"
+                >
+                  <img
+                    src="https://wellat-files.s3.eu-north-1.amazonaws.com/instagram.png"
+                  />
+                </a>
+
+                <a
+                  class="social_media_icon"
+                  href="https://www.linkedin.com/company/wellat/"
+                >
+                  <img
+                    class="adjust-tiktok-icon"
+                    src="https://wellat-files.s3.eu-north-1.amazonaws.com/linkedin.png"
+                  />
+                </a>
+
+                <a
+                  class="social_media_icon"
+                  href="https://twitter.com/0xWellat"
+                >
+                  <img
+                    class="adjust-x-icon"
+                    src="https://wellat-files.s3.eu-north-1.amazonaws.com/x.png"
+                  />
+                </a>
+
+                <a
+                  class="social_media_icon"
+                  href="https://www.tiktok.com/@0xwellat"
+                >
+                  <img
+                    class="adjust-tiktok-icon"
+                    src="https://wellat-files.s3.eu-north-1.amazonaws.com/tiktok.png"
+                  />
+                </a>
+              </div>
+              <div class="footer-links">
+                <a href="mailto:support@mywellat.com"> Contact </a>
+                <a href="mywellat.com"> Platform </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

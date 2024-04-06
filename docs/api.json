@@ -1,0 +1,354 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "FH Turbo API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.something.com"
+    },
+    {
+      "url": "http://localhost:7701"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/auth/create": {
+      "post": {
+        "description": "",
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Accept",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "trial_count": {
+                    "type": "number"
+                  },
+                  "tcAndPpAcceptedDate": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              },
+              "example": {
+                "email": "el@lowi.comsec",
+                "password": "5nUKp2E",
+                "firstName": "Daniel",
+                "lastName": "Walter",
+                "trial_count": 0,
+                "tcAndPpAcceptedDate": "2024-04-06T19:55:51.191Z"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "is2FASet": {
+                          "type": "string"
+                        },
+                        "userType": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "number"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "acceptedTCAndPP": {
+                          "type": "string"
+                        },
+                        "emailVerificationCode": {
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        },
+                        "referralCode": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "phoneNumber": {},
+                        "nationality": {},
+                        "deletedAt": {},
+                        "token": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "status": true,
+                  "message": "Your account has been created successfully",
+                  "data": {
+                    "is2FASet": "false",
+                    "userType": "INVESTOR",
+                    "id": 5,
+                    "email": "el@lowi.comsec",
+                    "acceptedTCAndPP": "2024-04-06T19:55:51.191Z",
+                    "emailVerificationCode": "f3cbb280b848f6c29bc3bea186ab30da57e35a59",
+                    "firstName": "Daniel",
+                    "lastName": "Walter",
+                    "referralCode": "BCzN3n",
+                    "isEmailVerified": false,
+                    "createdAt": "2024-04-06T19:55:51.280Z",
+                    "updatedAt": "2024-04-06T19:55:51.281Z",
+                    "phoneNumber": null,
+                    "nationality": null,
+                    "deletedAt": null,
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpczJGQVNldCI6ImZhbHNlIiwidXNlclR5cGUiOiJJTlZFU1RPUiIsInBhc3N3b3JkUmVjb3ZlcnlDb2RlIjpudWxsLCJpZCI6NSwiZW1haWwiOiJlbEBsb3dpLmNvbXNlYyIsImFjY2VwdGVkVENBbmRQUCI6IjIwMjQtMDQtMDZUMTk6NTU6NTEuMTkxWiIsImVtYWlsVmVyaWZpY2F0aW9uQ29kZSI6ImYzY2JiMjgwYjg0OGY2YzI5YmMzYmVhMTg2YWIzMGRhNTdlMzVhNTkiLCJmaXJzdE5hbWUiOiJEYW5pZWwiLCJsYXN0TmFtZSI6IldhbHRlciIsInJlZmVycmFsQ29kZSI6IkJDek4zbiIsImlzRW1haWxWZXJpZmllZCI6ZmFsc2UsInBhc3N3b3JkIjoiJDJiJDEwJGIwMVgxL0NYaDYvUTZHTWI2MXhnLk9MMlFMWUU3ZjlYNHp0anVabU44bWNEOVJNd200VjVHIiwiY3JlYXRlZEF0IjoiMjAyNC0wNC0wNlQxOTo1NTo1MS4yODBaIiwidXBkYXRlZEF0IjoiMjAyNC0wNC0wNlQxOTo1NTo1MS4yODFaIiwidHJhbnNhY3Rpb25QaW4iOm51bGwsInR3b0ZhY3RvclNlY3JldCI6bnVsbCwicGhvbmVOdW1iZXIiOm51bGwsIm5hdGlvbmFsaXR5IjpudWxsLCJkZWxldGVkQXQiOm51bGwsImlhdCI6MTcxMjQzMzM1MX0.H2o8RY64450GGBw8od30-5BkDfv5MM_EOdpUfon9PZY",
+                    "isTransactionPinSet": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/platform-feature/create": {
+      "post": {
+        "description": "",
+        "tags": [
+          "PlatformFeatureStatus"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Accept",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "feature": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "feature": "SIGNUPTEST",
+                "status": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "feature": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "deletedAt": {}
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "status": true,
+                  "message": "Feature created successfully",
+                  "data": {
+                    "id": 4,
+                    "feature": "SIGNUPTEST",
+                    "status": true,
+                    "updatedAt": "2024-04-06T19:55:51.299Z",
+                    "createdAt": "2024-04-06T19:55:51.299Z",
+                    "deletedAt": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/platform-feature/update/4": {
+      "patch": {
+        "description": "",
+        "tags": [
+          "PlatformFeatureStatus"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Accept",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "feature": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "deletedAt": {}
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "status": true,
+                  "message": "Feature updated successfullt",
+                  "data": {
+                    "id": 4,
+                    "feature": "SIGNUPTEST",
+                    "status": false,
+                    "createdAt": "2024-04-06T19:55:51.299Z",
+                    "updatedAt": "2024-04-06T19:55:51.299Z",
+                    "deletedAt": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/platform-feature/delete/4": {
+      "delete": {
+        "description": "",
+        "tags": [
+          "PlatformFeatureStatus"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Accept",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "status": true,
+                  "message": "Feature deleted successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

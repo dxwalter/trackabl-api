@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  backend:
+    build: ./
+    container_name: wellat_market_dev_api
+    environment:
+      - DEVELOPMENT_DATABASE_USERNAME=uvwsfykj
+      - DEVELOPMENT_DATABASE_PASSWORD=k_7ITlSY_xhro-J62QLHasUSiSyZjh-k
+      - DEVELOPMENT_DATABASE_NAME=uvwsfykj
+      - DEVELOPMENT_DATABASE_HOST=peanut.db.elephantsql.com
+      - DEVELOPMENT_DATABASE_PORT=5432
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+
+database:
+  image: postgres
+  ports:
+    - "5432:5432"

@@ -60,14 +60,6 @@ export class AuthenticationController {
   async createUser(
     @Body() userBody: CreateUserDto
   ): Promise<createUserResponse> {
-    this.utils.logUserActions(
-      userBody.email,
-      "AuthenticationController.createUser",
-      userBody,
-      undefined,
-      undefined
-    );
-
     return await new AuthCreateUserAccount(
       this.userService,
       this.utils,

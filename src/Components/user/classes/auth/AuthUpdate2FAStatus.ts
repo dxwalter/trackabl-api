@@ -24,22 +24,6 @@ export class AuthUpdate2FAStatus {
 
     const user = await this.userService.getUserProfileUsingID(userId);
 
-    if (!user?.twoFactorSecret) {
-      throw new BadRequestException();
-    }
-
-    const status = !user.is2FASet;
-
-    let data = {};
-
-    if (status === false) {
-      (data["twoFactorSecret"] = null), (data["is2FASet"] = status);
-    } else {
-      data["is2FASet"] = status;
-    }
-
-    await this.userService.updateUserProfile(userId, data);
-
     return {
       status: true,
       message: UserStatusMessages.TwoFactorAuthentication.statusUpdate,

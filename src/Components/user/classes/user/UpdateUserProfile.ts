@@ -47,23 +47,6 @@ export class UpdateUserProfile {
       updatedUserProfile["lastName"] = payload.lastName;
     }
 
-    // nationality
-    if (payload.nationality && payload.nationality !== user?.nationality) {
-      updatedUserProfile["nationality"] = payload.nationality;
-    }
-
-    // phone number
-    if (payload.phoneNumber && payload.phoneNumber !== user?.phoneNumber) {
-      const phoneNumberStatus =
-        await this.userService.getProfileUsingPhoneNumber(payload.phoneNumber);
-
-      if (phoneNumberStatus) {
-        throw new PhoneNumberExists();
-      }
-
-      updatedUserProfile["phoneNumber"] = payload.phoneNumber;
-    }
-
     // email address
     if (
       payload.email &&

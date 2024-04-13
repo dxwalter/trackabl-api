@@ -31,6 +31,14 @@ import { PlatformFeatureStatusModule } from "../platform-feature-status/platform
 import { PlatformFeatureStatusController } from "../platform-feature-status/platform-status.controller";
 import { PlatformFeatureStatusService } from "../platform-feature-status/platform-status.service";
 
+import { AdminController } from "../admin/admin.controller";
+import { AdminService } from "../admin/admin.service";
+import { AdminModule } from "../admin/admin.module";
+
+import { SubscriptionController } from "../subscription/subscription.controller";
+import { SubscriptionService } from "../subscription/subscription.service";
+import { SubcriptionPlanModel } from "../subscription/model/subscription-plans.model";
+
 import { GlobalErrorService } from "../globals/global.error.service";
 // import { GlobalLogService } from "../globals/global.log.service";
 import { GlobalModule } from "../globals/global.module";
@@ -95,6 +103,8 @@ const port = isProduction
     forwardRef(() => WebhookModule),
     forwardRef(() => HistoryModule),
     forwardRef(() => GlobalModule),
+    forwardRef(() => AdminModule),
+    forwardRef(() => SubcriptionPlanModel),
   ],
   controllers: [
     WaitlistController,
@@ -106,6 +116,8 @@ const port = isProduction
     TransactionsController,
     WebhookController,
     HistoryController,
+    AdminController,
+    SubscriptionController,
   ],
   providers: [
     WaitlistService,
@@ -117,6 +129,8 @@ const port = isProduction
     TransactionsService,
     WebhookService,
     HistoryService,
+    AdminService,
+    SubscriptionService,
   ],
 })
 export class AppModule {}

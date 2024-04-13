@@ -50,10 +50,6 @@ export class UserModel extends Model {
   @Column(DataType.STRING)
   public password: string;
 
-  @AllowNull(true)
-  @Column(DataType.STRING)
-  public transactionPin: string;
-
   @Unique
   @AllowNull(true)
   @Column(DataType.STRING)
@@ -67,24 +63,7 @@ export class UserModel extends Model {
   @AllowNull(false)
   @Default(false)
   @Column(DataType.BOOLEAN)
-  public is2FASet: boolean;
-
-  @AllowNull(true)
-  @Column(DataType.STRING)
-  public twoFactorSecret: string;
-
-  @AllowNull(true)
-  @Default(USER_TYPE.INVESTOR)
-  @Column(DataType.STRING)
-  public userType: string;
-
-  @AllowNull(true)
-  @Column(DataType.STRING)
-  public phoneNumber: string;
-
-  @AllowNull(true)
-  @Column(DataType.STRING)
-  public nationality: string;
+  public isSubscriptionActive: boolean;
 
   @AllowNull(false)
   @Column(DataType.STRING)

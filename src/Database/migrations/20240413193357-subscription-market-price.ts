@@ -36,7 +36,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      price: {
+      priceAMonth: {
         type: Sequelize.FLOAT,
         allowNull: false,
       },

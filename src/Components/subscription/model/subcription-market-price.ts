@@ -49,7 +49,7 @@ export class SubscriptionMarketPricesModel extends Model {
 
   @AllowNull(false)
   @Column(DataType.FLOAT)
-  public price: number;
+  public priceAMonth: number;
 
   @AllowNull(false)
   @CreatedAt

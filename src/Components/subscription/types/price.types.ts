@@ -19,6 +19,16 @@ export interface Market {
   updatedAt: Date;
 }
 
+export interface Price {
+  id: number;
+  planId: number;
+  marketId: number;
+  freePlanPriceInDays: number;
+  priceAMonth: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface createSubscriptionPlan {
   name: string;
   status: boolean;
@@ -34,6 +44,16 @@ export interface getMarketsResponse extends GlobalRequestResponse {
   data: Market[];
 }
 
+export interface getAllMarketPriceResponse extends GlobalRequestResponse {
+  data: Price[];
+}
+
 export interface getPlansResponse extends GlobalRequestResponse {
   data: Plan[];
 }
+
+export interface createPriceResponse extends GlobalRequestResponse {
+  data: Price;
+}
+
+export interface deletePriceResponse extends GlobalRequestResponse {}

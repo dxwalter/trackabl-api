@@ -18,6 +18,10 @@ import { Utils } from "../../src/Components/utils/index";
 import { AdminStatusMessages } from "../../src/Components/admin/config/admin-response-message";
 import { SubcriptionPlanStatusMessage } from "../../src/Components/subscription/config/subscription-response-message";
 import { ADMIN_TYPE } from "../../src/Components/admin/types/admin.constants";
+import {
+  Plan,
+  Market,
+} from "../../src/Components/subscription/types/price.types";
 
 dotenv.config();
 
@@ -38,10 +42,14 @@ describe("PLATFORM PRICING (e2e)", () => {
   let userId = 0;
   let featureId = undefined;
 
-  let markets = [];
-  let plans = [];
+  let markets: Market[] = [];
+  let plans: Plan[] = [];
 
   let planId = undefined;
+  const priceIds = {
+    priceId1: 0,
+    priceId2: 0,
+  };
 
   const referredUserEmail: string = randomEmail();
   const referredUserPassword = utils.generateRandomString(7);
@@ -169,7 +177,6 @@ describe("PLATFORM PRICING (e2e)", () => {
       .set("Accept", "application/json")
       .set("Authorization", `Bearer ${userToken}`)
       .expect(function (res) {
-        console.log(res.body);
         if (!("message" in res.body)) {
           throw new Error("Response should contain message.");
         }
@@ -187,36 +194,203 @@ describe("PLATFORM PRICING (e2e)", () => {
         }
 
         plans = res.body.data;
+
         addEndpoint(res, {
           tags: ["Subscription"],
         });
       });
   });
 
-  // it("Map Subscription plan to market", () => {
-  //   return request(app.getHttpServer())
-  //     .post("/subscription/create-plan-price")
-  //     .send({
-  //       name: "Free-test",
-  //       status: true,
-  //     })
-  //     .set("Accept", "application/json")
-  //     .set("Authorization", `Bearer ${userToken}`)
-  //     .expect(function (res) {
-  //       if (!("message" in res.body)) {
-  //         throw new Error("Response should contain message.");
-  //       }
+  it("Map Subscription plan to nigerian market", () => {
+    const getPlatinum = plans.filter(
+      (plan) => plan.name.toLowerCase() === "premium"
+    );
+    const nigMarket = markets.filter(
+      (market) => market.countryName.toLowerCase() === "nigeria"
+    );
 
-  //       if (res.body.message !== SubcriptionPlanStatusMessage.plan.created) {
-  //         throw new Error("Invalid message response.");
-  //       }
+    const priceAMonth = 1999.99;
 
-  //       planId = res.body.data.id;
-  //       addEndpoint(res, {
-  //         tags: ["Admin"],
-  //       });
-  //     });
-  // });
+    return request(app.getHttpServer())
+      .post("/subscription/create-plan-price")
+      .send({
+        planId: getPlatinum[0].id,
+        marketId: nigMarket[0].id,
+        freePlanPriceInDays: 7,
+        priceAMonth,
+      })
+      .set("Accept", "application/json")
+      .set("Authorization", `Bearer ${userToken}`)
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+
+        if (!("data" in res.body)) {
+          throw new Error("Response should contain data.");
+        }
+
+        if (res.body.data.priceAMonth !== priceAMonth) {
+          throw new Error("Wrong price gotten.");
+        }
+
+        if (
+          res.body.message !== SubcriptionPlanStatusMessage.plan.priceCreated
+        ) {
+          throw new Error("Invalid message response.");
+        }
+        priceIds.priceId1 = res.body.data.id;
+        addEndpoint(res, {
+          tags: ["Admin"],
+        });
+      });
+  });
+
+  it("Map Subscription plan to US market", () => {
+    const getPlatinum = plans.filter(
+      (plan) => plan.name.toLowerCase() === "premium"
+    );
+
+    const usMarket = markets.filter((market) => market.countryCode === "USA");
+
+    const priceAMonth = 10;
+
+    return request(app.getHttpServer())
+      .post("/subscription/create-plan-price")
+      .send({
+        planId: getPlatinum[0].id,
+        marketId: usMarket[0].id,
+        freePlanPriceInDays: 7,
+        priceAMonth,
+      })
+      .set("Accept", "application/json")
+      .set("Authorization", `Bearer ${userToken}`)
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+
+        if (!("data" in res.body)) {
+          throw new Error("Response should contain data.");
+        }
+
+        if (res.body.data.priceAMonth !== priceAMonth) {
+          throw new Error("Wrong price gotten.");
+        }
+
+        if (
+          res.body.message !== SubcriptionPlanStatusMessage.plan.priceCreated
+        ) {
+          throw new Error("Invalid message response.");
+        }
+        priceIds.priceId2 = res.body.data.id;
+
+        addEndpoint(res, {
+          tags: ["Admin"],
+        });
+      });
+  });
+
+  it("Get all price plans", () => {
+    return request(app.getHttpServer())
+      .get("/subscription/admin-get-plans")
+
+      .set("Accept", "application/json")
+      .set("Authorization", `Bearer ${userToken}`)
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+
+        if (!("data" in res.body)) {
+          throw new Error("Response should contain data.");
+        }
+
+        if (res.body.data.length !== 2) {
+          throw new Error("Wrong price gotten.");
+        }
+
+        if (res.body.message !== SubcriptionPlanStatusMessage.default) {
+          throw new Error("Invalid message response.");
+        }
+
+        addEndpoint(res, {
+          tags: ["Admin"],
+        });
+      });
+  });
+
+  it("Get all price plans in a market", () => {
+    const usMarket = markets.filter((market) => market.countryCode === "USA");
+    return request(app.getHttpServer())
+      .get("/subscription/admin-get-plans?marketId=" + usMarket[0].id)
+
+      .set("Accept", "application/json")
+      .set("Authorization", `Bearer ${userToken}`)
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+
+        if (!("data" in res.body)) {
+          throw new Error("Response should contain data.");
+        }
+
+        if (res.body.data.length != 1) {
+          throw new Error("Wrong price gotten.");
+        }
+
+        if (res.body.message !== SubcriptionPlanStatusMessage.default) {
+          throw new Error("Invalid message response.");
+        }
+
+        addEndpoint(res, {
+          tags: ["Admin"],
+        });
+      });
+  });
+
+  it("Delete subscription price 1", () => {
+    return request(app.getHttpServer())
+      .delete("/subscription/price/" + priceIds.priceId1)
+      .set("Authorization", `Bearer ${userToken}`)
+      .set("Accept", "application/json")
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+
+        if (
+          res.body.message !== SubcriptionPlanStatusMessage.plan.PriceDeleted
+        ) {
+          throw new Error("Invalid message response.");
+        }
+        addEndpoint(res, {
+          tags: ["Admin"],
+        });
+      });
+  });
+
+  it("Delete subscription price 2", () => {
+    return request(app.getHttpServer())
+      .delete("/subscription/price/" + priceIds.priceId2)
+      .set("Authorization", `Bearer ${userToken}`)
+      .set("Accept", "application/json")
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+
+        if (
+          res.body.message !== SubcriptionPlanStatusMessage.plan.PriceDeleted
+        ) {
+          throw new Error("Invalid message response.");
+        }
+        addEndpoint(res, {
+          tags: ["Admin"],
+        });
+      });
+  });
 
   it("Delete subscription plan", () => {
     return request(app.getHttpServer())
@@ -224,7 +398,6 @@ describe("PLATFORM PRICING (e2e)", () => {
       .set("Authorization", `Bearer ${userToken}`)
       .set("Accept", "application/json")
       .expect(function (res) {
-        console.log(res.body);
         if (!("message" in res.body)) {
           throw new Error("Response should contain message.");
         }

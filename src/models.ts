@@ -7,6 +7,10 @@ import { SystemTokenModel } from "./Components/transactions/models/system-tokens
 import { TemporaryRemittanceModel } from "./Components/transactions/models/temporary-remittances.model";
 import { TokenWalletHistory } from "./Components/history/models/token-wallet-history";
 import { SystemErrorLogs } from "./Components/globals/model/error-logs.model";
+import { AdminModel } from "./Components/admin/model/admin.model";
+import { SubcriptionPlanModel } from "./Components/subscription/model/subscription-plans.model";
+import { MarketModel } from "./Components/subscription/model/market.model";
+import { SubscriptionMarketPricesModel } from "./Components/subscription/model/subcription-market-price";
 
 export const models = [
   WaitlistUsersPoint,
@@ -18,4 +22,8 @@ export const models = [
   TemporaryRemittanceModel,
   TokenWalletHistory,
   SystemErrorLogs,
+  AdminModel,
+  SubcriptionPlanModel,
+  MarketModel,
+  SubscriptionMarketPricesModel,
 ];

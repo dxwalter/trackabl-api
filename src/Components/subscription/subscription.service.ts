@@ -5,6 +5,7 @@ import { Utils } from "../utils/index";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { SystemErrorLogDTO } from "../globals/types/globel.types";
 import { SubcriptionPlanModel } from "./model/subscription-plans.model";
+import { MarketModel } from "./model/market.model";
 import { createSubscriptionPlan } from "./types/price.types";
 
 @Injectable()
@@ -12,6 +13,8 @@ export class SubscriptionService {
   constructor(
     @InjectModel(SubcriptionPlanModel)
     private readonly subscriptionModel: typeof SubcriptionPlanModel,
+    @InjectModel(MarketModel)
+    private readonly marketModel: typeof MarketModel,
     protected eventEmitter: EventEmitter2
   ) {}
 
@@ -83,6 +86,43 @@ export class SubscriptionService {
       throw new BadRequestException(
         "An error occurred deleting subscription plan"
       );
+    }
+  }
+
+  async getAllMarkets(): Promise<MarketModel[]> {
+    try {
+      return await this.marketModel.findAll();
+    } catch (error) {
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `Unable to get all markets`,
+        severity: "MEDIUM",
+        details: {
+          service: "SubscriptionService.getAllMarkets",
+          payload: {},
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      throw new BadRequestException("An error occurred getting all markets");
+    }
+  }
+  async getAllPlans(): Promise<SubcriptionPlanModel[]> {
+    try {
+      return await this.subscriptionModel.findAll();
+    } catch (error) {
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `Unable to get all plans`,
+        severity: "MEDIUM",
+        details: {
+          service: "SubscriptionService.getAllPlans",
+          payload: {},
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      throw new BadRequestException("An error occurred getting all plans");
     }
   }
 }

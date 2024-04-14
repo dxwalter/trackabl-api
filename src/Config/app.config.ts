@@ -18,6 +18,7 @@ export default () => ({
     jwtConstant: process.env.JWT_CONSTANT,
     passwordSalt: process.env.PASSWORD_SALT,
     saltRounds: 10,
+    adminSalRounds: 30,
   },
   environment: {
     env: process.env.NODE_ENV,

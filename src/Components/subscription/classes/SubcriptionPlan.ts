@@ -4,6 +4,8 @@ import { GlobalErrorService } from "../../globals/global.error.service";
 import {
   createSubscriptionPlanResponse,
   deleteSubscrptionResponse,
+  getMarketsResponse,
+  getPlansResponse,
 } from "../types/price.types";
 import { CreatePricePlanDTO } from "../dto/price.dto";
 import { SubscriptionPlanExists } from "../exception/subscription.exception";
@@ -50,6 +52,22 @@ export class SubscriptionPlan {
     return {
       status: true,
       message: SubcriptionPlanStatusMessage.plan.deleted,
+    };
+  }
+
+  async getAllMarkets(): Promise<getMarketsResponse> {
+    return {
+      status: true,
+      message: SubcriptionPlanStatusMessage.default,
+      data: await this.subscription.getAllMarkets(),
+    };
+  }
+
+  async getAllPlans(): Promise<getPlansResponse> {
+    return {
+      status: true,
+      message: SubcriptionPlanStatusMessage.default,
+      data: await this.subscription.getAllPlans(),
     };
   }
 }

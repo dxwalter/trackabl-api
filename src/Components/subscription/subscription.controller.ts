@@ -16,6 +16,8 @@ import { GlobalErrorService } from "../globals/global.error.service";
 import {
   createSubscriptionPlanResponse,
   deleteSubscrptionResponse,
+  getMarketsResponse,
+  getPlansResponse,
 } from "../subscription/types/price.types";
 import { SubscriptionService } from "./subscription.service";
 import { SubscriptionPlan } from "./classes/SubcriptionPlan";
@@ -55,5 +57,27 @@ export class SubscriptionController {
       this.utils,
       this.globalError
     ).delete(id);
+  }
+
+  @AdminRoles(AdminRole.ADMIN)
+  @UseGuards(AuthGuard)
+  @Get("/markets")
+  async listAllMarkets(): Promise<getMarketsResponse> {
+    return new SubscriptionPlan(
+      this.subscriptionService,
+      this.utils,
+      this.globalError
+    ).getAllMarkets();
+  }
+
+  @AdminRoles(AdminRole.ADMIN)
+  @UseGuards(AuthGuard)
+  @Get("/admin-plans")
+  async listAllPlansForAdmin(): Promise<getPlansResponse> {
+    return new SubscriptionPlan(
+      this.subscriptionService,
+      this.utils,
+      this.globalError
+    ).getAllPlans();
   }
 }

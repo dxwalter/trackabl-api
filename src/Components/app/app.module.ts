@@ -38,6 +38,8 @@ import { AdminModule } from "../admin/admin.module";
 import { SubscriptionController } from "../subscription/subscription.controller";
 import { SubscriptionService } from "../subscription/subscription.service";
 import { SubcriptionPlanModel } from "../subscription/model/subscription-plans.model";
+import { MarketModel } from "../subscription/model/market.model";
+import { SubscriptionMarketPricesModel } from "../subscription/model/subcription-market-price";
 
 import { GlobalErrorService } from "../globals/global.error.service";
 // import { GlobalLogService } from "../globals/global.log.service";
@@ -105,6 +107,8 @@ const port = isProduction
     forwardRef(() => GlobalModule),
     forwardRef(() => AdminModule),
     forwardRef(() => SubcriptionPlanModel),
+    forwardRef(() => SubscriptionMarketPricesModel),
+    forwardRef(() => MarketModel),
   ],
   controllers: [
     WaitlistController,

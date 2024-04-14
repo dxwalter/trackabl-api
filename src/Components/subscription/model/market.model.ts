@@ -17,12 +17,12 @@ import {
 import { SubscriptionMarketPricesModel } from "./subcription-market-price";
 
 @Table({
-  tableName: "subscription-plans",
+  tableName: "markets",
   paranoid: false,
   timestamps: true,
   underscored: false,
 })
-export class SubcriptionPlanModel extends Model {
+export class MarketModel extends Model {
   @AutoIncrement
   @PrimaryKey
   @Unique
@@ -33,12 +33,27 @@ export class SubcriptionPlanModel extends Model {
   @AllowNull(false)
   @Unique
   @Column(DataType.STRING)
-  public name: string;
+  public countryName: string;
 
   @AllowNull(false)
-  @Default(false)
-  @Column(DataType.BOOLEAN)
-  public status: boolean;
+  @Unique
+  @Column(DataType.STRING)
+  public countryCode: string;
+
+  @AllowNull(false)
+  @Unique
+  @Column(DataType.STRING)
+  public currencyCode: string;
+
+  @AllowNull(false)
+  @Unique
+  @Column(DataType.STRING)
+  public currencyName: string;
+
+  @AllowNull(false)
+  @Unique
+  @Column(DataType.STRING)
+  public currencySymbol: string;
 
   @AllowNull(false)
   @CreatedAt

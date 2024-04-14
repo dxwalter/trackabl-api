@@ -9,21 +9,17 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    await queryInterface.createTable("users", {
+
+    await queryInterface.createTable("admin-users", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      firstName: {
+      fullname: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: false,
-      },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: true,
         unique: false,
       },
       email: {
@@ -36,33 +32,14 @@ module.exports = {
         allowNull: false,
         unique: false,
       },
-      isSubscriptionActive: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        unique: false,
-      },
-      // activeSubscriptionId: {
-      //   type: Sequelize.BOOLEAN,
-      //   allowNull: false,
-      //   unique: false,
-      // },
-      isEmailVerified: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        unique: false,
-      },
-      emailVerificationCode: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
       passwordRecoveryCode: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      acceptedTCAndPP: {
-        type: Sequelize.DATE,
+      accessLevel: {
+        type: Sequelize.STRING,
         allowNull: false,
+        unique: false,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -86,6 +63,7 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable("users");
+
+    await queryInterface.dropTable("admin-users");
   },
 };

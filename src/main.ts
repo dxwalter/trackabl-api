@@ -14,10 +14,8 @@ async function bootstrap() {
     origin: "*",
   });
 
-  console.log(process.env.NODE_ENV);
-
   if (process.env.NODE_ENV !== "test") {
-    app.use(new Utils().SetupLogService());
+    // app.use(new Utils().SetupLogService());
   }
   await app.listen(Number(process.env.PORT) ?? 0);
 }

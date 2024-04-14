@@ -9,64 +9,38 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    await queryInterface.createTable("users", {
+
+    await queryInterface.createTable("markets", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      firstName: {
+      countryName: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: false,
       },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        unique: false,
-      },
-      email: {
+      countryCode: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
-      password: {
+      currencyCode: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: false,
       },
-      isSubscriptionActive: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        unique: false,
-      },
-      // activeSubscriptionId: {
-      //   type: Sequelize.BOOLEAN,
-      //   allowNull: false,
-      //   unique: false,
-      // },
-      isEmailVerified: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        unique: false,
-      },
-      emailVerificationCode: {
+      currencyName: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
-      passwordRecoveryCode: {
+      currencySymbol: {
         type: Sequelize.STRING,
-        allowNull: true,
-      },
-      acceptedTCAndPP: {
-        type: Sequelize.DATE,
         allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
+        defaultValue: Sequelize.fn("NOW"),
       },
       updatedAt: {
         type: Sequelize.DATE,
@@ -84,8 +58,8 @@ module.exports = {
      * Add reverting commands here.
      *
      * Example:
-     * await queryInterface.dropTable('users');
+     * await queryInterface.dropTable('markets');
      */
-    await queryInterface.dropTable("users");
+    await queryInterface.dropTable("markets");
   },
 };

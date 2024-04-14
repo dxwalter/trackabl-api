@@ -5,6 +5,7 @@
  */
 
 export const SubcriptionPlanStatusMessage = {
+  default: "Ok",
   plan: {
     exist: "This subscription plan exists.",
     created: "Subscription plan created successfully",

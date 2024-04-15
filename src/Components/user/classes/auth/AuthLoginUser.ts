@@ -62,7 +62,6 @@ export class AuthLoginUser {
       data: {
         ...this.utils.deleteSensitiveDataFromUserObject(userData),
         token: generateToken,
-        isTransactionPinSet: userData.transactionPin == null ? false : true,
       },
       message: UserStatusMessages.Login.success,
       status: true,

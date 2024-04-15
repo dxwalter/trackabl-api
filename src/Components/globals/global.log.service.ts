@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { BadRequestException } from "@nestjs/common";
@@ -69,6 +70,40 @@ export class GlobalLogService extends PlatformFeatureStatusService {
       );
     } catch (error) {
       console.log("Error writing error message");
+    }
+  }
+
+  public async makeAPIGetRequest(url: string): Promise<any> {
+    try {
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        Error.captureStackTrace(error);
+        this.createErrorEntry({
+          details: {
+            service: "GlobalLogService.makeAPIGetRequest",
+            payload: url,
+            stack: error.stack ? error.stack.toString() : "",
+          },
+          message: "An axios package error occurred for GET request",
+          severity: "HIGH",
+        } as SystemErrorLogDTO);
+        throw new BadRequestException(
+          "A technical error occurred on our end. We are working to fix it"
+        );
+      } else {
+        this.createErrorEntry({
+          details: {
+            service: "GlobalLogService.makeAPIGetRequest",
+            payload: url,
+            stack: error?.stack.toString(),
+          },
+          message: "An API error occurred with message: " + error.message,
+          severity: "HIGH",
+        } as SystemErrorLogDTO);
+        throw new BadRequestException(error.message);
+      }
     }
   }
 }

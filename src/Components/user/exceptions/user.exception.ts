@@ -18,6 +18,12 @@ export class EmailExists extends BadRequestException {
   }
 }
 
+export class ProvideFullName extends BadRequestException {
+  constructor() {
+    super(UserStatusMessages.CreateAccount.fullnameError);
+  }
+}
+
 export class PhoneNumberExists extends BadRequestException {
   constructor() {
     super(UserStatusMessages.CreateAccount.phoneNumberExists);

@@ -9,7 +9,6 @@ import { SubcriptionPlanModel } from "./model/subscription-plans.model";
 import { MarketModel } from "./model/market.model";
 import { SubscriptionMarketPricesModel } from "./model/subcription-market-price";
 import { CreatePricePlan } from "./dto/create-price-plan.dto";
-
 import { Op } from "sequelize";
 @Injectable()
 export class SubscriptionService {

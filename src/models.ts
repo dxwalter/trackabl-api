@@ -11,6 +11,7 @@ import { AdminModel } from "./Components/admin/model/admin.model";
 import { SubcriptionPlanModel } from "./Components/subscription/model/subscription-plans.model";
 import { MarketModel } from "./Components/subscription/model/market.model";
 import { SubscriptionMarketPricesModel } from "./Components/subscription/model/subcription-market-price";
+import { IPStackLookupModel } from "./Components/subscription/model/ipstack-lookups.model";
 
 export const models = [
   WaitlistUsersPoint,
@@ -26,4 +27,5 @@ export const models = [
   SubcriptionPlanModel,
   MarketModel,
   SubscriptionMarketPricesModel,
+  IPStackLookupModel,
 ];

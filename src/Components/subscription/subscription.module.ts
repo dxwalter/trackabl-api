@@ -5,6 +5,7 @@ import { SequelizeModule } from "@nestjs/sequelize";
 import { MarketModel } from "./model/market.model";
 import { SubscriptionMarketPricesModel } from "./model/subcription-market-price";
 import { SubcriptionPlanModel } from "./model/subscription-plans.model";
+import { IPStackLookupModel } from "./model/ipstack-lookups.model";
 @Module({
   controllers: [SubscriptionController],
   providers: [SubscriptionService],
@@ -13,6 +14,7 @@ import { SubcriptionPlanModel } from "./model/subscription-plans.model";
       MarketModel,
       SubscriptionMarketPricesModel,
       SubcriptionPlanModel,
+      IPStackLookupModel,
     ]),
   ],
   exports: [SubscriptionService],

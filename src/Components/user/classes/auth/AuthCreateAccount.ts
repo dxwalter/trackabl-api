@@ -10,7 +10,7 @@ import {
   JoinedWellatSendEmail,
 } from "../../types/user.types";
 import { UserStatusMessages } from "../../config/user-response-message";
-import { EmailExists } from "../../exceptions/user.exception";
+import { EmailExists, ProvideFullName } from "../../exceptions/user.exception";
 
 export class AuthCreateUserAccount {
   constructor(
@@ -36,12 +36,21 @@ export class AuthCreateUserAccount {
       throw new EmailExists();
     }
 
+    const fullName = userBody.fullname.split(" ");
+
+    if (fullName.length < 2) {
+      throw new ProvideFullName();
+    }
+
     // create password
     const newPassword = await this.userService.generatePasswordForUser(
       userBody.password
     );
 
-    const randomStringForEmailVerification = this.utils.generateEmailToken();
+    const randomStringForEmailVerification = this.utils.generateTokenWithRance(
+      1000,
+      9999
+    );
 
     // Generate referral code
     const referralCode = this.utils.generateReferralCode();
@@ -49,10 +58,9 @@ export class AuthCreateUserAccount {
     // create user account;
     const newUser = await this.userService.createUserAccount({
       email: userEmail,
-      acceptedTCAndPP: userBody.tcAndPpAcceptedDate,
-      emailVerificationCode: randomStringForEmailVerification,
-      firstName: userBody.firstName,
-      lastName: userBody.lastName,
+      emailVerificationCode: randomStringForEmailVerification.toString(),
+      firstName: fullName[0],
+      lastName: fullName[1],
       referralCode: referralCode[0],
       isEmailVerified: false,
       password: newPassword,
@@ -76,8 +84,8 @@ export class AuthCreateUserAccount {
     this.eventEmitter.emit("send.email.authentication", {
       emailBody: "text",
       recipientEmail: userEmail,
-      subject: `Welcome to Wellat - Empower Your Crypto Journey!`,
-      recipientName: userBody.firstName,
+      subject: `Welcome to Trackabl - Know Where Your Money Goes!`,
+      recipientName: fullName[0],
       emailType: "NewUserAccountSignUp",
       referralCode: referralCode[0],
     } as JoinedWellatSendEmail);
@@ -85,8 +93,8 @@ export class AuthCreateUserAccount {
     // Send email verification
     this.sendEmailVerification({
       recipientEmail: userEmail,
-      recipientName: userBody.firstName,
-      verificationCode: randomStringForEmailVerification,
+      recipientName: fullName[0],
+      verificationCode: randomStringForEmailVerification.toString(),
     });
 
     // if user has referral code set
@@ -99,7 +107,7 @@ export class AuthCreateUserAccount {
       if (getUserUsingReferralCode) {
         // create points
         await this.userService.createReferralPoint({
-          comment: `${userBody.firstName} ${userBody.lastName} joined Wellat using your referral code`,
+          comment: `${fullName[0]} ${fullName[1]} joined Trackabl using your referral code`,
           isPointFromReferral: true,
           point: 100,
           state: "REFERRED_PARTICPATION",
@@ -112,7 +120,7 @@ export class AuthCreateUserAccount {
           recipientEmail: getUserUsingReferralCode.email,
           subject: `Exciting News! Your Referral = Bitcoin Points!`,
           emailType: "ReferralCodeUsedDuringSignUp",
-          FriendsName: `${userBody.firstName} ${userBody.lastName}`,
+          FriendsName: `${fullName[0]} ${fullName[1]}`,
           fullname:
             getUserUsingReferralCode.firstName +
             " " +
@@ -120,13 +128,6 @@ export class AuthCreateUserAccount {
         } as ReferralCodeUsedEmail);
       }
     }
-
-    const newUserObject = {
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-
-      acceptedTCAndPP: newUser.acceptedTCAndPP,
-    };
 
     return {
       status: true,
@@ -144,7 +145,6 @@ export class AuthCreateUserAccount {
         email: userEmail,
         id: newUser.id,
         isEmailVerified: false,
-        isTransactionPinSet: false,
       },
     };
   }

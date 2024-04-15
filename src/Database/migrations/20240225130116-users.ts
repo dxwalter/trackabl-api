@@ -41,11 +41,11 @@ module.exports = {
         allowNull: false,
         unique: false,
       },
-      // activeSubscriptionId: {
-      //   type: Sequelize.BOOLEAN,
-      //   allowNull: false,
-      //   unique: false,
-      // },
+      activeSubscriptionId: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+        unique: false,
+      },
       isEmailVerified: {
         type: Sequelize.BOOLEAN,
         allowNull: false,

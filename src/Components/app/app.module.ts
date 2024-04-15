@@ -40,6 +40,7 @@ import { SubscriptionService } from "../subscription/subscription.service";
 import { SubcriptionPlanModel } from "../subscription/model/subscription-plans.model";
 import { MarketModel } from "../subscription/model/market.model";
 import { SubscriptionMarketPricesModel } from "../subscription/model/subcription-market-price";
+import { IPStackLookupModel } from "../subscription/model/ipstack-lookups.model";
 
 import { GlobalErrorService } from "../globals/global.error.service";
 // import { GlobalLogService } from "../globals/global.log.service";
@@ -109,6 +110,7 @@ const port = isProduction
     forwardRef(() => SubcriptionPlanModel),
     forwardRef(() => SubscriptionMarketPricesModel),
     forwardRef(() => MarketModel),
+    forwardRef(() => IPStackLookupModel),
   ],
   controllers: [
     WaitlistController,

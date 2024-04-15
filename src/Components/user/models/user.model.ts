@@ -65,6 +65,11 @@ export class UserModel extends Model {
   @Column(DataType.BOOLEAN)
   public isSubscriptionActive: boolean;
 
+  @AllowNull(true)
+  @Default(null)
+  @Column(DataType.INTEGER)
+  public activeSubscriptionId: number;
+
   @AllowNull(false)
   @Column(DataType.STRING)
   public emailVerificationCode: string;

@@ -14,6 +14,9 @@ import {
 } from "./types/user.types";
 import appConfig from "../../Config/app.config";
 import { SystemErrorLogDTO } from "../globals/types/globel.types";
+
+import { Op } from "sequelize";
+
 @Injectable()
 export class UserService {
   constructor(
@@ -54,10 +57,15 @@ export class UserService {
     }
   }
 
-  async getUserProfileWithToken(token: string): Promise<UserModel | null> {
+  async getUserProfileWithToken(
+    token: string,
+    userId: number
+  ): Promise<UserModel | null> {
     try {
       return await this.userModel.findOne({
-        where: { emailVerificationCode: token },
+        where: {
+          [Op.and]: [{ emailVerificationCode: token }, { id: userId }],
+        },
       });
     } catch (error) {
       Error.captureStackTrace(error);
@@ -227,6 +235,7 @@ export class UserService {
     try {
       return await this.userModel.create({ ...userData });
     } catch (error) {
+      console.log(error);
       Error.captureStackTrace(error);
       this.eventEmitter.emit("log.system.error", {
         message: `Error creating user account`,

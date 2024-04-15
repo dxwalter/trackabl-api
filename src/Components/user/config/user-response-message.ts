@@ -14,6 +14,7 @@ export const UserStatusMessages = {
     maximumTrial: "You have exceed multiple trials to ",
     ok: "Data retrieved",
     invalidEmail: "Enter a valid email address",
+    fullnameError: "Tell us your full name",
   },
   EmailVerification: {
     success: "Email address verification is successful",

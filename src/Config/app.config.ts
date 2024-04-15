@@ -26,4 +26,7 @@ export default () => ({
   logging: {
     authKey: process.env.MOESIF_LOGGING_KEY,
   },
+  ipStack: {
+    key: process.env.IPSTACK_KEY,
+  },
 });

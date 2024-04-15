@@ -80,6 +80,10 @@ export class Utils {
     return this.encryptSHA1(this.generateRandomString(10));
   };
 
+  public generateTokenWithRance = (min: number, max: number): number => {
+    return Math.floor(Math.random() * (max - min)) + min;
+  };
+
   public plainSequelizeObject = (data: any) => {
     return data.get({ plain: true });
   };

@@ -14,6 +14,7 @@ export class AuthVerifyUserEmail {
   ) {}
 
   async verifyUserEmail(
+    req: any,
     id: string,
     verifyUserEmailData: VerifyUserEmailDTO
   ): Promise<defaultResponse> {
@@ -21,7 +22,12 @@ export class AuthVerifyUserEmail {
 
     const token = id;
 
-    const confirmToken = await this.userService.getUserProfileWithToken(token);
+    const userId = req.user.id;
+
+    const confirmToken = await this.userService.getUserProfileWithToken(
+      token,
+      userId
+    );
 
     if (confirmToken === null) {
       throw new InvalidEmailVerificationTokenException();

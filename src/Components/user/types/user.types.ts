@@ -8,7 +8,6 @@ export interface CreateUserAccount {
   password: string;
   isEmailVerified: boolean;
   emailVerificationCode: string;
-  acceptedTCAndPP: string;
   createdAt: Date;
   referralCode: string;
 }

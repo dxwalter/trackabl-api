@@ -18,15 +18,9 @@ import { TrialCount } from "../../../Config/global.dto";
 export class CreateUserDto extends TrialCount {
   @IsString()
   @IsNotEmpty({
-    message: "Enter your first name",
+    message: "Tell us your full names",
   })
-  public firstName: string;
-
-  @IsString()
-  @IsNotEmpty({
-    message: "Enter your last name",
-  })
-  public lastName: string;
+  public fullname: string;
 
   @IsEmail()
   @IsNotEmpty({
@@ -42,8 +36,4 @@ export class CreateUserDto extends TrialCount {
   @IsString()
   @IsOptional()
   public referral_code: string;
-
-  @IsString()
-  @IsNotEmpty()
-  public tcAndPpAcceptedDate: string;
 }

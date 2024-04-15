@@ -90,15 +90,17 @@ export class AuthenticationController {
     ).loginUserWith2FA(payload);
   }
 
+  @UseGuards(AuthGuard)
   @Patch("/verify-email/:id")
   async verifyUserEmail(
+    @Request() req: any,
     @Param("id") id: string,
     @Body() verifyUserEmailData: VerifyUserEmailDTO
   ): Promise<defaultResponse> {
     return await new AuthVerifyUserEmail(
       this.userService,
       this.globalError
-    ).verifyUserEmail(id, verifyUserEmailData);
+    ).verifyUserEmail(req, id, verifyUserEmailData);
   }
 
   @Patch("/generate-verifcation-token")

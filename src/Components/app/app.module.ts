@@ -46,6 +46,8 @@ import { GlobalErrorService } from "../globals/global.error.service";
 // import { GlobalLogService } from "../globals/global.log.service";
 import { GlobalModule } from "../globals/global.module";
 
+import { APIs } from "../utils/apis";
+
 import { models as DatabaseModels } from "../../models";
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -137,6 +139,7 @@ const port = isProduction
     HistoryService,
     AdminService,
     SubscriptionService,
+    APIs,
   ],
 })
 export class AppModule {}

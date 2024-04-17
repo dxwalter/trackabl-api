@@ -7,8 +7,10 @@ import { SystemErrorLogDTO } from "../globals/types/globel.types";
 import { createSubscriptionPlan } from "./types/price.types";
 import { SubcriptionPlanModel } from "./model/subscription-plans.model";
 import { MarketModel } from "./model/market.model";
+import { IPStackLookupModel } from "./model/ipstack-lookups.model";
 import { SubscriptionMarketPricesModel } from "./model/subcription-market-price";
 import { CreatePricePlan } from "./dto/create-price-plan.dto";
+import { StoreIPStackResponse } from "./dto/generic-subscription.dto";
 import { Op } from "sequelize";
 @Injectable()
 export class SubscriptionService {
@@ -17,6 +19,8 @@ export class SubscriptionService {
     private readonly subscriptionModel: typeof SubcriptionPlanModel,
     @InjectModel(MarketModel)
     private readonly marketModel: typeof MarketModel,
+    @InjectModel(IPStackLookupModel)
+    private readonly ipStackModel: typeof IPStackLookupModel,
     @InjectModel(SubscriptionMarketPricesModel)
     private readonly subscriptionMarketPriceModel: typeof SubscriptionMarketPricesModel,
     protected eventEmitter: EventEmitter2
@@ -246,6 +250,48 @@ export class SubscriptionService {
       throw new BadRequestException(
         "An error occurred deleting subscription plan price"
       );
+    }
+  }
+
+  async getIpStackRecordUsingUserId(
+    id: number
+  ): Promise<IPStackLookupModel | null> {
+    try {
+      return await this.ipStackModel.findOne({
+        where: {
+          userId: id,
+        },
+      });
+    } catch (error) {
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `Error checking getting IPstack data using:  ${id}`,
+        severity: "MEDIUM",
+        details: {
+          service: "SubscriptionService.getIpStackRecordUsingUserId",
+          payload: id,
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      return null;
+    }
+  }
+
+  async storeIpStackResponse(data: StoreIPStackResponse): Promise<void> {
+    try {
+      await this.ipStackModel.create({ ...data });
+    } catch (error) {
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `Error storing IP Stack response`,
+        severity: "MEDIUM",
+        details: {
+          service: "SubscriptionService.storeIpStackResponse",
+          payload: data,
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
     }
   }
 }

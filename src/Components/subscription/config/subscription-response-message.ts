@@ -13,5 +13,7 @@ export const SubcriptionPlanStatusMessage = {
     priceCreated: "Subscription price created successfully",
     priceExists: "Subscription price exists for this market",
     PriceDeleted: "Subscription plan price deleted successfully",
+    FailedToGetPlans:
+      "An error occurred getting plans. Kindly try again shortly",
   },
 };

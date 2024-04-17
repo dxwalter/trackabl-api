@@ -19,6 +19,9 @@ import { CreatAdminAccountResponse } from "./types/admin.types";
 import { AuthGuard } from "../user/guard/auth.guard";
 import { CreateAdminAccount } from "./classes/Auth/AdminCreateAccount";
 import { AdminLogin } from "./classes/Auth/AdminLogin";
+import { AdminRoles } from "../../Config/adminRole/admin.roles.decortator";
+import { AdminRole } from "../../Config/adminRole/enums/admin.roles";
+import { RolesGuard } from "../../Config/roles.guard";
 
 @Controller("admin")
 export class AdminController {
@@ -29,7 +32,8 @@ export class AdminController {
     private readonly globalError: GlobalErrorService
   ) {}
 
-  @UseGuards(AuthGuard)
+  @AdminRoles(AdminRole.ADMIN)
+  @UseGuards(AuthGuard, RolesGuard)
   @Post("/create")
   async create(
     @Body() createAdminDto: CreateAdminDto

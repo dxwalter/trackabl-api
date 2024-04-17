@@ -19,7 +19,7 @@ import {
 import { UserModel } from "../../user/models/user.model";
 
 @Table({
-  tableName: "markets",
+  tableName: "ipstack-lookups",
   paranoid: false,
   timestamps: true,
   underscored: false,
@@ -39,7 +39,7 @@ export class IPStackLookupModel extends Model {
 
   @AllowNull(false)
   @Column(DataType.JSONB)
-  public details: JSON;
+  public details: any;
 
   @AllowNull(false)
   @CreatedAt

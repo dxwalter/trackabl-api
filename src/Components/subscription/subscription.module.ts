@@ -6,9 +6,10 @@ import { MarketModel } from "./model/market.model";
 import { SubscriptionMarketPricesModel } from "./model/subcription-market-price";
 import { SubcriptionPlanModel } from "./model/subscription-plans.model";
 import { IPStackLookupModel } from "./model/ipstack-lookups.model";
+import { APIs } from "../utils/apis";
 @Module({
   controllers: [SubscriptionController],
-  providers: [SubscriptionService],
+  providers: [SubscriptionService, APIs],
   imports: [
     SequelizeModule.forFeature([
       MarketModel,

@@ -20,3 +20,8 @@ export class AdminGetAllPrice {
   @IsOptional()
   public marketId: number;
 }
+
+export interface StoreIPStackResponse {
+  userId: number;
+  details: JSON;
+}

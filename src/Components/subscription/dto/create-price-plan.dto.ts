@@ -34,7 +34,7 @@ export class CreatePricePlan {
   })
   public freePlanPriceInDays: number;
 
-  @IsDecimal()
+  @IsNumber()
   @IsNotEmpty({
     message: "How much is this plan",
   })

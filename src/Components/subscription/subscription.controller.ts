@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Query,
+  Request,
 } from "@nestjs/common";
 import { AuthGuard } from "../user/guard/auth.guard";
 import { UserService } from "../user/user.service";
@@ -15,6 +16,7 @@ import { CreatePricePlanDTO } from "../subscription/dto/price.dto";
 import { AdminGetAllPrice } from "../subscription/dto/generic-subscription.dto";
 import { CreatePricePlan } from "../subscription/dto/create-price-plan.dto";
 import { Utils } from "../utils";
+import { APIs } from "../utils/apis";
 import { GlobalErrorService } from "../globals/global.error.service";
 import {
   createSubscriptionPlanResponse,
@@ -31,13 +33,17 @@ import { RolesGuard } from "../../Config/roles.guard";
 
 import { SubscriptionPlan } from "./classes/SubcriptionPlan";
 import { SubscriptionPricePlan } from "./classes/CreateSubscriptionPlanPrice";
+import { GetSubscriptionPlanPrices } from "./classes/GetSubscriptionPrices";
+import { EventEmitter2 } from "@nestjs/event-emitter";
 
 @Controller("subscription")
 export class SubscriptionController {
   constructor(
     private readonly subscriptionService: SubscriptionService,
     private utils: Utils,
-    private readonly globalError: GlobalErrorService
+    private readonly globalError: GlobalErrorService,
+    private readonly apis: APIs,
+    protected eventEmitter: EventEmitter2
   ) {}
 
   @AdminRoles(AdminRole.ADMIN)
@@ -53,8 +59,22 @@ export class SubscriptionController {
     ).create(createPricePlan);
   }
 
-  @AdminRoles(AdminRole.ADMIN)
   @UseGuards(AuthGuard)
+  @Get("/plans")
+  async GetPlansForUser(
+    @Request() req: any
+  ): Promise<getAllMarketPriceResponse> {
+    return await new GetSubscriptionPlanPrices(
+      this.subscriptionService,
+      this.utils,
+      this.globalError,
+      this.apis,
+      this.eventEmitter
+    ).getPlans(req);
+  }
+
+  @AdminRoles(AdminRole.ADMIN)
+  @UseGuards(AuthGuard, RolesGuard)
   @Get("/markets")
   async listAllMarkets(): Promise<getMarketsResponse> {
     return new SubscriptionPlan(
@@ -65,7 +85,7 @@ export class SubscriptionController {
   }
 
   @AdminRoles(AdminRole.ADMIN)
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, RolesGuard)
   @Get("/admin-plans")
   async listAllPlansForAdmin(): Promise<getPlansResponse> {
     return new SubscriptionPlan(
@@ -76,7 +96,7 @@ export class SubscriptionController {
   }
 
   @AdminRoles(AdminRole.ADMIN)
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, RolesGuard)
   @Post("/create-plan-price")
   async mapPlanToMarket(
     @Body() createPricePlan: CreatePricePlan
@@ -89,7 +109,7 @@ export class SubscriptionController {
   }
 
   @AdminRoles(AdminRole.ADMIN)
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, RolesGuard)
   @Get("/admin-get-plans")
   async adminGetAllPlans(
     @Query() query: AdminGetAllPrice
@@ -102,7 +122,7 @@ export class SubscriptionController {
   }
 
   @AdminRoles(AdminRole.ADMIN)
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, RolesGuard)
   @Delete("/price/:id")
   async deletePrice(
     @Param("id") id: number
@@ -115,7 +135,7 @@ export class SubscriptionController {
   }
 
   @AdminRoles(AdminRole.ADMIN)
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, RolesGuard)
   @Delete("/plan/:id")
   async deletePlan(
     @Param("id") id: number

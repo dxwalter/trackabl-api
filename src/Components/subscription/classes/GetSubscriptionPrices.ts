@@ -34,11 +34,12 @@ export class GetSubscriptionPlanPrices {
     }
 
     if (ipStackDataFromAPI) {
-      return markets.filter(
-        (market) =>
+      return markets.filter((market) => {
+        return (
           market.countryCode.toLowerCase() ===
           ipStackDataFromAPI?.country_code.toLowerCase()
-      );
+        );
+      });
     }
 
     return [];
@@ -61,6 +62,8 @@ export class GetSubscriptionPlanPrices {
         }`;
 
         const makeRequest = await this.api.makeAPIGetRequest(ipStackUrl);
+
+        console.log(makeRequest);
 
         ipStackData = makeRequest;
         await this.subscriptionService.storeIpStackResponse({

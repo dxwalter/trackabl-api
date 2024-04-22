@@ -10,7 +10,7 @@ export const IpStackFailedRequest = {
   responseCode: 200,
 };
 
-export const IpStackSuccessfulRequest = {
+export const IpStackSuccessfulRequestForNigeria = {
   status: "success",
   message: "Transaction fetched successfully",
   data: {
@@ -43,4 +43,41 @@ export const IpStackSuccessfulRequest = {
       is_eu: false,
     },
   },
+  responseCode: 200,
+};
+
+export const IpStackSuccessfulRequestForUnitedStates = {
+  status: "success",
+  message: "Transaction fetched successfully",
+  data: {
+    ip: "104.28.204.175",
+    zip: "10020",
+    city: "Manhattan",
+    type: "ipv4",
+    latitude: 40.7589111328125,
+    location: {
+      is_eu: false,
+      capital: "Washington D.C.",
+      languages: [
+        {
+          code: "en",
+          name: "English",
+          native: "English",
+        },
+      ],
+      geoname_id: 5125771,
+      calling_code: "1",
+      country_flag: "https://assets.ipstack.com/flags/us.svg",
+      country_flag_emoji: "🇺🇸",
+      country_flag_emoji_unicode: "U+1F1FA U+1F1F8",
+    },
+    longitude: -73.97901916503906,
+    region_code: "NY",
+    region_name: "New York",
+    country_code: "US",
+    country_name: "United States",
+    continent_code: "NA",
+    continent_name: "North America",
+  },
+  responseCode: 200,
 };

@@ -251,7 +251,7 @@ describe("PLATFORM PRICING (e2e)", () => {
       (plan) => plan.name.toLowerCase() === "premium"
     );
 
-    const usMarket = markets.filter((market) => market.countryCode === "USA");
+    const usMarket = markets.filter((market) => market.countryCode === "US");
 
     const priceAMonth = 10;
 
@@ -321,7 +321,7 @@ describe("PLATFORM PRICING (e2e)", () => {
   });
 
   it("Get all price plans in a market", () => {
-    const usMarket = markets.filter((market) => market.countryCode === "USA");
+    const usMarket = markets.filter((market) => market.countryCode === "US");
     return request(app.getHttpServer())
       .get("/subscription/admin-get-plans?marketId=" + usMarket[0].id)
 

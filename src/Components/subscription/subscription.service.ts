@@ -236,6 +236,7 @@ export class SubscriptionService {
         },
       });
     } catch (error) {
+      console.log(error, id);
       Error.captureStackTrace(error);
       this.eventEmitter.emit("log.system.error", {
         message: `Error checking deleting subscription plan price with ID: ${id}`,

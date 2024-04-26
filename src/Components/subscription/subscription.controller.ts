@@ -15,6 +15,7 @@ import { UserService } from "../user/user.service";
 import { CreatePricePlanDTO } from "../subscription/dto/price.dto";
 import { AdminGetAllPrice } from "../subscription/dto/generic-subscription.dto";
 import { CreatePricePlan } from "../subscription/dto/create-price-plan.dto";
+import { ActivateFreeSubscriptionPlanDto } from "./dto/create-subscription.dto";
 import { Utils } from "../utils";
 import { APIs } from "../utils/apis";
 import { GlobalErrorService } from "../globals/global.error.service";
@@ -25,6 +26,8 @@ import {
   getPlansResponse,
   createPriceResponse,
   getAllMarketPriceResponse,
+  activateFreePlanResponse,
+  userSubscriptionListResponse,
 } from "../subscription/types/price.types";
 import { SubscriptionService } from "./subscription.service";
 import { AdminRoles } from "../../Config/adminRole/admin.roles.decortator";
@@ -43,8 +46,23 @@ export class SubscriptionController {
     private utils: Utils,
     private readonly globalError: GlobalErrorService,
     private readonly apis: APIs,
-    protected eventEmitter: EventEmitter2
+    protected eventEmitter: EventEmitter2,
+    protected userService: UserService
   ) {}
+
+  @UseGuards(AuthGuard)
+  @Get("/")
+  async getUserPastSubscriptions(
+    @Request() req: any
+  ): Promise<userSubscriptionListResponse> {
+    return await new SubscriptionPlan(
+      this.subscriptionService,
+      this.utils,
+      this.globalError,
+      this.eventEmitter,
+      this.userService
+    ).listUserSubscriptions(req);
+  }
 
   @AdminRoles(AdminRole.ADMIN)
   @UseGuards(AuthGuard, RolesGuard)
@@ -55,7 +73,9 @@ export class SubscriptionController {
     return new SubscriptionPlan(
       this.subscriptionService,
       this.utils,
-      this.globalError
+      this.globalError,
+      this.eventEmitter,
+      this.userService
     ).create(createPricePlan);
   }
 
@@ -73,6 +93,21 @@ export class SubscriptionController {
     ).getPlans(req);
   }
 
+  @UseGuards(AuthGuard)
+  @Post("/activate-free-plan")
+  async ActivateFreePlan(
+    @Request() req: any,
+    @Body() data: ActivateFreeSubscriptionPlanDto
+  ): Promise<activateFreePlanResponse> {
+    return await new SubscriptionPlan(
+      this.subscriptionService,
+      this.utils,
+      this.globalError,
+      this.eventEmitter,
+      this.userService
+    ).activateFreeSubscriptionPlan(req, data);
+  }
+
   @AdminRoles(AdminRole.ADMIN)
   @UseGuards(AuthGuard, RolesGuard)
   @Get("/markets")
@@ -80,7 +115,9 @@ export class SubscriptionController {
     return new SubscriptionPlan(
       this.subscriptionService,
       this.utils,
-      this.globalError
+      this.globalError,
+      this.eventEmitter,
+      this.userService
     ).getAllMarkets();
   }
 
@@ -91,7 +128,9 @@ export class SubscriptionController {
     return new SubscriptionPlan(
       this.subscriptionService,
       this.utils,
-      this.globalError
+      this.globalError,
+      this.eventEmitter,
+      this.userService
     ).getAllPlans();
   }
 
@@ -143,7 +182,9 @@ export class SubscriptionController {
     return new SubscriptionPlan(
       this.subscriptionService,
       this.utils,
-      this.globalError
+      this.globalError,
+      this.eventEmitter,
+      this.userService
     ).delete(id);
   }
 }

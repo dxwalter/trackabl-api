@@ -63,8 +63,6 @@ export class GetSubscriptionPlanPrices {
 
         const makeRequest = await this.api.makeAPIGetRequest(ipStackUrl);
 
-        console.log(makeRequest);
-
         ipStackData = makeRequest;
         await this.subscriptionService.storeIpStackResponse({
           userId,

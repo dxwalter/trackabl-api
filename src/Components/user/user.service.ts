@@ -14,6 +14,8 @@ import {
 } from "./types/user.types";
 import appConfig from "../../Config/app.config";
 import { SystemErrorLogDTO } from "../globals/types/globel.types";
+import { UserSubscriptionModel } from "../subscription/model/user-subscriptions.model";
+import { SubscriptionMarketPricesModel } from "../subscription/model/subcription-market-price.model";
 
 import { Op } from "sequelize";
 
@@ -24,6 +26,8 @@ export class UserService {
     private readonly userModel: typeof UserModel,
     @InjectModel(UserSignUpPoints)
     private readonly userReferralPoints: typeof UserSignUpPoints,
+    @InjectModel(UserSubscriptionModel)
+    private readonly userSubscriptionModel: typeof UserSubscriptionModel,
     private readonly utils: Utils,
     private jwtService: JwtService,
     protected eventEmitter: EventEmitter2
@@ -91,6 +95,16 @@ export class UserService {
     try {
       const makeRequest = await this.userModel.findOne({
         where: { email },
+        include: [
+          {
+            model: UserSubscriptionModel,
+            where: { isActive: true },
+            limit: 1,
+            attributes: {
+              exclude: ["paymentProviderDetails"],
+            },
+          },
+        ],
       });
       return makeRequest;
     } catch (error) {
@@ -162,9 +176,20 @@ export class UserService {
   }
 
   async getUserProfileUsingID(id: number): Promise<UserModel | null> {
+    // const include = ;
     try {
       const makeRequest = await this.userModel.findOne({
         where: { id },
+        include: [
+          {
+            model: UserSubscriptionModel,
+            where: { isActive: true },
+            limit: 1,
+            attributes: {
+              exclude: ["paymentProviderDetails"],
+            },
+          },
+        ],
       });
       return makeRequest;
     } catch (error) {
@@ -321,6 +346,7 @@ export class UserService {
         }
       );
     } catch (error) {
+      console.log(error, id);
       Error.captureStackTrace(error);
       this.eventEmitter.emit("log.system.error", {
         message: `Error updating user profile with user ID: ${id}`,

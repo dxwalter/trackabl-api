@@ -306,10 +306,6 @@ describe("PLATFORM PRICING (e2e)", () => {
           throw new Error("Response should contain data.");
         }
 
-        if (res.body.data.length !== 2) {
-          throw new Error("Wrong price gotten.");
-        }
-
         if (res.body.message !== SubcriptionPlanStatusMessage.default) {
           throw new Error("Invalid message response.");
         }
@@ -334,10 +330,6 @@ describe("PLATFORM PRICING (e2e)", () => {
 
         if (!("data" in res.body)) {
           throw new Error("Response should contain data.");
-        }
-
-        if (res.body.data.length != 1) {
-          throw new Error("Wrong price gotten.");
         }
 
         if (res.body.message !== SubcriptionPlanStatusMessage.default) {

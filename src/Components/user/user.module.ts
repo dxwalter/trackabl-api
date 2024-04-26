@@ -14,6 +14,7 @@ import { PlatformFeatureStatusService } from "../platform-feature-status/platfor
 import { PlatformFeatureStatus } from "../platform-feature-status/models/platform-feature-status.model";
 import { SystemErrorLogs } from "../globals/model/error-logs.model";
 import { GlobalLogService } from "../globals/global.log.service";
+import { UserSubscriptionModel } from "../subscription/model/user-subscriptions.model";
 @Module({
   controllers: [UserController, AuthenticationController],
   providers: [
@@ -37,6 +38,7 @@ import { GlobalLogService } from "../globals/global.log.service";
       UserSignUpPoints,
       PlatformFeatureStatus,
       SystemErrorLogs,
+      UserSubscriptionModel,
     ]),
     JwtModule.register({
       global: true,

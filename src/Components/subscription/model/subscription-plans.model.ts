@@ -14,7 +14,8 @@ import {
   Default,
 } from "sequelize-typescript";
 
-import { SubscriptionMarketPricesModel } from "./subcription-market-price";
+import { SubscriptionMarketPricesModel } from "./subcription-market-price.model";
+import { UserSubscriptionModel } from "./user-subscriptions.model";
 
 @Table({
   tableName: "subscription-plans",
@@ -61,4 +62,11 @@ export class SubcriptionPlanModel extends Model {
     hooks: false,
   })
   subcriptionMarketPrice: SubscriptionMarketPricesModel;
+
+  @HasMany(() => UserSubscriptionModel, {
+    as: "plan_subscriptions",
+    onDelete: "cascade",
+    hooks: false,
+  })
+  plan_subscriptions: UserSubscriptionModel;
 }

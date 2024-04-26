@@ -9,64 +9,73 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    await queryInterface.createTable("users", {
+
+    await queryInterface.createTable("user-subscriptions", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      firstName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: false,
-      },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        unique: false,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: false,
-      },
-      isSubscriptionActive: {
+      isActive: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        unique: false,
       },
-      activeSubscriptionId: {
+      userId: {
         type: Sequelize.INTEGER,
-        allowNull: true,
-        unique: false,
-      },
-      isEmailVerified: {
-        type: Sequelize.BOOLEAN,
         allowNull: false,
-        unique: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
       },
-      emailVerificationCode: {
-        type: Sequelize.STRING,
+      planId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
+        references: {
+          model: "subscription-plans",
+          key: "id",
+        },
       },
-      passwordRecoveryCode: {
-        type: Sequelize.STRING,
-        allowNull: true,
+      marketId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "markets",
+          key: "id",
+        },
       },
-      acceptedTCAndPP: {
+      priceMarketId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "subscription-market-prices",
+          key: "id",
+        },
+      },
+      startDateInUnix: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      endDateInUnix: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      startDate: {
         type: Sequelize.DATE,
         allowNull: false,
+      },
+      endDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      paymentProviderDetails: {
+        type: Sequelize.JSONB,
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
       },
       updatedAt: {
         type: Sequelize.DATE,
@@ -86,6 +95,7 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable("users");
+
+    await queryInterface.dropTable("user-subscriptions");
   },
 };

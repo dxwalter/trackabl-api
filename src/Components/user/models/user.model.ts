@@ -16,8 +16,7 @@ import {
 
 import { UserSignUpPoints } from "./user-sign-up-points.model";
 import { USER_TYPE } from "../types/user.contants";
-import { TemporaryRemittanceModel } from "../../transactions/models/temporary-remittances.model";
-import { TokenWalletHistory } from "../../history/models/token-wallet-history";
+import { UserSubscriptionModel } from "../../subscription/model/user-subscriptions.model";
 
 @Table({
   tableName: "users",
@@ -106,17 +105,10 @@ export class UserModel extends Model {
   })
   user_sign_up_points: UserSignUpPoints;
 
-  @HasMany(() => TemporaryRemittanceModel, {
-    as: "user_temporal_deposits",
+  @HasMany(() => UserSubscriptionModel, {
+    as: "user_subscriptions",
     onDelete: "cascade",
     hooks: true,
   })
-  user_temporal_deposits: TemporaryRemittanceModel;
-
-  @HasMany(() => TokenWalletHistory, {
-    as: "token_wallet_history",
-    onDelete: "cascade",
-    hooks: true,
-  })
-  tokenWalletHistory: TokenWalletHistory;
+  user_subscriptions: UserSubscriptionModel;
 }

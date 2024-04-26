@@ -9,6 +9,7 @@ import { UserModel } from "../user/models/user.model";
 import { UserSignUpPoints } from "../user/models/user-sign-up-points.model";
 import { GlobalErrorService } from "../globals/global.error.service";
 import { SystemErrorLogs } from "../globals/model/error-logs.model";
+import { UserSubscriptionModel } from "../subscription/model/user-subscriptions.model";
 
 @Module({
   controllers: [AdminController],
@@ -20,6 +21,7 @@ import { SystemErrorLogs } from "../globals/model/error-logs.model";
       AdminModel,
       SystemErrorLogs,
       UserSignUpPoints,
+      UserSubscriptionModel,
     ]),
   ],
 })

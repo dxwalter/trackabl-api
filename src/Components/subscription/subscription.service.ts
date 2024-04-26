@@ -4,11 +4,15 @@ import { JwtService } from "@nestjs/jwt";
 import { Utils } from "../utils/index";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { SystemErrorLogDTO } from "../globals/types/globel.types";
-import { createSubscriptionPlan } from "./types/price.types";
+import {
+  createSubscriptionPlan,
+  createUserSubscription,
+} from "./types/price.types";
 import { SubcriptionPlanModel } from "./model/subscription-plans.model";
 import { MarketModel } from "./model/market.model";
 import { IPStackLookupModel } from "./model/ipstack-lookups.model";
-import { SubscriptionMarketPricesModel } from "./model/subcription-market-price";
+import { SubscriptionMarketPricesModel } from "./model/subcription-market-price.model";
+import { UserSubscriptionModel } from "./model/user-subscriptions.model";
 import { CreatePricePlan } from "./dto/create-price-plan.dto";
 import { StoreIPStackResponse } from "./dto/generic-subscription.dto";
 import { Op } from "sequelize";
@@ -23,6 +27,8 @@ export class SubscriptionService {
     private readonly ipStackModel: typeof IPStackLookupModel,
     @InjectModel(SubscriptionMarketPricesModel)
     private readonly subscriptionMarketPriceModel: typeof SubscriptionMarketPricesModel,
+    @InjectModel(UserSubscriptionModel)
+    private readonly userSubscrptionPlan: typeof UserSubscriptionModel,
     protected eventEmitter: EventEmitter2
   ) {}
 
@@ -134,6 +140,46 @@ export class SubscriptionService {
     }
   }
 
+  async getUserSubscriptionList(
+    userId: number
+  ): Promise<UserSubscriptionModel[]> {
+    try {
+      return await this.userSubscrptionPlan.findAll({
+        where: {
+          userId,
+        },
+        include: [
+          {
+            model: MarketModel,
+          },
+          {
+            model: SubcriptionPlanModel,
+          },
+          {
+            model: SubscriptionMarketPricesModel,
+          },
+        ],
+        attributes: {
+          exclude: ["paymentProviderDetails"],
+        },
+        order: [['id', 'DESC']],
+      });
+    } catch (error) {
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `Unable to get previous subscriptions`,
+        severity: "MEDIUM",
+        details: {
+          service: "SubscriptionService.getUserSubscriptionList",
+          payload: {},
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      throw new BadRequestException("An error occurred previous subscriptions");
+    }
+  }
+
   async getPriceInMarket(
     market: number,
     plan: number
@@ -188,6 +234,60 @@ export class SubscriptionService {
     }
   }
 
+  async createUserSubscripton(
+    data: createUserSubscription
+  ): Promise<UserSubscriptionModel> {
+    try {
+      return await this.userSubscrptionPlan.create({
+        ...data,
+      });
+    } catch (error) {
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `Unable to create user subscription`,
+        severity: "HIGH",
+        details: {
+          service: "SubscriptionService.createUserSubscripton",
+          payload: data,
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      throw new BadRequestException(
+        "An error occurred creating your subscription plan."
+      );
+    }
+  }
+
+  async updateUserSubscriptionPlanStatus(userId: number, isActive: boolean) {
+    try {
+      return await this.userSubscrptionPlan.update(
+        { isActive },
+        {
+          where: { userId },
+        }
+      );
+    } catch (error) {
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `Error updating user's subscription status : ${userId}`,
+        severity: "HIGH",
+        details: {
+          service: "UserService.updateUserSubscriptionPlanStatus",
+          payload: {
+            userId: userId,
+            isActive,
+          },
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      throw new BadRequestException(
+        "An error occurred updating your subscription status"
+      );
+    }
+  }
+
   async getAllPrice(
     market: number | undefined = undefined
   ): Promise<SubscriptionMarketPricesModel[]> {
@@ -228,6 +328,41 @@ export class SubscriptionService {
     }
   }
 
+  async getPriceUsingID(
+    id: number
+  ): Promise<SubscriptionMarketPricesModel | null> {
+    try {
+      const include = [
+        {
+          model: MarketModel,
+        },
+        {
+          model: SubcriptionPlanModel,
+        },
+      ];
+
+      return await this.subscriptionMarketPriceModel.findOne({
+        where: {
+          id: id,
+        },
+        include,
+      });
+    } catch (error) {
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `An error occurred getting price`,
+        severity: "HIGH",
+        details: {
+          service: "SubscriptionService.getPriceUsingID",
+          payload: id,
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      throw new BadRequestException("An error occurred getting price");
+    }
+  }
+
   async deleteSubscriptionPlanPrice(id: number): Promise<void> {
     try {
       await this.subscriptionMarketPriceModel.destroy({
@@ -236,7 +371,6 @@ export class SubscriptionService {
         },
       });
     } catch (error) {
-      console.log(error, id);
       Error.captureStackTrace(error);
       this.eventEmitter.emit("log.system.error", {
         message: `Error checking deleting subscription plan price with ID: ${id}`,

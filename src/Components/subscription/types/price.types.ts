@@ -15,6 +15,7 @@ export interface Market {
   currencyCode: string;
   currencyName: string;
   currencySymbol: string;
+  vat: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -29,11 +30,39 @@ export interface Price {
   updatedAt: Date;
 }
 
+export interface UserSubscription {
+  id: number;
+  isActive: boolean;
+  userId: number;
+  planId: number;
+  marketId: number;
+  priceMarketId: number;
+  startDateInUnix: number;
+  endDateInUnix: number;
+  paymentProviderDetails: any;
+  startDate: Date;
+  endDate: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface createSubscriptionPlan {
   name: string;
   status: boolean;
 }
 
+export interface createUserSubscription {
+  isActive: boolean;
+  userId: number;
+  planId: number;
+  marketId: number;
+  priceMarketId: number;
+  startDateInUnix: number;
+  endDateInUnix: number;
+  startDate: Date;
+  endDate: Date;
+  paymentProviderDetails;
+}
 export interface createSubscriptionPlanResponse extends GlobalRequestResponse {
   data: Plan;
 }
@@ -57,3 +86,11 @@ export interface createPriceResponse extends GlobalRequestResponse {
 }
 
 export interface deletePriceResponse extends GlobalRequestResponse {}
+
+export interface activateFreePlanResponse extends GlobalRequestResponse {
+  data: UserSubscription;
+}
+
+export interface userSubscriptionListResponse extends GlobalRequestResponse {
+  data: UserSubscription[];
+}

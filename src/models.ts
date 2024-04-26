@@ -10,8 +10,9 @@ import { SystemErrorLogs } from "./Components/globals/model/error-logs.model";
 import { AdminModel } from "./Components/admin/model/admin.model";
 import { SubcriptionPlanModel } from "./Components/subscription/model/subscription-plans.model";
 import { MarketModel } from "./Components/subscription/model/market.model";
-import { SubscriptionMarketPricesModel } from "./Components/subscription/model/subcription-market-price";
+import { SubscriptionMarketPricesModel } from "./Components/subscription/model/subcription-market-price.model";
 import { IPStackLookupModel } from "./Components/subscription/model/ipstack-lookups.model";
+import { UserSubscriptionModel } from "./Components/subscription/model/user-subscriptions.model";
 
 export const models = [
   WaitlistUsersPoint,
@@ -28,4 +29,5 @@ export const models = [
   MarketModel,
   SubscriptionMarketPricesModel,
   IPStackLookupModel,
+  UserSubscriptionModel,
 ];

@@ -18,6 +18,7 @@ import {
 
 import { MarketModel } from "./market.model";
 import { SubcriptionPlanModel } from "./subscription-plans.model";
+import { UserSubscriptionModel } from "./user-subscriptions.model";
 
 @Table({
   tableName: "subscription-market-prices",
@@ -71,4 +72,11 @@ export class SubscriptionMarketPricesModel extends Model {
 
   @BelongsTo(() => SubcriptionPlanModel)
   public subscriptionPlan: SubcriptionPlanModel;
+
+  @HasMany(() => UserSubscriptionModel, {
+    as: "market_price_subscriptions",
+    onDelete: "cascade",
+    hooks: true,
+  })
+  market_price_subscriptions: UserSubscriptionModel;
 }

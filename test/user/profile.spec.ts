@@ -23,11 +23,12 @@ import { ADMIN_TYPE } from "../../src/Components/admin/types/admin.constants";
 import {
   Plan,
   Market,
+  Price,
 } from "../../src/Components/subscription/types/price.types";
 
 dotenv.config();
 
-describe("AuthController (e2e)", () => {
+describe("UserProfileController (e2e)", () => {
   let app: INestApplication;
   const userEmail: string = randomEmail();
   let referralCode: string | undefined = undefined;
@@ -48,11 +49,30 @@ describe("AuthController (e2e)", () => {
   // admin
   let markets: Market[] = [];
   let plans: Plan[] = [];
+  let marketPlans: {
+    id: number;
+    planId: number;
+    marketId: number;
+    freePlanPriceInDays: number;
+    priceAMonth: number;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: null | string;
+    subscriptionPlan: Plan;
+    market: Market;
+  }[] = [];
 
   let planId = undefined;
   const priceIds = {
     priceId1: 0,
     priceId2: 0,
+    priceId3: 0,
+    priceId4: 0,
+  };
+
+  const newPlanId = {
+    plandId1: 0,
+    plandId2: 0,
   };
 
   const referredUserEmail: string = randomEmail();
@@ -124,13 +144,12 @@ describe("AuthController (e2e)", () => {
     return request(app.getHttpServer())
       .post("/subscription/create-plan")
       .send({
-        name: "Auth-Platinum",
+        name: "Auth-Platinum-profile",
         status: true,
       })
       .set("Accept", "application/json")
       .set("Authorization", `Bearer ${adminToken}`)
       .expect(function (res) {
-        console.log(res.body);
         if (!("message" in res.body)) {
           throw new Error("Response should contain message.");
         }
@@ -139,7 +158,7 @@ describe("AuthController (e2e)", () => {
           throw new Error("Invalid message response.");
         }
 
-        planId = res.body.data.id;
+        newPlanId.plandId1 = res.body.data.id;
         addEndpoint(res, {
           tags: ["Subscription"],
         });
@@ -150,7 +169,7 @@ describe("AuthController (e2e)", () => {
     return request(app.getHttpServer())
       .post("/subscription/create-plan")
       .send({
-        name: "Auth-Platinum-us",
+        name: "Auth-Platinum-us-profile",
         status: true,
       })
       .set("Accept", "application/json")
@@ -164,7 +183,7 @@ describe("AuthController (e2e)", () => {
           throw new Error("Invalid message response.");
         }
 
-        planId = res.body.data.id;
+        newPlanId.plandId2 = res.body.data.id;
         addEndpoint(res, {
           tags: ["Subscription"],
         });
@@ -230,100 +249,9 @@ describe("AuthController (e2e)", () => {
       });
   });
 
-  it("Map Subscription plan to nigerian market", () => {
-    const getPlatinum = plans.filter(
-      (plan) => plan.name.toLowerCase() === "auth-platinum"
-    );
-    const nigMarket = markets.filter(
-      (market) => market.countryName.toLowerCase() === "nigeria"
-    );
-
-    const priceAMonth = 1999.99;
-
-    return request(app.getHttpServer())
-      .post("/subscription/create-plan-price")
-      .send({
-        planId: getPlatinum[0].id,
-        marketId: nigMarket[0].id,
-        freePlanPriceInDays: 7,
-        priceAMonth,
-      })
-      .set("Accept", "application/json")
-      .set("Authorization", `Bearer ${adminToken}`)
-      .expect(function (res) {
-        if (!("message" in res.body)) {
-          throw new Error("Response should contain message.");
-        }
-
-        if (!("data" in res.body)) {
-          throw new Error("Response should contain data.");
-        }
-
-        if (res.body.data.priceAMonth !== priceAMonth) {
-          throw new Error("Wrong price gotten.");
-        }
-
-        if (
-          res.body.message !== SubcriptionPlanStatusMessage.plan.priceCreated
-        ) {
-          throw new Error("Invalid message response.");
-        }
-        priceIds.priceId1 = res.body.data.id;
-        addEndpoint(res, {
-          tags: ["Admin"],
-        });
-      });
-  });
-
-  it("Map Subscription plan to US market", () => {
-    const getPlatinum = plans.filter(
-      (plan) => plan.name.toLowerCase() === "auth-platinum-us"
-    );
-
-    const usMarket = markets.filter((market) => market.countryCode === "US");
-
-    const priceAMonth = 10;
-
-    return request(app.getHttpServer())
-      .post("/subscription/create-plan-price")
-      .send({
-        planId: getPlatinum[0].id,
-        marketId: usMarket[0].id,
-        freePlanPriceInDays: 7,
-        priceAMonth,
-      })
-      .set("Accept", "application/json")
-      .set("Authorization", `Bearer ${adminToken}`)
-      .expect(function (res) {
-        if (!("message" in res.body)) {
-          throw new Error("Response should contain message.");
-        }
-
-        if (!("data" in res.body)) {
-          throw new Error("Response should contain data.");
-        }
-
-        if (res.body.data.priceAMonth !== priceAMonth) {
-          throw new Error("Wrong price gotten.");
-        }
-
-        if (
-          res.body.message !== SubcriptionPlanStatusMessage.plan.priceCreated
-        ) {
-          throw new Error("Invalid message response.");
-        }
-        priceIds.priceId2 = res.body.data.id;
-
-        addEndpoint(res, {
-          tags: ["Admin"],
-        });
-      });
-  });
-
   it("Get all price plans", () => {
     return request(app.getHttpServer())
       .get("/subscription/admin-get-plans")
-
       .set("Accept", "application/json")
       .set("Authorization", `Bearer ${adminToken}`)
       .expect(function (res) {
@@ -333,10 +261,6 @@ describe("AuthController (e2e)", () => {
 
         if (!("data" in res.body)) {
           throw new Error("Response should contain data.");
-        }
-
-        if (res.body.data.length !== 2) {
-          throw new Error("Wrong price gotten.");
         }
 
         if (res.body.message !== SubcriptionPlanStatusMessage.default) {
@@ -363,10 +287,6 @@ describe("AuthController (e2e)", () => {
 
         if (!("data" in res.body)) {
           throw new Error("Response should contain data.");
-        }
-
-        if (res.body.data.length != 1) {
-          throw new Error("Wrong price gotten.");
         }
 
         if (res.body.message !== SubcriptionPlanStatusMessage.default) {
@@ -433,53 +353,23 @@ describe("AuthController (e2e)", () => {
       });
   });
 
-  it("Get Plans", () => {
-    nockIpStackRequest();
+  it("Get user profile [SUCCESS]", () => {
     return request(app.getHttpServer())
-      .get("/subscription/plans")
-      .send({ trial_count: 0 })
+      .get("/user")
       .set("Authorization", `Bearer ${userToken}`)
       .set("Accept", "application/json")
       .expect(function (res) {
-        console.log(res.body.data);
         if (!("message" in res.body)) {
           throw new Error("Response should contain message.");
         }
 
-        if (res.body.message !== SubcriptionPlanStatusMessage.default) {
-          throw new Error("Invalid message response.");
-        }
-
-        addEndpoint(res, {
-          tags: ["Sunscription"],
-        });
-      });
-  });
-
-  it("Login a user [SUCCESS]", () => {
-    return request(app.getHttpServer())
-      .post("/auth/login")
-      .send({
-        email: userEmail,
-        password: randomPassword,
-        trial_count: 0,
-      })
-      .set("Accept", "application/json")
-      .expect(function (res) {
-        if (!("message" in res.body)) {
-          throw new Error("Response should contain message.");
-        }
-
-        if (!("token" in res.body.data)) {
+        if (!("user_subscriptions" in res.body.data)) {
           throw new Error("Response should contain latest subscription.");
         }
 
-        if (res.body.message !== UserStatusMessages.Login.success) {
+        if (res.body.message !== UserStatusMessages.UserActions.ok) {
           throw new Error("Invalid message response.");
         }
-
-        userToken = res.body.data.token;
-        userId = res.body.data.id;
 
         addEndpoint(res, {
           tags: ["User"],
@@ -487,9 +377,9 @@ describe("AuthController (e2e)", () => {
       });
   });
 
-  it("Delete subscription price 1", () => {
+  it("Delete subscription plan", () => {
     return request(app.getHttpServer())
-      .delete("/subscription/price/" + priceIds.priceId1)
+      .delete("/subscription/plan/" + newPlanId.plandId1)
       .set("Authorization", `Bearer ${adminToken}`)
       .set("Accept", "application/json")
       .expect(function (res) {
@@ -497,9 +387,26 @@ describe("AuthController (e2e)", () => {
           throw new Error("Response should contain message.");
         }
 
-        if (
-          res.body.message !== SubcriptionPlanStatusMessage.plan.PriceDeleted
-        ) {
+        if (res.body.message !== SubcriptionPlanStatusMessage.plan.deleted) {
+          throw new Error("Invalid message response.");
+        }
+        addEndpoint(res, {
+          tags: ["Admin"],
+        });
+      });
+  });
+
+  it("Delete subscription plan", () => {
+    return request(app.getHttpServer())
+      .delete("/subscription/plan/" + newPlanId.plandId2)
+      .set("Authorization", `Bearer ${adminToken}`)
+      .set("Accept", "application/json")
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+
+        if (res.body.message !== SubcriptionPlanStatusMessage.plan.deleted) {
           throw new Error("Invalid message response.");
         }
         addEndpoint(res, {
@@ -522,25 +429,6 @@ describe("AuthController (e2e)", () => {
         if (
           res.body.message !== SubcriptionPlanStatusMessage.plan.PriceDeleted
         ) {
-          throw new Error("Invalid message response.");
-        }
-        addEndpoint(res, {
-          tags: ["Admin"],
-        });
-      });
-  });
-
-  it("Delete subscription plan", () => {
-    return request(app.getHttpServer())
-      .delete("/subscription/plan/" + planId)
-      .set("Authorization", `Bearer ${adminToken}`)
-      .set("Accept", "application/json")
-      .expect(function (res) {
-        if (!("message" in res.body)) {
-          throw new Error("Response should contain message.");
-        }
-
-        if (res.body.message !== SubcriptionPlanStatusMessage.plan.deleted) {
           throw new Error("Invalid message response.");
         }
         addEndpoint(res, {

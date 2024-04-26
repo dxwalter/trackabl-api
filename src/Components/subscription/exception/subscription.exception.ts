@@ -18,3 +18,9 @@ export class SubscriptionPlanPriceExists extends BadRequestException {
     super(SubcriptionPlanStatusMessage.plan.priceExists);
   }
 }
+
+export class SubscriptionPlanPriceDoesNotExist extends BadRequestException {
+  constructor() {
+    super(SubcriptionPlanStatusMessage.plan.priceDoesNotExist);
+  }
+}

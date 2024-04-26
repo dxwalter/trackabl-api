@@ -21,7 +21,6 @@ export class UserGetUserProfile {
       message: UserStatusMessages.UserActions.ok,
       data: {
         ...this.utils.deleteSensitiveDataFromUserObject(getProfile),
-        isTransactionPinSet: getProfile.transactionPin === null ? false : true,
       },
     };
   }

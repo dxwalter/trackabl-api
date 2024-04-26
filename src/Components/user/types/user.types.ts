@@ -65,6 +65,8 @@ export interface UpdateUserAccount {
   lastName?: string;
   email?: string;
   password?: string;
+  activeSubscriptionId?: number;
+  isSubscriptionActive?: boolean;
   transactionPin?: string;
   isEmailVerified?: boolean;
   emailVerificationCode?: string;

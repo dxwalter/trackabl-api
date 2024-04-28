@@ -43,6 +43,10 @@ import { SubscriptionMarketPricesModel } from "../subscription/model/subcription
 import { IPStackLookupModel } from "../subscription/model/ipstack-lookups.model";
 import { UserSubscriptionModel } from "../subscription/model/user-subscriptions.model";
 
+import { CategoryController } from "../category/category.controller";
+import { CategoryService } from "../category/category.service";
+import { CategoryModule } from "../category/category.module";
+
 import { GlobalErrorService } from "../globals/global.error.service";
 // import { GlobalLogService } from "../globals/global.log.service";
 import { GlobalModule } from "../globals/global.module";
@@ -115,6 +119,7 @@ const port = isProduction
     forwardRef(() => MarketModel),
     forwardRef(() => IPStackLookupModel),
     forwardRef(() => UserSubscriptionModel),
+    forwardRef(() => CategoryModule),
   ],
   controllers: [
     WaitlistController,
@@ -128,6 +133,7 @@ const port = isProduction
     HistoryController,
     AdminController,
     SubscriptionController,
+    CategoryController,
   ],
   providers: [
     WaitlistService,
@@ -142,6 +148,7 @@ const port = isProduction
     AdminService,
     SubscriptionService,
     APIs,
+    CategoryService,
   ],
 })
 export class AppModule {}

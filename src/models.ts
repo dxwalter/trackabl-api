@@ -13,6 +13,10 @@ import { MarketModel } from "./Components/subscription/model/market.model";
 import { SubscriptionMarketPricesModel } from "./Components/subscription/model/subcription-market-price.model";
 import { IPStackLookupModel } from "./Components/subscription/model/ipstack-lookups.model";
 import { UserSubscriptionModel } from "./Components/subscription/model/user-subscriptions.model";
+import { CategoriesModel } from "./Components/category/model/categories.model";
+import { SuggestedCategoriesModel } from "./Components/category/model/suggested-categories.model";
+import { SubcategoriesModel } from "./Components/category/model/subcatgories.model";
+import { SuggestedSubcategoriesModel } from "./Components/category/model/suggested-subcatgories.model";
 
 export const models = [
   WaitlistUsersPoint,
@@ -30,4 +34,8 @@ export const models = [
   SubscriptionMarketPricesModel,
   IPStackLookupModel,
   UserSubscriptionModel,
+  CategoriesModel,
+  SuggestedCategoriesModel,
+  SubcategoriesModel,
+  SuggestedSubcategoriesModel,
 ];

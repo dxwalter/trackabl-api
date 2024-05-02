@@ -353,6 +353,35 @@ describe("UserProfileController (e2e)", () => {
       });
   });
 
+  it("Update User Profile", () => {
+    return request(app.getHttpServer())
+      .patch("/user/update-profile")
+      .send({
+        fullname: "NewFirstName NewLastName",
+        email: randomEmail(),
+        trial_count: 0,
+      })
+      .set("Authorization", `Bearer ${userToken}`)
+      .set("Accept", "application/json")
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+
+        if (res.body.data.firstName !== "NewFirstName") {
+          throw new Error("Invalid data retrieved.");
+        }
+
+        if (res.body.message !== UserStatusMessages.UserActions.updateProfile) {
+          throw new Error("Invalid message response.");
+        }
+
+        addEndpoint(res, {
+          tags: ["User"],
+        });
+      });
+  });
+
   it("Get user profile [SUCCESS]", () => {
     return request(app.getHttpServer())
       .get("/user")

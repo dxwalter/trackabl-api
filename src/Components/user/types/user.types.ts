@@ -115,18 +115,17 @@ export interface generate2FAQrCode extends GlobalRequestResponse {
   };
 }
 
+export interface UserProfileType {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  referralCode: string;
+  isEmailVerified: boolean;
+  acceptedTCAndPP: Date;
+  updatedAt: Date;
+}
+
 export interface userProfile extends GlobalRequestResponse {
-  data: {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    referralCode: string;
-    isEmailVerified: boolean;
-    is2FASet: boolean;
-    isTransactionPinSet: boolean;
-    userType: string;
-    acceptedTCAndPP: Date;
-    updatedAt: Date;
-  };
+  data: UserProfileType;
 }

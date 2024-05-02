@@ -12,6 +12,7 @@ import {
   EmailExists,
   PhoneNumberExists,
   NoNewDataToBeUpdated,
+  ProvideFullName,
 } from "./../../exceptions/user.exception";
 
 export class UpdateUserProfile {
@@ -32,19 +33,22 @@ export class UpdateUserProfile {
     const updatedUserProfile = {};
 
     // first name
-    if (
-      payload.firstName &&
-      payload.firstName.toLowerCase() !== user?.firstName.toLowerCase()
-    ) {
-      updatedUserProfile["firstName"] = payload.firstName;
-    }
+    if (payload.fullname) {
+      const splitFullName = payload.fullname.split(" ");
 
-    // last name
-    if (
-      payload.lastName &&
-      payload.lastName.toLowerCase() !== user?.lastName.toLowerCase()
-    ) {
-      updatedUserProfile["lastName"] = payload.lastName;
+      if (splitFullName.length < 2) {
+        throw new ProvideFullName();
+      }
+
+      const checkFirstName =
+        splitFullName[0].toLowerCase() === user?.firstName.toLowerCase();
+      const checkLastName =
+        splitFullName[1].toLowerCase() === user?.lastName.toLowerCase();
+
+      if (!checkFirstName || !checkLastName) {
+        updatedUserProfile["firstName"] = splitFullName[0];
+        updatedUserProfile["lastName"] = splitFullName[1];
+      }
     }
 
     // email address
@@ -66,7 +70,6 @@ export class UpdateUserProfile {
     }
 
     // check if there is data to be updated
-
     if (Object.keys(updatedUserProfile).length === 0) {
       throw new NoNewDataToBeUpdated();
     }

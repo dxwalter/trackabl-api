@@ -1,3 +1,4 @@
+import { BadRequestException } from "@nestjs/common";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ReferralCodes = require("voucher-code-generator");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -8,9 +9,13 @@ const domainList = require("disposable-email-domains");
 const dns = require("node:dns");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bcrypt = require("bcrypt");
+const cloudinary = require("cloudinary").v2;
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const crypto = require("crypto");
 const moesif = require("moesif-nodejs");
+
+import { EventEmitter2 } from "@nestjs/event-emitter";
+
 import AppConfigs from "../../Config/app.config";
 
 import { InvalidEmailException } from "../../Components/user/exceptions/user.exception";
@@ -23,6 +28,15 @@ import {
 } from "../transactions/types/transactions.types";
 import { TokenHistoryType } from "../history/types/history.type";
 import { TRANSACTION_TYPE } from "../history/types/history.constant";
+
+import { SystemErrorLogDTO } from "../globals/types/globel.types";
+
+cloudinary.config({
+  secure: true,
+  cloud_name: AppConfigs().cloudinary.cloudName,
+  api_key: AppConfigs().cloudinary.apiKey,
+  api_secret: AppConfigs().cloudinary.apiSecret,
+});
 
 export class Utils {
   public generateReferralCode = () => {
@@ -165,5 +179,64 @@ export class Utils {
       },
     });
   };
+
+  public uploadImageToCloudinary = async (data: {
+    imagePath: string;
+    asset_folder: string;
+  }): Promise<string> => {
+    // Use the uploaded file's name as the asset's public ID and
+    // allow overwriting the asset with new versions
+    const options = {
+      use_filename: false,
+      unique_filename: true,
+      overwrite: false,
+      asset_folder: data.asset_folder,
+    };
+
+    try {
+      // Upload the image
+      if (AppConfigs().environment.env?.toLowerCase() === "test") {
+        return "https://res.cloudinary.com/dsvppsml4/image/upload/v1714318977/trackabl.io/category_icons/category_icon_jnj7uz.svg";
+      }
+      const result = await cloudinary.uploader.upload(data.imagePath, {
+        ...options,
+      });
+      return result.secure_url;
+    } catch (error) {
+      Error.captureStackTrace(error);
+      const eventEmitter = new EventEmitter2();
+
+      eventEmitter.emit("log.system.error", {
+        message: `Error uploading image to cloudinary`,
+        severity: "HIGH",
+        details: {
+          service: "Utils.uploadImageToCloudinary",
+          payload: data,
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      throw new BadRequestException(
+        "An error occurred uploading file to cloudinary"
+      );
+    }
+  };
+
+  public capitalizeWord = (word: string): string => {
+    const tolowerCase = word.toLowerCase();
+    return tolowerCase.charAt(0).toUpperCase() + tolowerCase.slice(1);
+  };
+
+  public generateRandomColor = () => {
+    const red = Math.floor(Math.random() * 256)
+      .toString(16)
+      .padStart(2, "0");
+    const green = Math.floor(Math.random() * 256)
+      .toString(16)
+      .padStart(2, "0");
+    const blue = Math.floor(Math.random() * 256)
+      .toString(16)
+      .padStart(2, "0");
+    return `#${red}${green}${blue}`;
+  };
 }
-// isTransactionPinSet: userData.transactionPin === null ? false : true,

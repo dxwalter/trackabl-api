@@ -11,7 +11,7 @@ module.exports = {
      */
     await queryInterface.addColumn("markets", "paymentProcessor", {
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: false,
     });
   },

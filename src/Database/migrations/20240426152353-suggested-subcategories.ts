@@ -10,7 +10,7 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
 
-    await queryInterface.createTable("subcatgory-subcategories", {
+    await queryInterface.createTable("suggested-subcategories", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       categoryId: {

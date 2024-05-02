@@ -13,6 +13,7 @@ import {
   HasMany,
   Default,
   ForeignKey,
+  BelongsTo,
 } from "sequelize-typescript";
 
 import { UserModel } from "../../user/models/user.model";
@@ -54,7 +55,7 @@ export class SubcategoriesModel extends Model {
 
   @ForeignKey(() => UserModel)
   @Unique
-  @AllowNull(false)
+  @AllowNull(true)
   @Column(DataType.INTEGER)
   public userId: number;
 
@@ -76,4 +77,10 @@ export class SubcategoriesModel extends Model {
   @DeletedAt
   @Column(DataType.DATE)
   public deletedAt: Date;
+
+  @BelongsTo(() => CategoriesModel)
+  public category: CategoriesModel;
+
+  @BelongsTo(() => UserModel)
+  public customer: UserModel;
 }

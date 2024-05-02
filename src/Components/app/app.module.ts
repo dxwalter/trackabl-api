@@ -2,7 +2,7 @@ import { Module, forwardRef } from "@nestjs/common";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { ConfigModule } from "@nestjs/config";
 import { EventEmitterModule } from "@nestjs/event-emitter";
-
+import { MulterModule } from "@nestjs/platform-express";
 import { HistoryModule } from "../history/history.module";
 import { HistoryController } from "../history/history.controller";
 import { HistoryService } from "../history/history.service";
@@ -45,6 +45,7 @@ import { UserSubscriptionModel } from "../subscription/model/user-subscriptions.
 
 import { CategoryController } from "../category/category.controller";
 import { CategoryService } from "../category/category.service";
+import { SuggestedCategoryService } from "../category/category.suggestions.service";
 import { CategoryModule } from "../category/category.module";
 
 import { GlobalErrorService } from "../globals/global.error.service";
@@ -88,6 +89,9 @@ const port = isProduction
 
 @Module({
   imports: [
+    MulterModule.register({
+      dest: "../../../asset/file_uploads",
+    }),
     ConfigModule.forRoot(),
     EventEmitterModule.forRoot(),
     SequelizeModule.forFeature(DatabaseModels),
@@ -149,6 +153,7 @@ const port = isProduction
     SubscriptionService,
     APIs,
     CategoryService,
+    SuggestedCategoryService,
   ],
 })
 export class AppModule {}

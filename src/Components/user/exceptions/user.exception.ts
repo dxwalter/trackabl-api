@@ -6,6 +6,7 @@ export class DefaultUserException extends BadRequestException {
     super(`An error occurred completing your request. Please try again`);
   }
 }
+
 export class MaximumTrialCount extends BadRequestException {
   constructor() {
     super(UserStatusMessages.CreateAccount.maximumTrial);

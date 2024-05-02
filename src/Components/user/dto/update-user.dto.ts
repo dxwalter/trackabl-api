@@ -22,23 +22,11 @@ import { TrialCount } from "../../../Config/global.dto";
 export class UpdateUserDto extends TrialCount {
   @IsString()
   @IsOptional()
-  public firstName: string;
-
-  @IsString()
-  @IsOptional()
-  public lastName: string;
+  public fullname: string;
 
   @IsEmail()
   @IsOptional()
   public email: string;
-
-  @IsString()
-  @IsOptional()
-  public nationality: string;
-
-  @IsPhoneNumber()
-  @IsOptional()
-  public phoneNumber: string;
 }
 
 export class UpdateUserPasswordDto extends TrialCount {

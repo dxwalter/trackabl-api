@@ -346,13 +346,12 @@ export class UserService {
         }
       );
     } catch (error) {
-      console.log(error, id);
       Error.captureStackTrace(error);
       this.eventEmitter.emit("log.system.error", {
         message: `Error updating user profile with user ID: ${id}`,
         severity: "HIGH",
         details: {
-          service: "UserService.getUserReferralPoints",
+          service: "UserService.updateUserProfile",
           payload: {
             userId: id,
             ...updateUserDto,

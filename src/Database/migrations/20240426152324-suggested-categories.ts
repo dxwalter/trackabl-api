@@ -30,8 +30,8 @@ module.exports = {
         },
       },
       description: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.TEXT,
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,

@@ -13,13 +13,14 @@ import {
   HasMany,
   Default,
   ForeignKey,
+  BelongsTo,
 } from "sequelize-typescript";
 
 import { UserModel } from "../../user/models/user.model";
 import { CategoriesModel } from "./categories.model";
 
 @Table({
-  tableName: "subcatgory-subcategories",
+  tableName: "suggested-subcategories",
   paranoid: false,
   timestamps: true,
   underscored: false,
@@ -66,4 +67,10 @@ export class SuggestedSubcategoriesModel extends Model {
   @DeletedAt
   @Column(DataType.DATE)
   public deletedAt: Date;
+
+  @BelongsTo(() => CategoriesModel)
+  public category: CategoriesModel;
+
+  @BelongsTo(() => UserModel)
+  public customer: UserModel;
 }

@@ -13,9 +13,11 @@ import {
   HasMany,
   Default,
   ForeignKey,
+  BelongsTo,
 } from "sequelize-typescript";
 
 import { UserModel } from "../../user/models/user.model";
+import { SubcategoriesModel } from "./subcatgories.model";
 
 @Table({
   tableName: "categories",
@@ -47,7 +49,7 @@ export class CategoriesModel extends Model {
 
   @ForeignKey(() => UserModel)
   @Unique
-  @AllowNull(false)
+  @AllowNull(true)
   @Column(DataType.INTEGER)
   public userId: number;
 
@@ -73,4 +75,14 @@ export class CategoriesModel extends Model {
   @DeletedAt
   @Column(DataType.DATE)
   public deletedAt: Date;
+
+  @BelongsTo(() => UserModel)
+  public customer: UserModel;
+
+  @HasMany(() => SubcategoriesModel, {
+    as: "subcagtegories",
+    onDelete: "cascade",
+    hooks: true,
+  })
+  subcagtegories: SubcategoriesModel;
 }

@@ -60,8 +60,8 @@
                 }
               },
               "example": {
-                "email": "ccc@gmail.com",
-                "password": "cccddedded",
+                "email": "wagpe@firpo.red",
+                "password": "EHE0VNW",
                 "trial_count": 0
               }
             }
@@ -75,51 +75,21 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "fullname": {
-                          "type": "string"
-                        },
-                        "email": {
-                          "type": "string"
-                        },
-                        "accessLevel": {
-                          "type": "string"
-                        },
-                        "createdAt": {
-                          "type": "string"
-                        },
-                        "updatedAt": {
-                          "type": "string"
-                        },
-                        "deletedAt": {},
-                        "token": {
-                          "type": "string"
-                        }
-                      }
-                    },
                     "message": {
                       "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "statusCode": {
+                      "type": "number"
                     }
                   }
                 },
                 "example": {
-                  "data": {
-                    "id": 1,
-                    "fullname": "Daniel",
-                    "email": "ccc@gmail.com",
-                    "accessLevel": "ADMIN",
-                    "createdAt": "2024-04-28T13:10:04.716Z",
-                    "updatedAt": "2024-04-28T13:10:04.716Z",
-                    "deletedAt": null,
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJEYW5pZWwiLCJlbWFpbCI6ImNjY0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2UkVKYnRsbFBqWDRiMUFjeEk3bzhPUURHMmNLemdsZ1hab0RucWRTTmQ0WFE1WFd2LllUZSIsInBhc3N3b3JkUmVjb3ZlcnlDb2RlIjpudWxsLCJhY2Nlc3NMZXZlbCI6IkFETUlOIiwiY3JlYXRlZEF0IjoiMjAyNC0wNC0yOFQxMzoxMDowNC43MTZaIiwidXBkYXRlZEF0IjoiMjAyNC0wNC0yOFQxMzoxMDowNC43MTZaIiwiZGVsZXRlZEF0IjpudWxsLCJpYXQiOjE3MTQzMDk4NDZ9.KUwM5Z0HCnx3MyBwxlRvd8EOrkSv2VHMdRRG_cMYukQ"
-                  },
-                  "message": "Your login was successful",
-                  "status": true
+                  "message": "Failed login attempt",
+                  "error": "Bad Request",
+                  "statusCode": 400
                 }
               }
             }
@@ -127,11 +97,11 @@
         }
       }
     },
-    "/subscription/create-plan": {
+    "/admin/create": {
       "post": {
         "description": "",
         "tags": [
-          "Subscription"
+          "Admin"
         ],
         "parameters": [
           {
@@ -148,14 +118,25 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "fullname": {
+                    "type": "string"
+                  },
+                  "accessLevel": {
                     "type": "string"
                   }
                 }
               },
               "example": {
-                "name": "Free-test",
-                "status": true
+                "email": "agpe@firpo.red",
+                "password": "EHE0VNW",
+                "fullname": "Daniel",
+                "accessLevel": "ADMIN"
               }
             }
           }
@@ -170,635 +151,12 @@
                   "properties": {
                     "message": {
                       "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "createdAt": {
-                          "type": "string"
-                        },
-                        "updatedAt": {
-                          "type": "string"
-                        }
-                      }
                     }
                   }
                 },
                 "example": {
                   "status": true,
-                  "message": "Subscription plan created successfully",
-                  "data": {
-                    "id": 18,
-                    "name": "Free-test",
-                    "status": true,
-                    "createdAt": "2024-04-28T13:10:46.275Z",
-                    "updatedAt": "2024-04-28T13:10:46.275Z"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscription/markets": {
-      "get": {
-        "description": "",
-        "tags": [
-          "Subscription"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Accept",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          },
-                          "countryName": {
-                            "type": "string"
-                          },
-                          "countryCode": {
-                            "type": "string"
-                          },
-                          "currencyCode": {
-                            "type": "string"
-                          },
-                          "currencyName": {
-                            "type": "string"
-                          },
-                          "currencySymbol": {
-                            "type": "string"
-                          },
-                          "vat": {
-                            "type": "number"
-                          },
-                          "createdAt": {
-                            "type": "string"
-                          },
-                          "updatedAt": {
-                            "type": "string"
-                          },
-                          "deletedAt": {}
-                        }
-                      }
-                    }
-                  }
-                },
-                "example": {
-                  "status": true,
-                  "message": "Ok",
-                  "data": [
-                    {
-                      "id": 1,
-                      "countryName": "Nigeria",
-                      "countryCode": "NG",
-                      "currencyCode": "NGN",
-                      "currencyName": "Naira",
-                      "currencySymbol": "₦",
-                      "vat": 7.5,
-                      "createdAt": "2024-04-28T13:10:04.721Z",
-                      "updatedAt": "2024-04-28T13:10:04.721Z",
-                      "deletedAt": null
-                    },
-                    {
-                      "id": 2,
-                      "countryName": "United States of America",
-                      "countryCode": "US",
-                      "currencyCode": "USD",
-                      "currencyName": "United States Dollar",
-                      "currencySymbol": "$",
-                      "vat": 0,
-                      "createdAt": "2024-04-28T13:10:04.721Z",
-                      "updatedAt": "2024-04-28T13:10:04.721Z",
-                      "deletedAt": null
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscription/admin-plans": {
-      "get": {
-        "description": "",
-        "tags": [
-          "Subscription"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Accept",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "createdAt": {
-                            "type": "string"
-                          },
-                          "updatedAt": {
-                            "type": "string"
-                          },
-                          "deletedAt": {}
-                        }
-                      }
-                    }
-                  }
-                },
-                "example": {
-                  "status": true,
-                  "message": "Ok",
-                  "data": [
-                    {
-                      "id": 1,
-                      "name": "Free",
-                      "status": true,
-                      "createdAt": "2024-04-28T13:10:04.728Z",
-                      "updatedAt": "2024-04-28T13:10:04.728Z",
-                      "deletedAt": null
-                    },
-                    {
-                      "id": 2,
-                      "name": "Regular",
-                      "status": true,
-                      "createdAt": "2024-04-28T13:10:04.728Z",
-                      "updatedAt": "2024-04-28T13:10:04.728Z",
-                      "deletedAt": null
-                    },
-                    {
-                      "id": 3,
-                      "name": "Premium",
-                      "status": true,
-                      "createdAt": "2024-04-28T13:10:04.728Z",
-                      "updatedAt": "2024-04-28T13:10:04.728Z",
-                      "deletedAt": null
-                    },
-                    {
-                      "id": 18,
-                      "name": "Free-test",
-                      "status": true,
-                      "createdAt": "2024-04-28T13:10:46.275Z",
-                      "updatedAt": "2024-04-28T13:10:46.275Z",
-                      "deletedAt": null
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscription/create-plan-price": {
-      "post": {
-        "description": "",
-        "tags": [
-          "Admin"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Accept",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "planId": {
-                    "type": "number"
-                  },
-                  "marketId": {
-                    "type": "number"
-                  },
-                  "freePlanPriceInDays": {
-                    "type": "number"
-                  },
-                  "priceAMonth": {
-                    "type": "number"
-                  }
-                }
-              },
-              "example": {
-                "planId": 3,
-                "marketId": 2,
-                "freePlanPriceInDays": 7,
-                "priceAMonth": 10
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "planId": {
-                          "type": "number"
-                        },
-                        "marketId": {
-                          "type": "number"
-                        },
-                        "freePlanPriceInDays": {
-                          "type": "number"
-                        },
-                        "priceAMonth": {
-                          "type": "number"
-                        },
-                        "updatedAt": {
-                          "type": "string"
-                        },
-                        "createdAt": {
-                          "type": "string"
-                        },
-                        "deletedAt": {}
-                      }
-                    }
-                  }
-                },
-                "example": {
-                  "status": true,
-                  "message": "Subscription price created successfully",
-                  "data": {
-                    "id": 16,
-                    "planId": 3,
-                    "marketId": 2,
-                    "freePlanPriceInDays": 7,
-                    "priceAMonth": 10,
-                    "updatedAt": "2024-04-28T13:10:46.316Z",
-                    "createdAt": "2024-04-28T13:10:46.316Z",
-                    "deletedAt": null
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscription/admin-get-plans": {
-      "get": {
-        "description": "",
-        "tags": [
-          "Admin"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Accept",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "marketId",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          },
-                          "planId": {
-                            "type": "number"
-                          },
-                          "marketId": {
-                            "type": "number"
-                          },
-                          "freePlanPriceInDays": {
-                            "type": "number"
-                          },
-                          "priceAMonth": {
-                            "type": "number"
-                          },
-                          "createdAt": {
-                            "type": "string"
-                          },
-                          "updatedAt": {
-                            "type": "string"
-                          },
-                          "deletedAt": {},
-                          "market": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "number"
-                              },
-                              "countryName": {
-                                "type": "string"
-                              },
-                              "countryCode": {
-                                "type": "string"
-                              },
-                              "currencyCode": {
-                                "type": "string"
-                              },
-                              "currencyName": {
-                                "type": "string"
-                              },
-                              "currencySymbol": {
-                                "type": "string"
-                              },
-                              "vat": {
-                                "type": "number"
-                              },
-                              "createdAt": {
-                                "type": "string"
-                              },
-                              "updatedAt": {
-                                "type": "string"
-                              },
-                              "deletedAt": {}
-                            }
-                          },
-                          "subscriptionPlan": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "number"
-                              },
-                              "name": {
-                                "type": "string"
-                              },
-                              "createdAt": {
-                                "type": "string"
-                              },
-                              "updatedAt": {
-                                "type": "string"
-                              },
-                              "deletedAt": {}
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "example": {
-                  "status": true,
-                  "message": "Ok",
-                  "data": [
-                    {
-                      "id": 4,
-                      "planId": 1,
-                      "marketId": 2,
-                      "freePlanPriceInDays": 7,
-                      "priceAMonth": 0,
-                      "createdAt": "2024-04-28T13:10:09.203Z",
-                      "updatedAt": "2024-04-28T13:10:09.203Z",
-                      "deletedAt": null,
-                      "market": {
-                        "id": 2,
-                        "countryName": "United States of America",
-                        "countryCode": "US",
-                        "currencyCode": "USD",
-                        "currencyName": "United States Dollar",
-                        "currencySymbol": "$",
-                        "vat": 0,
-                        "createdAt": "2024-04-28T13:10:04.721Z",
-                        "updatedAt": "2024-04-28T13:10:04.721Z",
-                        "deletedAt": null
-                      },
-                      "subscriptionPlan": {
-                        "id": 1,
-                        "name": "Free",
-                        "status": true,
-                        "createdAt": "2024-04-28T13:10:04.728Z",
-                        "updatedAt": "2024-04-28T13:10:04.728Z",
-                        "deletedAt": null
-                      }
-                    },
-                    {
-                      "id": 16,
-                      "planId": 3,
-                      "marketId": 2,
-                      "freePlanPriceInDays": 7,
-                      "priceAMonth": 10,
-                      "createdAt": "2024-04-28T13:10:46.316Z",
-                      "updatedAt": "2024-04-28T13:10:46.316Z",
-                      "deletedAt": null,
-                      "market": {
-                        "id": 2,
-                        "countryName": "United States of America",
-                        "countryCode": "US",
-                        "currencyCode": "USD",
-                        "currencyName": "United States Dollar",
-                        "currencySymbol": "$",
-                        "vat": 0,
-                        "createdAt": "2024-04-28T13:10:04.721Z",
-                        "updatedAt": "2024-04-28T13:10:04.721Z",
-                        "deletedAt": null
-                      },
-                      "subscriptionPlan": {
-                        "id": 3,
-                        "name": "Premium",
-                        "status": true,
-                        "createdAt": "2024-04-28T13:10:04.728Z",
-                        "updatedAt": "2024-04-28T13:10:04.728Z",
-                        "deletedAt": null
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscription/price/15": {
-      "delete": {
-        "description": "",
-        "tags": [
-          "Admin"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Accept",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "example": {
-                  "status": true,
-                  "message": "Subscription plan price deleted successfully"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscription/price/16": {
-      "delete": {
-        "description": "",
-        "tags": [
-          "Admin"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Accept",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "example": {
-                  "status": true,
-                  "message": "Subscription plan price deleted successfully"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscription/plan/18": {
-      "delete": {
-        "description": "",
-        "tags": [
-          "Admin"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Accept",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "example": {
-                  "status": true,
-                  "message": "Subscription plan deleted successfully"
+                  "message": "An admin was created successfully"
                 }
               }
             }

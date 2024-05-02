@@ -14,6 +14,11 @@ export default () => ({
     wellatDevelopmentDomain: process.env.WELLAT_DEV_DOMAIN,
     token: process.env.ZEPTOMAIL_EMAIL_KEY,
   },
+  cloudinary: {
+    apiSecret: process.env.CLOUDINARY_API_SECRET,
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+  },
   security: {
     jwtConstant: process.env.JWT_CONSTANT,
     passwordSalt: process.env.PASSWORD_SALT,

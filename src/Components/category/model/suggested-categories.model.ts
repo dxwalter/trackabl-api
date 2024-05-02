@@ -13,6 +13,7 @@ import {
   HasMany,
   Default,
   ForeignKey,
+  BelongsTo,
 } from "sequelize-typescript";
 
 import { UserModel } from "../../user/models/user.model";
@@ -41,7 +42,7 @@ export class SuggestedCategoriesModel extends Model {
   @Column(DataType.INTEGER)
   public userId: number;
 
-  @AllowNull(false)
+  @AllowNull(true)
   @Column(DataType.TEXT)
   public description: string;
 
@@ -59,4 +60,7 @@ export class SuggestedCategoriesModel extends Model {
   @DeletedAt
   @Column(DataType.DATE)
   public deletedAt: Date;
+
+  @BelongsTo(() => UserModel)
+  public customer: UserModel;
 }

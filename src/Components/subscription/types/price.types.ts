@@ -14,6 +14,7 @@ export interface Market {
   countryCode: string;
   currencyCode: string;
   currencyName: string;
+  paymentProcessor: string;
   currencySymbol: string;
   vat: number;
   createdAt: Date;
@@ -37,8 +38,10 @@ export interface UserSubscription {
   planId: number;
   marketId: number;
   priceMarketId: number;
+  reference?: string;
   startDateInUnix: number;
   endDateInUnix: number;
+  paymentDetails?: any;
   paymentProviderDetails: any;
   startDate: Date;
   endDate: Date;
@@ -57,11 +60,13 @@ export interface createUserSubscription {
   planId: number;
   marketId: number;
   priceMarketId: number;
+  reference?: string;
   startDateInUnix: number;
   endDateInUnix: number;
   startDate: Date;
   endDate: Date;
-  paymentProviderDetails;
+  paymentProviderDetails: any;
+  paymentDetails?: any;
 }
 export interface createSubscriptionPlanResponse extends GlobalRequestResponse {
   data: Plan;

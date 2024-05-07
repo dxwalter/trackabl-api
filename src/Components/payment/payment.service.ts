@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateWebhookDto } from './dto/create-webhook.dto';
-import { UpdateWebhookDto } from './dto/update-webhook.dto';
+import { Injectable } from "@nestjs/common";
+import { CreateWebhookDto } from "./dto/create-webhook.dto";
+import { UpdateWebhookDto } from "./dto/update-webhook.dto";
 
 @Injectable()
-export class WebhookService {
+export class PaymentService {
   create(createWebhookDto: CreateWebhookDto) {
-    return 'This action adds a new webhook';
+    return "This action adds a new webhook";
   }
 
   findAll() {
@@ -23,4 +23,6 @@ export class WebhookService {
   remove(id: number) {
     return `This action removes a #${id} webhook`;
   }
+
+  async initializeTransaction(userId, gateway): Promise<any> {}
 }

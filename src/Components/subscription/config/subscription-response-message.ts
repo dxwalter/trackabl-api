@@ -21,5 +21,6 @@ export const SubcriptionPlanStatusMessage = {
     subscriptionPlanActivated:
       "Your subscription plan was activated successfully",
     freePlanActivated: "Your free trial period has been activated",
+    deletePlan: "Your subscription was deleted successfully",
   },
 };

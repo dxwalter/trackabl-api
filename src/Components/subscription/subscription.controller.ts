@@ -9,6 +9,7 @@ import {
   UseGuards,
   Query,
   Request,
+  BadRequestException,
 } from "@nestjs/common";
 import { AuthGuard } from "../user/guard/auth.guard";
 import { UserService } from "../user/user.service";
@@ -106,6 +107,23 @@ export class SubscriptionController {
       this.eventEmitter,
       this.userService
     ).activateFreeSubscriptionPlan(req, data);
+  }
+
+  @UseGuards(AuthGuard)
+  @Delete("/user-subscription/:id")
+  async deleteUserSubscription(
+    @Param("id") id: number
+  ): Promise<deleteSubscrptionResponse> {
+    if (process.env.NODE_ENV !== "test") {
+      throw new BadRequestException(
+        "This feature is unavailable at the moment"
+      );
+    }
+    return new SubscriptionPricePlan(
+      this.subscriptionService,
+      this.utils,
+      this.globalError
+    ).deleteUserSubscription(id);
   }
 
   @AdminRoles(AdminRole.ADMIN)

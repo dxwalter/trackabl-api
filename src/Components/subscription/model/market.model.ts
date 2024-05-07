@@ -56,6 +56,10 @@ export class MarketModel extends Model {
   @Column(DataType.STRING)
   public currencySymbol: string;
 
+  @AllowNull(true)
+  @Column(DataType.STRING)
+  public paymentProcessor: string;
+
   @AllowNull(false)
   @Column(DataType.FLOAT)
   public vat: number;

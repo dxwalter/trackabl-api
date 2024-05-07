@@ -34,4 +34,7 @@ export default () => ({
   ipStack: {
     key: process.env.IPSTACK_KEY,
   },
+  paystack: {
+    secret: process.env.PAYSTACK_SECRET,
+  },
 });

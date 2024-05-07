@@ -162,7 +162,7 @@ export class SubscriptionService {
         attributes: {
           exclude: ["paymentProviderDetails"],
         },
-        order: [['id', 'DESC']],
+        order: [["id", "DESC"]],
       });
     } catch (error) {
       Error.captureStackTrace(error);
@@ -371,6 +371,7 @@ export class SubscriptionService {
         },
       });
     } catch (error) {
+      console.log(error.message, id);
       Error.captureStackTrace(error);
       this.eventEmitter.emit("log.system.error", {
         message: `Error checking deleting subscription plan price with ID: ${id}`,
@@ -385,6 +386,30 @@ export class SubscriptionService {
       throw new BadRequestException(
         "An error occurred deleting subscription plan price"
       );
+    }
+  }
+
+  async deleteUserSubscription(id: number): Promise<void> {
+    try {
+      await this.userSubscrptionPlan.destroy({
+        where: {
+          id,
+        },
+      });
+    } catch (error) {
+      console.log(error.message);
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `Error checking deleting user subscription with ID: ${id}`,
+        severity: "MEDIUM",
+        details: {
+          service: "SubscriptionService.deleteUserSubscription",
+          payload: id,
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      throw new BadRequestException("An error occurred deleting subscription ");
     }
   }
 

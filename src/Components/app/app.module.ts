@@ -11,9 +11,9 @@ import { WaitlistModule } from "../waitlist/waitlist.module";
 import { WaitlistController } from "../waitlist/waitlist.controller";
 import { WaitlistService } from "../waitlist/waitlist.service";
 
-import { WebhookController } from "../webhook/webhook.controller";
-import { WebhookService } from "../webhook/webhook.service";
-import { WebhookModule } from "../webhook/webhook.module";
+import { PaymentController } from "../payment/payment.controller";
+import { PaymentService } from "../payment/payment.service";
+import { PaymentModule } from "../payment/payment.module";
 
 import { StatusController } from "../status/status.controller";
 import { StatusService } from "../status/status.service";
@@ -114,7 +114,7 @@ const port = isProduction
     forwardRef(() => UserModule),
     forwardRef(() => PlatformFeatureStatusModule),
     forwardRef(() => TransactionsModule),
-    forwardRef(() => WebhookModule),
+    forwardRef(() => PaymentModule),
     forwardRef(() => HistoryModule),
     forwardRef(() => GlobalModule),
     forwardRef(() => AdminModule),
@@ -133,7 +133,7 @@ const port = isProduction
     UserController,
     PlatformFeatureStatusController,
     TransactionsController,
-    WebhookController,
+    PaymentController,
     HistoryController,
     AdminController,
     SubscriptionController,
@@ -147,7 +147,7 @@ const port = isProduction
     GlobalErrorService,
     PlatformFeatureStatusService,
     TransactionsService,
-    WebhookService,
+    PaymentService,
     HistoryService,
     AdminService,
     SubscriptionService,

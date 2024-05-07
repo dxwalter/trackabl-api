@@ -60,26 +60,33 @@ export class UserSubscriptionModel extends Model {
   @Column(DataType.INTEGER)
   public priceMarketId: number;
 
-  @AllowNull(false)
+  @AllowNull(true)
   @Column(DataType.INTEGER)
   public startDateInUnix: number;
+
+  @AllowNull(true)
+  @Column(DataType.STRING)
+  public reference: string;
 
   @AllowNull(false)
   @Column(DataType.INTEGER)
   public endDateInUnix: number;
 
   @AllowNull(true)
-  @UpdatedAt
+  @CreatedAt
   @Column(DataType.DATE)
   public startDate: Date;
 
   @AllowNull(true)
-  @UpdatedAt
+  @CreatedAt
   @Column(DataType.DATE)
   public endDate: Date;
 
   @AllowNull(true)
-  @UpdatedAt
+  @Column(DataType.JSONB)
+  public paymentDetails: any;
+
+  @AllowNull(true)
   @Column(DataType.JSONB)
   public paymentProviderDetails: any;
 

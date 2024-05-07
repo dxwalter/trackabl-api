@@ -17,6 +17,6 @@ export const nockIpStackRequest = () => {
     })
     .get(`/check?access_key=${process.env.IPSTACK_KEY}`)
     .reply(IpStackSuccessfulRequestForUnitedStates.responseCode, {
-      ...IpStackSuccessfulRequestForUnitedStates.data,
+      ...IpStackSuccessfulRequestForNigeria.data,
     });
 };

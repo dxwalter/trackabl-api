@@ -9,6 +9,9 @@ export const ExpenseStatusMessages = {
   Create: {
     success: "Your expense was created successfully",
   },
+  Update: {
+    success: "Your expense was updated successfully",
+  },
   Error: {
     category: {
       required: "Select a category to continue",
@@ -24,6 +27,10 @@ export const ExpenseStatusMessages = {
       required: "Select a currency to continue",
       notFound:
         "The currency you selected is either inactive or does not exists",
+    },
+    expense: {
+      notFound:
+        "This expense was not found. It has either been moved or deleted",
     },
   },
 };

@@ -19,7 +19,7 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { ExpenseStatusMessages } from "./config/expense-response-messages";
 
 import { ExpenseService } from "./expense.service";
-import { CreateExpenseDto } from "./dto/create-expense.dto";
+import { CreateExpenseDto, EditExpenseDto } from "./dto/create-expense.dto";
 import { UpdateExpenseDto } from "./dto/update-expense.dto";
 import {
   createExpenseResponse,
@@ -61,6 +61,29 @@ export class ExpenseController {
     ).createExpense(data, req.user.id, file);
   }
 
+  @UseInterceptors(FileInterceptor("receipt"))
+  @UsePipes(
+    new AllowedFileTypesValidator(
+      ["png", "jpeg", "jpg"],
+      ".PNG, .JPEG, .JPG are the allowed file types"
+    )
+  ) // Apply custom validator if needed
+  @UseGuards(AuthGuard)
+  @Patch("/:id")
+  async editExpense(
+    @Body() data: EditExpenseDto,
+    @Request() req: any,
+    @UploadedFile()
+    file: Express.Multer.File | null | undefined,
+    @Param("id") id: number
+  ): Promise<createExpenseResponse> {
+    return await new ManageExpense(
+      this.expenseService,
+      this.categoryService,
+      this.utils
+    ).editExpsense(data, req.user.id, file, id);
+  }
+
   @UseGuards(AuthGuard)
   @Get("/currencies")
   async getAllCurrencies(): Promise<getCurrenciesResponse> {
@@ -73,7 +96,7 @@ export class ExpenseController {
 
   @Get(":id")
   findOne(@Param("id") id: string) {
-    return this.expenseService.findOne(+id);
+    // return this.expenseService.findOne(+id);
   }
 
   @Patch(":id")

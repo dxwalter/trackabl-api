@@ -59,6 +59,8 @@ describe("Expense (e2e)", () => {
   const referredUserEmail: string = randomEmail();
   const referredUserPassword = utils.generateRandomString(7);
 
+  let expenseDetails: any = null;
+
   beforeAll(async () => {
     const dbPort = process.env.TEST_DATABASE_PORT;
 
@@ -530,6 +532,154 @@ describe("Expense (e2e)", () => {
           res.body.data.receipt.length === 0 ||
           res.body.data.receipt.length === undefined
         ) {
+          throw new Error("Response should contain receipt url.");
+        }
+
+        expenseDetails = res.body.data;
+
+        addEndpoint(res, {
+          tags: ["Expense"],
+        });
+      });
+  });
+
+  it("Create a new expense without an image", () => {
+    const category =
+      categoryAndSubcategories[
+        utils.generateTokenWithRange(0, categoryAndSubcategories.length)
+      ];
+
+    const subcategories: SubcategoriesForAdmin[] | undefined =
+      category.subcategories ?? [];
+
+    const selectedSubcategory =
+      subcategories[utils.generateTokenWithRange(0, subcategories.length)];
+
+    const currency = currencies.filter(
+      (currency) => currency.currencyCode === "NGN"
+    )[0];
+
+    return request(app.getHttpServer())
+      .post("/expense")
+      .field("categoryId", category.id)
+      .field("currencyId", currency.id)
+      .field("amount", 10000)
+      .field("subcategoryId", selectedSubcategory.id)
+      .field("expenseDate", dayjs().format("DD/MM/YYYY"))
+      .field(
+        "note",
+        "Nullam accumsan lorem in dui. Fusce convallis metus id felis luctus adipiscing. Donec venenatis vulputate lorem. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Morbi mattis ullamcorper velit."
+      )
+      .set("Authorization", `Bearer ${userToken}`)
+      .set("Accept", "application/json")
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+        if (res.body.message !== ExpenseStatusMessages.Create.success) {
+          throw new Error("Invalid message response.");
+        }
+
+        if (res.body.data.receipt !== null) {
+          throw new Error("Response should contain receipt url.");
+        }
+
+        addEndpoint(res, {
+          tags: ["Expense"],
+        });
+      });
+  });
+
+  it("Edit expense: removed image", () => {
+    const category =
+      categoryAndSubcategories[
+        utils.generateTokenWithRange(0, categoryAndSubcategories.length)
+      ];
+
+    const subcategories: SubcategoriesForAdmin[] | undefined =
+      category.subcategories ?? [];
+
+    const selectedSubcategory =
+      subcategories[utils.generateTokenWithRange(0, subcategories.length)];
+
+    const currency = currencies.filter(
+      (currency) => currency.currencyCode === "NGN"
+    )[0];
+
+    return request(app.getHttpServer())
+      .patch("/expense/" + expenseDetails.id)
+      .field("isOldPhotoRemoved", true)
+      .field("categoryId", category.id)
+      .field("currencyId", currency.id)
+      .field("amount", 20000)
+      .field("subcategoryId", selectedSubcategory.id)
+      .field("expenseDate", dayjs().format("DD/MM/YYYY"))
+      .field("note", "New note")
+      .set("Authorization", `Bearer ${userToken}`)
+      .set("Accept", "application/json")
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+        if (res.body.message !== ExpenseStatusMessages.Update.success) {
+          throw new Error("Invalid message response.");
+        }
+
+        if (res.body.data.note !== "New note") {
+          throw new Error("Response should contain receipt url.");
+        }
+
+        addEndpoint(res, {
+          tags: ["Expense"],
+        });
+      });
+  });
+
+  it("Edit expense: added image", () => {
+    const category =
+      categoryAndSubcategories[
+        utils.generateTokenWithRange(0, categoryAndSubcategories.length)
+      ];
+
+    const subcategories: SubcategoriesForAdmin[] | undefined =
+      category.subcategories ?? [];
+
+    const selectedSubcategory =
+      subcategories[utils.generateTokenWithRange(0, subcategories.length)];
+
+    const currency = currencies.filter(
+      (currency) => currency.currencyCode === "NGN"
+    )[0];
+
+    const directoryPath = path.join(__dirname, "../setup/files/receipt.jpg");
+    return request(app.getHttpServer())
+      .patch("/expense/" + expenseDetails.id)
+      .attach("receipt", directoryPath)
+      .field("isOldPhotoRemoved", true)
+      .field("categoryId", category.id)
+      .field("currencyId", currency.id)
+      .field("amount", 20000)
+      .field("subcategoryId", selectedSubcategory.id)
+      .field("expenseDate", dayjs().format("DD/MM/YYYY"))
+      .field("note", "New note 2")
+      .set("Authorization", `Bearer ${userToken}`)
+      .set("Accept", "application/json")
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+        if (res.body.message !== ExpenseStatusMessages.Update.success) {
+          throw new Error("Invalid message response.");
+        }
+
+        if (
+          res.body.data.receipt.length === 0 ||
+          res.body.data.receipt.length === undefined
+        ) {
+          throw new Error("Response should contain receipt url.");
+        }
+
+        if (res.body.data.note !== "New note 2") {
           throw new Error("Response should contain receipt url.");
         }
 

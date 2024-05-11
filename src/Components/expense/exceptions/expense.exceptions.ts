@@ -42,3 +42,9 @@ export class CurrencyNotFoundException extends BadRequestException {
     super(ExpenseStatusMessages.Error.currency.notFound);
   }
 }
+
+export class ExpenseNotFoundException extends BadRequestException {
+  constructor() {
+    super(ExpenseStatusMessages.Error.expense.notFound);
+  }
+}

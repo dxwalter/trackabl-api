@@ -397,7 +397,7 @@ export class SubscriptionService {
         },
       });
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message, id);
       Error.captureStackTrace(error);
       this.eventEmitter.emit("log.system.error", {
         message: `Error checking deleting user subscription with ID: ${id}`,

@@ -865,7 +865,6 @@ describe("AuthController (e2e)", () => {
       .set("Authorization", `Bearer ${adminToken}`)
       .set("Accept", "application/json")
       .expect(function (res) {
-        console.log(res.body);
         if (!("message" in res.body)) {
           throw new Error("Response should contain message.");
         }

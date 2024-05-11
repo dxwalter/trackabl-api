@@ -16,7 +16,7 @@ import {
 } from "class-validator";
 
 import { TrialCount } from "../../../Config/global.dto";
-export class CreateExpenseDto {
+export class CreateExpenseDto extends TrialCount {
   @IsNumber()
   @IsNotEmpty({
     message: "Select a category",
@@ -53,4 +53,10 @@ export class CreateExpenseDto {
   @IsString()
   @IsOptional()
   public note: string;
+}
+
+export class EditExpenseDto extends CreateExpenseDto {
+  @IsBoolean()
+  @IsNotEmpty()
+  public isOldPhotoRemoved: boolean;
 }

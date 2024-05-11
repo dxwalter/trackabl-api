@@ -6,7 +6,7 @@ import { ExpenseModel } from "./model/expense.model";
 import { CurrencyModel } from "./model/currencies.model";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { SystemErrorLogDTO } from "../globals/types/globel.types";
-import { createExpense } from "./types/expense.types";
+import { createExpense, UpdateExpense } from "./types/expense.types";
 
 @Injectable()
 export class ExpenseService {
@@ -81,8 +81,54 @@ export class ExpenseService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} expense`;
+  async findExpense(id: number): Promise<ExpenseModel | null> {
+    try {
+      return await this.expenseModel.findOne({
+        where: {
+          id,
+        },
+      });
+    } catch (error) {
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `An error occurred finding expense: ${id}`,
+        severity: "HIGH",
+        details: {
+          service: "ExpenseService.findExpense",
+          payload: id,
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      throw new BadRequestException("An error occurred editing this expense");
+    }
+  }
+
+  async updateExpenseRecord(id: number, updateExense: UpdateExpense) {
+    try {
+      return await this.expenseModel.update(
+        { ...updateExense },
+        {
+          where: { id },
+        }
+      );
+    } catch (error) {
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `Error updating expense: ${id}`,
+        severity: "HIGH",
+        details: {
+          service: "ExpenseService.updateExpenseRecord",
+          payload: {
+            id,
+            ...updateExense,
+          },
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      throw new BadRequestException("An error occurred editing expense");
+    }
   }
 
   update(id: number, updateExpenseDto: UpdateExpenseDto) {

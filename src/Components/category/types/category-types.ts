@@ -1,18 +1,7 @@
 import { GlobalRequestResponse } from "../../globals/global.types";
 import { UserProfileType } from "../../user/types/user.types";
-
-export interface SubcategoriesForAdmin {
-  id: number;
-  name: string;
-  isUserDefinedSubcategory: boolean;
-  isSubcategoryActive: boolean;
-  categoryId: number;
-  userId: number;
-  color: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date;
-}
+import { SubcategoriesModel } from "../model/subcatgories.model";
+import { CategoriesModel } from "../model/categories.model";
 
 export interface Subcategory {
   id: number;
@@ -63,6 +52,36 @@ export interface CategoryTypeForAdmin {
   name: string;
   isUserDefinedCategory: boolean;
   isCategoryActive: boolean;
+  userId?: number;
+  icon: string;
+  color: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date;
+  customer: UserProfileType;
+  subcategories?: SubcategoriesForAdmin[];
+}
+
+export interface SubcategoriesForAdmin {
+  id: number;
+  name: string;
+  isUserDefinedSubcategory: boolean;
+  isSubcategoryActive: boolean;
+  categoryId: number;
+  userId: number;
+  color: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date;
+  category: CategoryTypeForAdmin;
+  customer: UserProfileType;
+}
+
+export interface CategoryTypeForCustomer {
+  id: number;
+  name: string;
+  isUserDefinedCategory: boolean;
+  isCategoryActive: boolean;
   userId?: null | number | UserProfileType;
   subcategories?: SubcategoriesForAdmin[];
   icon: string;
@@ -98,7 +117,12 @@ export interface CreateSubcategoryType {
 }
 
 export interface ListCategoriesForAdminResponse extends GlobalRequestResponse {
-  data: CategoryTypeForAdmin[];
+  data: CategoriesModel[];
+}
+
+export interface ListCategoriesForCustomerResponse
+  extends GlobalRequestResponse {
+  data: CategoriesModel[];
 }
 
 export interface CreateSuggestedCategoryResponse extends GlobalRequestResponse {
@@ -121,11 +145,11 @@ export interface ListSuggestedCategoriesForAdminResponse
 }
 
 export interface CreateCategoryResponse extends GlobalRequestResponse {
-  data: CategoryTypeForAdmin;
+  data: CategoriesModel;
 }
 
 export interface CreateSubcategoryResponse extends GlobalRequestResponse {
-  data: SubcategoriesForAdmin;
+  data: SubcategoriesModel;
 }
 
 export interface CategoryDefaultResponse extends GlobalRequestResponse {}

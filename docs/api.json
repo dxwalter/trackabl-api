@@ -113,10 +113,10 @@
                     "fullname": "Daniel",
                     "email": "ccc@gmail.com",
                     "accessLevel": "ADMIN",
-                    "createdAt": "2024-05-07T22:12:25.149Z",
-                    "updatedAt": "2024-05-07T22:12:25.149Z",
+                    "createdAt": "2024-05-11T21:19:31.339Z",
+                    "updatedAt": "2024-05-11T21:19:31.339Z",
                     "deletedAt": null,
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJEYW5pZWwiLCJlbWFpbCI6ImNjY0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2UkVKYnRsbFBqWDRiMUFjeEk3bzhPUURHMmNLemdsZ1hab0RucWRTTmQ0WFE1WFd2LllUZSIsInBhc3N3b3JkUmVjb3ZlcnlDb2RlIjpudWxsLCJhY2Nlc3NMZXZlbCI6IkFETUlOIiwiY3JlYXRlZEF0IjoiMjAyNC0wNS0wN1QyMjoxMjoyNS4xNDlaIiwidXBkYXRlZEF0IjoiMjAyNC0wNS0wN1QyMjoxMjoyNS4xNDlaIiwiZGVsZXRlZEF0IjpudWxsLCJpYXQiOjE3MTUxMTk5NTF9._33DYHE65UrGuSaADhgvAFMBE6BLksw6NcDJOBZx5ww"
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJEYW5pZWwiLCJlbWFpbCI6ImNjY0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2UkVKYnRsbFBqWDRiMUFjeEk3bzhPUURHMmNLemdsZ1hab0RucWRTTmQ0WFE1WFd2LllUZSIsInBhc3N3b3JkUmVjb3ZlcnlDb2RlIjpudWxsLCJhY2Nlc3NMZXZlbCI6IkFETUlOIiwiY3JlYXRlZEF0IjoiMjAyNC0wNS0xMVQyMToxOTozMS4zMzlaIiwidXBkYXRlZEF0IjoiMjAyNC0wNS0xMVQyMToxOTozMS4zMzlaIiwiZGVsZXRlZEF0IjpudWxsLCJpYXQiOjE3MTU0NjI0MTl9.TIzqhWEcd_uPK-zZg3gjmUVbOpCDPJQxIG7wWAbELSY"
                   },
                   "message": "Your login was successful",
                   "status": true
@@ -194,11 +194,11 @@
                   "status": true,
                   "message": "Subscription plan created successfully",
                   "data": {
-                    "id": 8,
+                    "id": 13,
                     "name": "Free-test",
                     "status": true,
-                    "createdAt": "2024-05-07T22:12:31.163Z",
-                    "updatedAt": "2024-05-07T22:12:31.163Z"
+                    "createdAt": "2024-05-11T21:20:19.547Z",
+                    "updatedAt": "2024-05-11T21:20:19.547Z"
                   }
                 }
               }
@@ -287,8 +287,8 @@
                       "currencySymbol": "₦",
                       "paymentProcessor": "paystack",
                       "vat": 7.5,
-                      "createdAt": "2024-05-07T22:12:25.154Z",
-                      "updatedAt": "2024-05-07T22:12:25.154Z",
+                      "createdAt": "2024-05-11T21:19:31.352Z",
+                      "updatedAt": "2024-05-11T21:19:31.352Z",
                       "deletedAt": null
                     },
                     {
@@ -300,8 +300,8 @@
                       "currencySymbol": "$",
                       "paymentProcessor": "stripe",
                       "vat": 0,
-                      "createdAt": "2024-05-07T22:12:25.154Z",
-                      "updatedAt": "2024-05-07T22:12:25.154Z",
+                      "createdAt": "2024-05-11T21:19:31.352Z",
+                      "updatedAt": "2024-05-11T21:19:31.352Z",
                       "deletedAt": null
                     }
                   ]
@@ -369,32 +369,32 @@
                       "id": 1,
                       "name": "Free",
                       "status": true,
-                      "createdAt": "2024-05-07T22:12:25.161Z",
-                      "updatedAt": "2024-05-07T22:12:25.161Z",
+                      "createdAt": "2024-05-11T21:19:31.357Z",
+                      "updatedAt": "2024-05-11T21:19:31.357Z",
                       "deletedAt": null
                     },
                     {
                       "id": 2,
                       "name": "Regular",
                       "status": true,
-                      "createdAt": "2024-05-07T22:12:25.161Z",
-                      "updatedAt": "2024-05-07T22:12:25.161Z",
+                      "createdAt": "2024-05-11T21:19:31.357Z",
+                      "updatedAt": "2024-05-11T21:19:31.357Z",
                       "deletedAt": null
                     },
                     {
                       "id": 3,
                       "name": "Premium",
                       "status": true,
-                      "createdAt": "2024-05-07T22:12:25.161Z",
-                      "updatedAt": "2024-05-07T22:12:25.161Z",
+                      "createdAt": "2024-05-11T21:19:31.357Z",
+                      "updatedAt": "2024-05-11T21:19:31.357Z",
                       "deletedAt": null
                     },
                     {
-                      "id": 8,
+                      "id": 13,
                       "name": "Free-test",
                       "status": true,
-                      "createdAt": "2024-05-07T22:12:31.163Z",
-                      "updatedAt": "2024-05-07T22:12:31.163Z",
+                      "createdAt": "2024-05-11T21:20:19.547Z",
+                      "updatedAt": "2024-05-11T21:20:19.547Z",
                       "deletedAt": null
                     }
                   ]
@@ -493,13 +493,13 @@
                   "status": true,
                   "message": "Subscription price created successfully",
                   "data": {
-                    "id": 6,
+                    "id": 11,
                     "planId": 3,
                     "marketId": 2,
                     "freePlanPriceInDays": 7,
                     "priceAMonth": 10,
-                    "updatedAt": "2024-05-07T22:12:31.191Z",
-                    "createdAt": "2024-05-07T22:12:31.191Z",
+                    "updatedAt": "2024-05-11T21:20:19.577Z",
+                    "createdAt": "2024-05-11T21:20:19.577Z",
                     "deletedAt": null
                   }
                 }
@@ -638,8 +638,8 @@
                       "marketId": 2,
                       "freePlanPriceInDays": 7,
                       "priceAMonth": 0,
-                      "createdAt": "2024-05-07T22:12:27.635Z",
-                      "updatedAt": "2024-05-07T22:12:27.635Z",
+                      "createdAt": "2024-05-11T21:19:34.029Z",
+                      "updatedAt": "2024-05-11T21:19:34.029Z",
                       "deletedAt": null,
                       "market": {
                         "id": 2,
@@ -650,27 +650,27 @@
                         "currencySymbol": "$",
                         "paymentProcessor": "stripe",
                         "vat": 0,
-                        "createdAt": "2024-05-07T22:12:25.154Z",
-                        "updatedAt": "2024-05-07T22:12:25.154Z",
+                        "createdAt": "2024-05-11T21:19:31.352Z",
+                        "updatedAt": "2024-05-11T21:19:31.352Z",
                         "deletedAt": null
                       },
                       "subscriptionPlan": {
                         "id": 1,
                         "name": "Free",
                         "status": true,
-                        "createdAt": "2024-05-07T22:12:25.161Z",
-                        "updatedAt": "2024-05-07T22:12:25.161Z",
+                        "createdAt": "2024-05-11T21:19:31.357Z",
+                        "updatedAt": "2024-05-11T21:19:31.357Z",
                         "deletedAt": null
                       }
                     },
                     {
-                      "id": 6,
+                      "id": 11,
                       "planId": 3,
                       "marketId": 2,
                       "freePlanPriceInDays": 7,
                       "priceAMonth": 10,
-                      "createdAt": "2024-05-07T22:12:31.191Z",
-                      "updatedAt": "2024-05-07T22:12:31.191Z",
+                      "createdAt": "2024-05-11T21:20:19.577Z",
+                      "updatedAt": "2024-05-11T21:20:19.577Z",
                       "deletedAt": null,
                       "market": {
                         "id": 2,
@@ -681,16 +681,16 @@
                         "currencySymbol": "$",
                         "paymentProcessor": "stripe",
                         "vat": 0,
-                        "createdAt": "2024-05-07T22:12:25.154Z",
-                        "updatedAt": "2024-05-07T22:12:25.154Z",
+                        "createdAt": "2024-05-11T21:19:31.352Z",
+                        "updatedAt": "2024-05-11T21:19:31.352Z",
                         "deletedAt": null
                       },
                       "subscriptionPlan": {
                         "id": 3,
                         "name": "Premium",
                         "status": true,
-                        "createdAt": "2024-05-07T22:12:25.161Z",
-                        "updatedAt": "2024-05-07T22:12:25.161Z",
+                        "createdAt": "2024-05-11T21:19:31.357Z",
+                        "updatedAt": "2024-05-11T21:19:31.357Z",
                         "deletedAt": null
                       }
                     }
@@ -702,7 +702,7 @@
         }
       }
     },
-    "/subscription/price/5": {
+    "/subscription/price/10": {
       "delete": {
         "description": "",
         "tags": [
@@ -740,7 +740,7 @@
         }
       }
     },
-    "/subscription/price/6": {
+    "/subscription/price/11": {
       "delete": {
         "description": "",
         "tags": [
@@ -778,7 +778,7 @@
         }
       }
     },
-    "/subscription/plan/8": {
+    "/subscription/plan/13": {
       "delete": {
         "description": "",
         "tags": [

@@ -52,6 +52,12 @@ import { GlobalErrorService } from "../globals/global.error.service";
 // import { GlobalLogService } from "../globals/global.log.service";
 import { GlobalModule } from "../globals/global.module";
 
+import { ExpenseModule } from "../expense/expense.module";
+import { ExpenseController } from "../expense/expense.controller";
+import { ExpenseService } from "../expense/expense.service";
+
+import { CacheModule } from "@nestjs/cache-manager";
+
 import { APIs } from "../utils/apis";
 
 import { models as DatabaseModels } from "../../models";
@@ -89,6 +95,7 @@ const port = isProduction
 
 @Module({
   imports: [
+    CacheModule.register(),
     MulterModule.register({
       dest: "../../../asset/file_uploads",
     }),
@@ -124,6 +131,7 @@ const port = isProduction
     forwardRef(() => IPStackLookupModel),
     forwardRef(() => UserSubscriptionModel),
     forwardRef(() => CategoryModule),
+    forwardRef(() => ExpenseModule),
   ],
   controllers: [
     WaitlistController,
@@ -138,6 +146,7 @@ const port = isProduction
     AdminController,
     SubscriptionController,
     CategoryController,
+    ExpenseController,
   ],
   providers: [
     WaitlistService,
@@ -154,6 +163,7 @@ const port = isProduction
     APIs,
     CategoryService,
     SuggestedCategoryService,
+    ExpenseService,
   ],
 })
 export class AppModule {}

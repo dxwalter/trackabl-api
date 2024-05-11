@@ -50,7 +50,7 @@ export class ManageCategories {
     // move file to cloudinary
     const fileUrl = await this.utils.uploadImageToCloudinary({
       imagePath: file.path,
-      asset_folder: "/trackabl.io/category_icons",
+      asset_folder: "/trackabl/category_icons",
     });
 
     return {

@@ -94,7 +94,7 @@ export class Utils {
     return this.encryptSHA1(this.generateRandomString(10));
   };
 
-  public generateTokenWithRance = (min: number, max: number): number => {
+  public generateTokenWithRange = (min: number, max: number): number => {
     return Math.floor(Math.random() * (max - min)) + min;
   };
 
@@ -180,17 +180,24 @@ export class Utils {
     });
   };
 
-  public uploadImageToCloudinary = async (data: {
-    imagePath: string;
-    asset_folder: string;
-  }): Promise<string> => {
+  public uploadImageToCloudinary = async (
+    data: {
+      imagePath: string;
+      asset_folder: string;
+      resource_type?: string;
+    } = {
+      asset_folder: "/trackabl",
+      imagePath: "",
+    }
+  ): Promise<string> => {
     // Use the uploaded file's name as the asset's public ID and
     // allow overwriting the asset with new versions
     const options = {
       use_filename: false,
       unique_filename: true,
       overwrite: false,
-      asset_folder: data.asset_folder,
+      folder: data.asset_folder,
+      resourceType: data.resource_type ? data.resource_type : "image",
     };
 
     try {
@@ -198,9 +205,7 @@ export class Utils {
       if (AppConfigs().environment.env?.toLowerCase() === "test") {
         return "https://res.cloudinary.com/dsvppsml4/image/upload/v1714318977/trackabl.io/category_icons/category_icon_jnj7uz.svg";
       }
-      const result = await cloudinary.uploader.upload(data.imagePath, {
-        ...options,
-      });
+      const result = await cloudinary.uploader.upload(data.imagePath, options);
       return result.secure_url;
     } catch (error) {
       Error.captureStackTrace(error);

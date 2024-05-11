@@ -3,6 +3,7 @@
 const randomEmail = require("random-email");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { addEndpoint, renderDocumentation } = require("../setup/documentation");
+import * as dayjs from "dayjs";
 import * as request from "supertest";
 import { Test } from "@nestjs/testing";
 import { INestApplication } from "@nestjs/common";
@@ -18,13 +19,17 @@ import { Utils } from "../../src/Components/utils/index";
 import { AdminStatusMessages } from "../../src/Components/admin/config/admin-response-message";
 import { ADMIN_TYPE } from "../../src/Components/admin/types/admin.constants";
 import { CategoryStatusMessages } from "../../src/Components/category/config/category-response-messages";
-import { CategoryTypeForAdmin } from "../../src/Components/category/types/category-types";
+import {
+  CategoryTypeForAdmin,
+  SubcategoriesForAdmin,
+} from "../../src/Components/category/types/category-types";
 import { generateRandomColor } from "../setup/global-function";
 import { UserStatusMessages } from "../../src/Components/user/config/user-response-message";
-import { SubcriptionPlanStatusMessage } from "../../src/Components/subscription/config/subscription-response-message";
+import { ExpenseStatusMessages } from "../../src/Components/expense/config/expense-response-messages";
+
 dotenv.config();
 
-describe("Category & Subcategories (e2e)", () => {
+describe("Expense (e2e)", () => {
   let app: INestApplication;
   const userEmail: string = randomEmail();
   let referralCode: string | undefined = undefined;
@@ -47,6 +52,9 @@ describe("Category & Subcategories (e2e)", () => {
   let suggestedSubcategoryId: number | null = null;
 
   let userToken = undefined;
+
+  const categoryAndSubcategories: CategoryTypeForAdmin[] = [];
+  let currencies: any[] = [];
 
   const referredUserEmail: string = randomEmail();
   const referredUserPassword = utils.generateRandomString(7);
@@ -389,8 +397,144 @@ describe("Category & Subcategories (e2e)", () => {
           throw new Error("Invalid message response.");
         }
 
+        res.body.data.forEach((element) => {
+          categoryAndSubcategories.push(element);
+        });
+
         addEndpoint(res, {
           tags: ["Category"],
+        });
+      });
+  });
+
+  it("Get all currencies", () => {
+    return request(app.getHttpServer())
+      .get("/expense/currencies")
+      .set("Authorization", `Bearer ${userToken}`)
+      .set("Accept", "application/json")
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+
+        if (!("data" in res.body)) {
+          throw new Error("Response should contain data.");
+        }
+
+        if (res.body.data[0].length > 0) {
+          throw new Error("The wrong amount of subcatgories was gotten.");
+        }
+
+        if (res.body.message !== ExpenseStatusMessages.default) {
+          throw new Error("Invalid message response.");
+        }
+
+        currencies = res.body.data;
+
+        addEndpoint(res, {
+          tags: ["Expense"],
+        });
+      });
+  });
+
+  it("Create a new expense: Failed due to file type", () => {
+    const category =
+      categoryAndSubcategories[
+        utils.generateTokenWithRange(0, categoryAndSubcategories.length)
+      ];
+
+    const subcategories: SubcategoriesForAdmin[] | undefined =
+      category.subcategories ?? [];
+
+    const selectedSubcategory =
+      subcategories[utils.generateTokenWithRange(0, subcategories.length)];
+
+    const currency = currencies.filter(
+      (currency) => currency.currencyCode === "NGN"
+    )[0];
+
+    const directoryPath = path.join(
+      __dirname,
+      "../setup/files/category_icon.svg"
+    );
+    return request(app.getHttpServer())
+      .post("/expense")
+      .attach("receipt", directoryPath)
+      .field("categoryId", category.id)
+      .field("currencyId", currency.id)
+      .field("amount", 10000)
+      .field("subcategoryId", selectedSubcategory.id)
+      .field("expenseDate", dayjs().format("DD/MM/YYYY"))
+      .field(
+        "note",
+        "Nullam accumsan lorem in dui. Fusce convallis metus id felis luctus adipiscing. Donec venenatis vulputate lorem. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Morbi mattis ullamcorper velit."
+      )
+      .set("Authorization", `Bearer ${userToken}`)
+      .set("Accept", "application/json")
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+        if (
+          res.body.message !== ".PNG, .JPEG, .JPG are the allowed file types"
+        ) {
+          throw new Error("Invalid message response.");
+        }
+
+        addEndpoint(res, {
+          tags: ["Expense"],
+        });
+      });
+  });
+
+  it("Create a new expense", () => {
+    const category =
+      categoryAndSubcategories[
+        utils.generateTokenWithRange(0, categoryAndSubcategories.length)
+      ];
+
+    const subcategories: SubcategoriesForAdmin[] | undefined =
+      category.subcategories ?? [];
+
+    const selectedSubcategory =
+      subcategories[utils.generateTokenWithRange(0, subcategories.length)];
+
+    const currency = currencies.filter(
+      (currency) => currency.currencyCode === "NGN"
+    )[0];
+
+    const directoryPath = path.join(__dirname, "../setup/files/receipt.jpg");
+    return request(app.getHttpServer())
+      .post("/expense")
+      .attach("receipt", directoryPath)
+      .field("categoryId", category.id)
+      .field("currencyId", currency.id)
+      .field("amount", 10000)
+      .field("subcategoryId", selectedSubcategory.id)
+      .field("expenseDate", dayjs().format("DD/MM/YYYY"))
+      .field(
+        "note",
+        "Nullam accumsan lorem in dui. Fusce convallis metus id felis luctus adipiscing. Donec venenatis vulputate lorem. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Morbi mattis ullamcorper velit."
+      )
+      .set("Authorization", `Bearer ${userToken}`)
+      .set("Accept", "application/json")
+      .expect(function (res) {
+        if (!("message" in res.body)) {
+          throw new Error("Response should contain message.");
+        }
+        if (res.body.message !== ExpenseStatusMessages.Create.success) {
+          throw new Error("Invalid message response.");
+        }
+
+        if (
+          res.body.data.receipt.length === 0 ||
+          res.body.data.receipt.length === undefined
+        ) {
+          throw new Error("Response should contain receipt url.");
+        }
+
+        addEndpoint(res, {
+          tags: ["Expense"],
         });
       });
   });

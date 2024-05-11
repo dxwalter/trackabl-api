@@ -38,6 +38,7 @@ import {
   CreateSuggestedCategoryResponse,
   CreateSuggestedSubcategoryResponse,
   ListSuggestedSubcategoriesForAdminResponse,
+  ListCategoriesForCustomerResponse,
 } from "./types/category-types";
 import { CategoryStatusMessages } from "./config/category-response-messages";
 import { Utils } from "../utils";
@@ -111,7 +112,7 @@ export class CategoryController {
   @Get("/")
   async getCategoriesForCustomer(
     @Request() req: any
-  ): Promise<ListCategoriesForAdminResponse> {
+  ): Promise<ListCategoriesForCustomerResponse> {
     return {
       status: true,
       message: CategoryStatusMessages.default,

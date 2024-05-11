@@ -32,7 +32,7 @@ export class ManageSubcategories {
     }
 
     const getSubcategory =
-      await this.categoryService.findSubcategoryUsingNameAndId(
+      await this.categoryService.findSubcategoryUsingNameAndCategoryId(
         newName,
         categoryId
       );

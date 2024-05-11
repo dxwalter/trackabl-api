@@ -17,6 +17,8 @@ import { CategoriesModel } from "./Components/category/model/categories.model";
 import { SuggestedCategoriesModel } from "./Components/category/model/suggested-categories.model";
 import { SubcategoriesModel } from "./Components/category/model/subcatgories.model";
 import { SuggestedSubcategoriesModel } from "./Components/category/model/suggested-subcatgories.model";
+import { ExpenseModel } from "./Components/expense/model/expense.model";
+import { CurrencyModel } from "./Components/expense/model/currencies.model";
 
 export const models = [
   WaitlistUsersPoint,
@@ -38,4 +40,6 @@ export const models = [
   SuggestedCategoriesModel,
   SubcategoriesModel,
   SuggestedSubcategoriesModel,
+  ExpenseModel,
+  CurrencyModel,
 ];

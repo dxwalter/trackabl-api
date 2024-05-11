@@ -14,18 +14,16 @@ import {
   Default,
   ForeignKey,
   BelongsTo,
+  HasOne,
 } from "sequelize-typescript";
 
-import { UserModel } from "../../user/models/user.model";
-import { SubcategoriesModel } from "./subcatgories.model";
-
 @Table({
-  tableName: "categories",
+  tableName: "currencies",
   paranoid: false,
   timestamps: true,
   underscored: false,
 })
-export class CategoriesModel extends Model {
+export class CurrencyModel extends Model {
   @AutoIncrement
   @PrimaryKey
   @Unique
@@ -35,31 +33,19 @@ export class CategoriesModel extends Model {
 
   @AllowNull(false)
   @Column(DataType.STRING)
+  public currencyCode: string;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  public symbol: string;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
   public name: string;
 
   @AllowNull(false)
-  @Default(false)
-  @Column(DataType.BOOLEAN)
-  public isUserDefinedCategory: boolean;
-
-  @AllowNull(false)
-  @Default(false)
-  @Column(DataType.BOOLEAN)
-  public isCategoryActive: boolean;
-
-  @ForeignKey(() => UserModel)
-  @Unique
-  @AllowNull(true)
-  @Column(DataType.INTEGER)
-  public userId: number;
-
-  @AllowNull(false)
   @Column(DataType.STRING)
-  public icon: string;
-
-  @AllowNull(false)
-  @Column(DataType.STRING)
-  public color: string;
+  public currencyName: string;
 
   @AllowNull(true)
   @CreatedAt
@@ -75,14 +61,4 @@ export class CategoriesModel extends Model {
   @DeletedAt
   @Column(DataType.DATE)
   public deletedAt: Date;
-
-  @BelongsTo(() => UserModel)
-  public customer: UserModel;
-
-  @HasMany(() => SubcategoriesModel, {
-    as: "subcategories",
-    onDelete: "cascade",
-    hooks: true,
-  })
-  subcategories: SubcategoriesModel;
 }

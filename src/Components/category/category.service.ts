@@ -213,7 +213,7 @@ export class CategoryService {
     return `This action removes a #${id} category`;
   }
 
-  async findSubcategoryUsingNameAndId(
+  async findSubcategoryUsingNameAndCategoryId(
     name: string,
     categoryId: number
   ): Promise<SubcategoriesModel | null> {
@@ -231,6 +231,31 @@ export class CategoryService {
         details: {
           service: "CategoryService.findSubcategoryUsingNameAndId",
           payload: { name, categoryId },
+          stack: error.stack.toString(),
+        },
+      } as SystemErrorLogDTO);
+
+      throw new BadRequestException(
+        "An error occurred checking if subcategory exists"
+      );
+    }
+  }
+
+  async findSubcategoryUsingId(id: number): Promise<SubcategoriesModel | null> {
+    try {
+      return await this.subcategory.findOne({
+        where: {
+          id,
+        },
+      });
+    } catch (error) {
+      Error.captureStackTrace(error);
+      this.eventEmitter.emit("log.system.error", {
+        message: `Error checking if subcategory exists: ${id}`,
+        severity: "MEDIUM",
+        details: {
+          service: "CategoryService.findSubcategoryUsingId",
+          payload: id,
           stack: error.stack.toString(),
         },
       } as SystemErrorLogDTO);

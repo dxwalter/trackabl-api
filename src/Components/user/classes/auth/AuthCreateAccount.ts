@@ -47,7 +47,7 @@ export class AuthCreateUserAccount {
       userBody.password
     );
 
-    const randomStringForEmailVerification = this.utils.generateTokenWithRance(
+    const randomStringForEmailVerification = this.utils.generateTokenWithRange(
       1000,
       9999
     );

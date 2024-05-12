@@ -7,6 +7,11 @@ import { CurrencyModel } from "./model/currencies.model";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { SystemErrorLogDTO } from "../globals/types/globel.types";
 import { createExpense, UpdateExpense } from "./types/expense.types";
+import {
+  ExpenseSqlQuery,
+  getExpenseSqlQueryInterface,
+  AggregateExpenseByCategoryOrSubcategory,
+} from "./model/queries/getExpenses.query";
 
 @Injectable()
 export class ExpenseService {
@@ -135,7 +140,30 @@ export class ExpenseService {
     return `This action updates a #${id} expense`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} expense`;
+  async GetExpenses(
+    data: getExpenseSqlQueryInterface
+  ): Promise<ExpenseModel[]> {
+    return await new ExpenseSqlQuery(
+      this.expenseModel,
+      this.eventEmitter
+    ).getExpensesInChronologicalOrder(data);
+  }
+
+  async aggregateExpensesForCategory(
+    data: getExpenseSqlQueryInterface
+  ): Promise<AggregateExpenseByCategoryOrSubcategory> {
+    return await new ExpenseSqlQuery(
+      this.expenseModel,
+      this.eventEmitter
+    ).aggregateCategoryExpense(data);
+  }
+
+  async aggregateExpensesForSubcategory(
+    data: getExpenseSqlQueryInterface
+  ): Promise<AggregateExpenseByCategoryOrSubcategory> {
+    return await new ExpenseSqlQuery(
+      this.expenseModel,
+      this.eventEmitter
+    ).aggregateSubcategoryExpense(data);
   }
 }

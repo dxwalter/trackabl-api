@@ -113,10 +113,10 @@
                     "fullname": "Daniel",
                     "email": "ccc@gmail.com",
                     "accessLevel": "ADMIN",
-                    "createdAt": "2024-05-11T22:51:53.354Z",
-                    "updatedAt": "2024-05-11T22:51:53.354Z",
+                    "createdAt": "2024-05-12T13:32:19.714Z",
+                    "updatedAt": "2024-05-12T13:32:19.714Z",
                     "deletedAt": null,
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJEYW5pZWwiLCJlbWFpbCI6ImNjY0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2UkVKYnRsbFBqWDRiMUFjeEk3bzhPUURHMmNLemdsZ1hab0RucWRTTmQ0WFE1WFd2LllUZSIsInBhc3N3b3JkUmVjb3ZlcnlDb2RlIjpudWxsLCJhY2Nlc3NMZXZlbCI6IkFETUlOIiwiY3JlYXRlZEF0IjoiMjAyNC0wNS0xMVQyMjo1MTo1My4zNTRaIiwidXBkYXRlZEF0IjoiMjAyNC0wNS0xMVQyMjo1MTo1My4zNTRaIiwiZGVsZXRlZEF0IjpudWxsLCJpYXQiOjE3MTU0Njc5MjB9.v8zEmF8sTJE5hlBySeYHDDCpQNtrdTACFyxFpxJYZVQ"
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJEYW5pZWwiLCJlbWFpbCI6ImNjY0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2UkVKYnRsbFBqWDRiMUFjeEk3bzhPUURHMmNLemdsZ1hab0RucWRTTmQ0WFE1WFd2LllUZSIsInBhc3N3b3JkUmVjb3ZlcnlDb2RlIjpudWxsLCJhY2Nlc3NMZXZlbCI6IkFETUlOIiwiY3JlYXRlZEF0IjoiMjAyNC0wNS0xMlQxMzozMjoxOS43MTRaIiwidXBkYXRlZEF0IjoiMjAyNC0wNS0xMlQxMzozMjoxOS43MTRaIiwiZGVsZXRlZEF0IjpudWxsLCJpYXQiOjE3MTU1MjA3NDd9.Rbxfstp71etk6JZgk7i0jJXVDmlZcXSUKWJW7QLCsDI"
                   },
                   "message": "Your login was successful",
                   "status": true
@@ -197,8 +197,8 @@
                     "id": 8,
                     "name": "Free-test",
                     "status": true,
-                    "createdAt": "2024-05-11T22:52:00.547Z",
-                    "updatedAt": "2024-05-11T22:52:00.547Z"
+                    "createdAt": "2024-05-12T13:32:27.720Z",
+                    "updatedAt": "2024-05-12T13:32:27.720Z"
                   }
                 }
               }
@@ -287,8 +287,8 @@
                       "currencySymbol": "₦",
                       "paymentProcessor": "paystack",
                       "vat": 7.5,
-                      "createdAt": "2024-05-11T22:51:53.371Z",
-                      "updatedAt": "2024-05-11T22:51:53.371Z",
+                      "createdAt": "2024-05-12T13:32:19.725Z",
+                      "updatedAt": "2024-05-12T13:32:19.725Z",
                       "deletedAt": null
                     },
                     {
@@ -300,8 +300,8 @@
                       "currencySymbol": "$",
                       "paymentProcessor": "stripe",
                       "vat": 0,
-                      "createdAt": "2024-05-11T22:51:53.371Z",
-                      "updatedAt": "2024-05-11T22:51:53.371Z",
+                      "createdAt": "2024-05-12T13:32:19.725Z",
+                      "updatedAt": "2024-05-12T13:32:19.725Z",
                       "deletedAt": null
                     }
                   ]
@@ -369,32 +369,32 @@
                       "id": 1,
                       "name": "Free",
                       "status": true,
-                      "createdAt": "2024-05-11T22:51:53.377Z",
-                      "updatedAt": "2024-05-11T22:51:53.377Z",
+                      "createdAt": "2024-05-12T13:32:19.731Z",
+                      "updatedAt": "2024-05-12T13:32:19.731Z",
                       "deletedAt": null
                     },
                     {
                       "id": 2,
                       "name": "Regular",
                       "status": true,
-                      "createdAt": "2024-05-11T22:51:53.377Z",
-                      "updatedAt": "2024-05-11T22:51:53.377Z",
+                      "createdAt": "2024-05-12T13:32:19.731Z",
+                      "updatedAt": "2024-05-12T13:32:19.731Z",
                       "deletedAt": null
                     },
                     {
                       "id": 3,
                       "name": "Premium",
                       "status": true,
-                      "createdAt": "2024-05-11T22:51:53.377Z",
-                      "updatedAt": "2024-05-11T22:51:53.377Z",
+                      "createdAt": "2024-05-12T13:32:19.731Z",
+                      "updatedAt": "2024-05-12T13:32:19.731Z",
                       "deletedAt": null
                     },
                     {
                       "id": 8,
                       "name": "Free-test",
                       "status": true,
-                      "createdAt": "2024-05-11T22:52:00.547Z",
-                      "updatedAt": "2024-05-11T22:52:00.547Z",
+                      "createdAt": "2024-05-12T13:32:27.720Z",
+                      "updatedAt": "2024-05-12T13:32:27.720Z",
                       "deletedAt": null
                     }
                   ]
@@ -498,8 +498,8 @@
                     "marketId": 2,
                     "freePlanPriceInDays": 7,
                     "priceAMonth": 10,
-                    "updatedAt": "2024-05-11T22:52:00.579Z",
-                    "createdAt": "2024-05-11T22:52:00.579Z",
+                    "updatedAt": "2024-05-12T13:32:27.755Z",
+                    "createdAt": "2024-05-12T13:32:27.755Z",
                     "deletedAt": null
                   }
                 }
@@ -638,8 +638,8 @@
                       "marketId": 2,
                       "freePlanPriceInDays": 7,
                       "priceAMonth": 0,
-                      "createdAt": "2024-05-11T22:51:56.892Z",
-                      "updatedAt": "2024-05-11T22:51:56.892Z",
+                      "createdAt": "2024-05-12T13:32:23.505Z",
+                      "updatedAt": "2024-05-12T13:32:23.505Z",
                       "deletedAt": null,
                       "market": {
                         "id": 2,
@@ -650,16 +650,16 @@
                         "currencySymbol": "$",
                         "paymentProcessor": "stripe",
                         "vat": 0,
-                        "createdAt": "2024-05-11T22:51:53.371Z",
-                        "updatedAt": "2024-05-11T22:51:53.371Z",
+                        "createdAt": "2024-05-12T13:32:19.725Z",
+                        "updatedAt": "2024-05-12T13:32:19.725Z",
                         "deletedAt": null
                       },
                       "subscriptionPlan": {
                         "id": 1,
                         "name": "Free",
                         "status": true,
-                        "createdAt": "2024-05-11T22:51:53.377Z",
-                        "updatedAt": "2024-05-11T22:51:53.377Z",
+                        "createdAt": "2024-05-12T13:32:19.731Z",
+                        "updatedAt": "2024-05-12T13:32:19.731Z",
                         "deletedAt": null
                       }
                     },
@@ -669,8 +669,8 @@
                       "marketId": 2,
                       "freePlanPriceInDays": 7,
                       "priceAMonth": 10,
-                      "createdAt": "2024-05-11T22:52:00.579Z",
-                      "updatedAt": "2024-05-11T22:52:00.579Z",
+                      "createdAt": "2024-05-12T13:32:27.755Z",
+                      "updatedAt": "2024-05-12T13:32:27.755Z",
                       "deletedAt": null,
                       "market": {
                         "id": 2,
@@ -681,16 +681,16 @@
                         "currencySymbol": "$",
                         "paymentProcessor": "stripe",
                         "vat": 0,
-                        "createdAt": "2024-05-11T22:51:53.371Z",
-                        "updatedAt": "2024-05-11T22:51:53.371Z",
+                        "createdAt": "2024-05-12T13:32:19.725Z",
+                        "updatedAt": "2024-05-12T13:32:19.725Z",
                         "deletedAt": null
                       },
                       "subscriptionPlan": {
                         "id": 3,
                         "name": "Premium",
                         "status": true,
-                        "createdAt": "2024-05-11T22:51:53.377Z",
-                        "updatedAt": "2024-05-11T22:51:53.377Z",
+                        "createdAt": "2024-05-12T13:32:19.731Z",
+                        "updatedAt": "2024-05-12T13:32:19.731Z",
                         "deletedAt": null
                       }
                     }

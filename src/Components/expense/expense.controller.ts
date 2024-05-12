@@ -14,22 +14,28 @@ import {
   MaxFileSizeValidator,
   FileTypeValidator,
   UsePipes,
+  Query,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ExpenseStatusMessages } from "./config/expense-response-messages";
 
 import { ExpenseService } from "./expense.service";
 import { CreateExpenseDto, EditExpenseDto } from "./dto/create-expense.dto";
+import { QueryExpensesDto } from "./dto/query-expense.dto";
 import { UpdateExpenseDto } from "./dto/update-expense.dto";
 import {
   createExpenseResponse,
   getCurrenciesResponse,
+  getExpensesResponse,
 } from "./types/expense.types";
 import { Utils } from "../utils";
-import { ManageExpense } from "./classes/CreateExpense";
+
 import { AuthGuard } from "../user/guard/auth.guard";
 import { AllowedFileTypesValidator } from "../utils/file.upload.validator";
 import { CategoryService } from "../category/category.service";
+
+import { ManageExpense } from "./classes/CreateExpense";
+import { QueryExpense } from "./classes/GetExpenses";
 
 @Controller("expense")
 export class ExpenseController {
@@ -94,9 +100,17 @@ export class ExpenseController {
     };
   }
 
-  @Get(":id")
-  findOne(@Param("id") id: string) {
-    // return this.expenseService.findOne(+id);
+  @UseGuards(AuthGuard)
+  @Get("/")
+  async findOne(
+    @Request() req: any,
+    @Query() query: QueryExpensesDto
+  ): Promise<getExpensesResponse> {
+    return await new QueryExpense(
+      this.expenseService,
+      this.categoryService,
+      this.utils
+    ).getExpenses(req.user.id, query);
   }
 
   @Patch(":id")
@@ -106,6 +120,6 @@ export class ExpenseController {
 
   @Delete(":id")
   remove(@Param("id") id: string) {
-    return this.expenseService.remove(+id);
+    // return this.expenseService.remove(+id);
   }
 }

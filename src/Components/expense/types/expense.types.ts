@@ -33,3 +33,10 @@ export interface createExpenseResponse extends GlobalRequestResponse {
 export interface getCurrenciesResponse extends GlobalRequestResponse {
   data: CurrencyModel[];
 }
+
+export interface getExpensesResponse extends GlobalRequestResponse {
+  data: {
+    expense: ExpenseModel[];
+    aggregation: any;
+  };
+}

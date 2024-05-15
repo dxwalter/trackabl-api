@@ -513,7 +513,7 @@ describe("Expense (e2e)", () => {
       .field("currencyId", currency.id)
       .field("amount", 10000)
       .field("subcategoryId", selectedSubcategory.id)
-      .field("expenseDate", dayjs().format("DD/MM/YYYY"))
+      .field("expenseDate", dayjs().format("MM/DD/YYYY"))
       .field(
         "note",
         "Nullam accumsan lorem in dui. Fusce convallis metus id felis luctus adipiscing. Donec venenatis vulputate lorem. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Morbi mattis ullamcorper velit."
@@ -521,6 +521,7 @@ describe("Expense (e2e)", () => {
       .set("Authorization", `Bearer ${userToken}`)
       .set("Accept", "application/json")
       .expect(function (res) {
+        console.log(res.body);
         if (!("message" in res.body)) {
           throw new Error("Response should contain message.");
         }
@@ -565,7 +566,7 @@ describe("Expense (e2e)", () => {
       .field("currencyId", currency.id)
       .field("amount", 10000)
       .field("subcategoryId", selectedSubcategory.id)
-      .field("expenseDate", dayjs().format("DD/MM/YYYY"))
+      .field("expenseDate", dayjs().format("MM/DD/YYYY"))
       .field(
         "note",
         "Nullam accumsan lorem in dui. Fusce convallis metus id felis luctus adipiscing. Donec venenatis vulputate lorem. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Morbi mattis ullamcorper velit."
@@ -613,7 +614,7 @@ describe("Expense (e2e)", () => {
       .field("currencyId", currency.id)
       .field("amount", 20000)
       .field("subcategoryId", selectedSubcategory.id)
-      .field("expenseDate", dayjs().format("DD/MM/YYYY"))
+      .field("expenseDate", dayjs().format("MM/DD/YYYY"))
       .field("note", "New note")
       .set("Authorization", `Bearer ${userToken}`)
       .set("Accept", "application/json")
@@ -660,7 +661,7 @@ describe("Expense (e2e)", () => {
       .field("currencyId", currency.id)
       .field("amount", 20000)
       .field("subcategoryId", selectedSubcategory.id)
-      .field("expenseDate", dayjs().format("DD/MM/YYYY"))
+      .field("expenseDate", dayjs().format("MM/DD/YYYY"))
       .field("note", "New note 2")
       .set("Authorization", `Bearer ${userToken}`)
       .set("Accept", "application/json")

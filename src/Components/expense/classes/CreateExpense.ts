@@ -17,11 +17,15 @@ import { ExpenseStatusMessages } from "../config/expense-response-messages";
 import * as dayjs from "dayjs";
 import { BadRequestException } from "@nestjs/common";
 
+import { UserService } from "../../user/user.service";
+import { GenerateReferralCodeForUser } from "../../user/classes/user/GenerateReferralCodeForUser";
+
 export class ManageExpense {
   constructor(
     private readonly expenseService: ExpenseService,
     private readonly categoryService: CategoryService,
-    private readonly utils: Utils
+    private readonly utils: Utils,
+    private readonly userService: UserService
   ) {}
 
   async createExpense(

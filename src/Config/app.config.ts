@@ -10,8 +10,8 @@ export default () => ({
   },
   database: {},
   zeptoMail: {
-    wellatDomain: process.env.WELLAT_DOMAIN,
-    wellatDevelopmentDomain: process.env.WELLAT_DEV_DOMAIN,
+    trackablDomain: process.env.TRACKABL_DOMAIN,
+    trackablDevelopmentDomain: process.env.TRACKABL_DEV_DOMAIN,
     token: process.env.ZEPTOMAIL_EMAIL_KEY,
   },
   cloudinary: {

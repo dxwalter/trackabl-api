@@ -37,12 +37,15 @@ import { CategoryService } from "../category/category.service";
 import { ManageExpense } from "./classes/CreateExpense";
 import { QueryExpense } from "./classes/GetExpenses";
 
+import { UserService } from "../user/user.service";
+
 @Controller("expense")
 export class ExpenseController {
   constructor(
     private readonly expenseService: ExpenseService,
     private readonly categoryService: CategoryService,
-    private readonly utils: Utils
+    private readonly utils: Utils,
+    private readonly userService: UserService
   ) {}
 
   @UseInterceptors(FileInterceptor("receipt"))
@@ -63,7 +66,8 @@ export class ExpenseController {
     return await new ManageExpense(
       this.expenseService,
       this.categoryService,
-      this.utils
+      this.utils,
+      this.userService
     ).createExpense(data, req.user.id, file);
   }
 
@@ -86,7 +90,8 @@ export class ExpenseController {
     return await new ManageExpense(
       this.expenseService,
       this.categoryService,
-      this.utils
+      this.utils,
+      this.userService
     ).editExpsense(data, req.user.id, file, id);
   }
 

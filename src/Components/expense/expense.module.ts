@@ -11,15 +11,23 @@ import { SubcategoriesModel } from "../category/model/subcatgories.model";
 import { SuggestedCategoriesModel } from "../category/model/suggested-categories.model";
 import { SuggestedSubcategoriesModel } from "../category/model/suggested-subcatgories.model";
 
+import { UserService } from "../user/user.service";
+import { UserSignUpPoints } from "../user/models/user-sign-up-points.model";
+import { UserModel } from "../user/models/user.model";
+import { UserSubscriptionModel } from "../subscription/model/user-subscriptions.model";
+
 @Module({
   controllers: [ExpenseController],
-  providers: [ExpenseService, Utils, CategoryService],
+  providers: [ExpenseService, Utils, CategoryService, UserService],
   imports: [
     SequelizeModule.forFeature([
+      UserModel,
       ExpenseModel,
       CurrencyModel,
       CategoriesModel,
+      UserSignUpPoints,
       SubcategoriesModel,
+      UserSubscriptionModel,
       SuggestedCategoriesModel,
       SuggestedSubcategoriesModel,
     ]),

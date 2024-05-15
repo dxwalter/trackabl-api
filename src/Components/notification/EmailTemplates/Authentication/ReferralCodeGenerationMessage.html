@@ -205,6 +205,12 @@
         color: #667085;
         font-weight: 400;
       }
+      .list ul {
+        padding-left: 36px;
+      }
+
+      .list ul li {
+      }
     </style>
   </head>
   <body>
@@ -255,24 +261,28 @@
       <div class="email-body">
         <div class="container">
           <div class="content-body">
-            <h1 class="email-header mb-24">Welcome to Trackabl!</h1>
+            <h1 class="email-header mb-24">🥳 Congratulations {{firstName}}</h1>
             <div class="salutation">
-              <div class="mb-24">Hello [Name],</div>
+              <div class="mb-24">Hello {{fullname}},</div>
               <div class="mb-24">
-                We're excited to have you on board and can't wait for you to
-                start simplifying your expense tracking with us.
+                Congratulations! You've officially been selected to be a partner
+                with <b>Trackable</b>. We're thrilled to have you join our
+                growing community.
               </div>
               <div class="mb-24">
-                Ready to get started? Simply log in to your account and you're
-                good to go!
+                Our partnership program unlocks exclusive benefits designed to
+                help you manage and grow your finance.
               </div>
               <div class="mb-32">
-                Thanks for choosing Trackabl. Here's to a simpler, more
-                organized financial future!
+                We're confident this partnership will be mutually beneficial. To
+                learn more about the program details and discover all the ways
+                we can support your success, click the link below
               </div>
               <div>
                 <div class="mb-8">
-                  <a class="button" href="[LINK]" target="_blank"> Login </a>
+                  <a class="button" href="{{LINK}}" target="_blank">
+                    Learn more
+                  </a>
                 </div>
                 <div class="support-text">
                   If you have any questions, feel free to reach out to us at

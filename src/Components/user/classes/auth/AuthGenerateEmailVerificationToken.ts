@@ -1,10 +1,7 @@
 import { BadRequestException } from "@nestjs/common";
 import { UserService } from "../../user.service";
 import { GlobalErrorService } from "../../../globals/global.error.service";
-import {
-  generateEmailVerificationTokenResponse,
-  JoinedWellatVerifyEmailSendEmail,
-} from "../../types/user.types";
+import { generateEmailVerificationTokenResponse } from "../../types/user.types";
 import { UserStatusMessages } from "../../config/user-response-message";
 import AppConfig from "../../../../Config/app.config";
 import { GenerateUserEmailVerificationTokenDTO } from "../../dto/verify-user-email.dto";

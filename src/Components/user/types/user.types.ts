@@ -9,7 +9,6 @@ export interface CreateUserAccount {
   isEmailVerified: boolean;
   emailVerificationCode: string;
   createdAt: Date;
-  referralCode: string;
 }
 
 export interface CreateUserReferralPoint {
@@ -77,11 +76,15 @@ export interface UpdateUserAccount {
   updatedAt?: Date;
 }
 
-export interface JoinedWellatSendEmail extends SendEmail {
+export interface JoinedTrackablSendEmail extends SendEmail {
+  referralCode?: string;
+}
+
+export interface ReferralCodeGenerated extends SendEmail {
   referralCode: string;
 }
 
-export interface JoinedWellatVerifyEmailSendEmail extends SendEmail {
+export interface JoinedTrackablVerifyEmailSendEmail extends SendEmail {
   verificationCode: string;
 }
 

@@ -205,6 +205,12 @@
         color: #667085;
         font-weight: 400;
       }
+      .list ul {
+        padding-left: 36px;
+      }
+
+      .list ul li {
+      }
     </style>
   </head>
   <body>
@@ -257,14 +263,21 @@
           <div class="content-body">
             <h1 class="email-header mb-24">Welcome to Trackabl!</h1>
             <div class="salutation">
-              <div class="mb-24">Hello [Name],</div>
+              <div class="mb-24">Hello {{fullname}},</div>
               <div class="mb-24">
-                We're excited to have you on board and can't wait for you to
-                start simplifying your expense tracking with us.
+                We're thrilled to have you join our community of financially
+                empowered individuals.
               </div>
-              <div class="mb-24">
-                Ready to get started? Simply log in to your account and you're
-                good to go!
+              <div class="mb-16">
+                Trackabl is your one-stop shop for taking control of your
+                finances. With our easy-to-use service, you can effortlessly:
+              </div>
+              <div class="mb-24 list">
+                <ul>
+                  <li>Track income and expenses effortlessly.</li>
+                  <li>Gain insights into your spending habits.</li>
+                  <li>Set and achieve financial goals.</li>
+                </ul>
               </div>
               <div class="mb-32">
                 Thanks for choosing Trackabl. Here's to a simpler, more
@@ -272,7 +285,9 @@
               </div>
               <div>
                 <div class="mb-8">
-                  <a class="button" href="[LINK]" target="_blank"> Login </a>
+                  <a class="button" href="{{LINK}}" target="_blank">
+                    Track your expenses
+                  </a>
                 </div>
                 <div class="support-text">
                   If you have any questions, feel free to reach out to us at

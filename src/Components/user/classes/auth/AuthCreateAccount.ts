@@ -6,8 +6,8 @@ import { CreateUserDto } from "../../dto/create-user.dto";
 import {
   createUserResponse,
   ReferralCodeUsedEmail,
-  JoinedWellatVerifyEmailSendEmail,
-  JoinedWellatSendEmail,
+  JoinedTrackablSendEmail,
+  JoinedTrackablVerifyEmailSendEmail,
 } from "../../types/user.types";
 import { UserStatusMessages } from "../../config/user-response-message";
 import { EmailExists, ProvideFullName } from "../../exceptions/user.exception";
@@ -61,7 +61,6 @@ export class AuthCreateUserAccount {
       emailVerificationCode: randomStringForEmailVerification.toString(),
       firstName: fullName[0],
       lastName: fullName[1],
-      referralCode: referralCode[0],
       isEmailVerified: false,
       password: newPassword,
       createdAt: new Date(),
@@ -73,7 +72,7 @@ export class AuthCreateUserAccount {
 
     // create free point for user sign up
     await this.userService.createReferralPoint({
-      comment: `You Joined Wellat`,
+      comment: `You Joined Trackabl`,
       isPointFromReferral: false,
       point: 100,
       state: "INITIAL_PARTICIPATION",
@@ -87,8 +86,7 @@ export class AuthCreateUserAccount {
       subject: `Welcome to Trackabl - Know Where Your Money Goes!`,
       recipientName: fullName[0],
       emailType: "NewUserAccountSignUp",
-      referralCode: referralCode[0],
-    } as JoinedWellatSendEmail);
+    } as JoinedTrackablSendEmail);
 
     // Send email verification
     this.sendEmailVerification({
@@ -158,10 +156,10 @@ export class AuthCreateUserAccount {
     this.eventEmitter.emit("send.email.authentication", {
       emailBody: "text",
       recipientEmail: data.recipientEmail,
-      subject: `Verify Your Wellat Account - Let's Secure Your Crypto Journey!`,
+      subject: `Welcome to Trackabl - Know Where Your Money Goes!`,
       recipientName: data.recipientName,
       emailType: "NewUserAccountEmailVerification",
       verificationCode: data.verificationCode,
-    } as JoinedWellatVerifyEmailSendEmail);
+    } as JoinedTrackablVerifyEmailSendEmail);
   }
 }

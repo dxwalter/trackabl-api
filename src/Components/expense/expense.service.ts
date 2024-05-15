@@ -39,7 +39,7 @@ export class ExpenseService {
           stack: error.stack.toString(),
         },
       } as SystemErrorLogDTO);
-
+      console.log(error.message);
       throw new BadRequestException("An error occurred creating your expense");
     }
   }

@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
       rel="stylesheet"
     />
     <title></title>
@@ -22,342 +22,288 @@
         padding: 0;
         margin: 0;
       }
-
-      h4 {
-        margin-bottom: 16px;
-        font-weight: 700;
+      body {
+        background-color: #f6f7f8;
+        width: 100%;
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
       }
-      body,
       .main {
-        font-family: "Sora", sans-serif;
-        background: white;
-        margin: 0;
-        padding: 0;
-        color: #262626;
-        font-size: 16px;
-        line-height: 32px;
+        /* background-color: ; */
+        width: 100%;
+        display: block;
+        color: #101828;
       }
-
-      p,
-      a,
-      a:visited,
-      a:focus,
-      a:hover {
-        font-size: 16px;
-        color: #262626;
-        line-height: 30px;
-        font: 300;
+      .nav-header {
+        background-color: #ffffff;
+        /* padding: 32px 24px 32px 56px; */
+        padding: 32px 24px 32px 16px;
       }
-
-      p {
-        margin-bottom: 16px;
+      .container {
+        width: 100%;
+        margin: 0 auto;
       }
-
-      .mail {
-        max-width: 700px;
-        margin: auto;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .text-right {
-        text-align: right;
-      }
-
-      .mail-container {
-        /* padding: 100%; */
-        padding: 0px 16px;
-      }
-
-      @media (min-width: 600px) {
-        .mail-container {
-          padding: 0px 30px;
+      @media (min-width: 768px) {
+        .container {
+          width: 650px;
+          /* margin: 0 auto; */
         }
       }
 
-      .pattern {
-        position: absolute;
-      }
-
-      .pattern.right {
-        right: -65px;
-        top: 0;
-        height: 300px;
-        text-align: right;
-      }
-
-      .pattern svg {
-        height: 100%;
-      }
-
-      .mail-logo {
-        max-width: 150px;
-        height: 100px;
-        margin-bottom: 32px;
-        position: relative;
-      }
-
-      .mail-logo img {
-        height: 100%;
-      }
-
-      .mail-body {
-        position: relative;
-        z-index: 5;
-      }
-
-      table {
+      .w-full {
         width: 100%;
-        border-spacing: 0;
       }
 
-      tr td {
-        border: 0;
-        padding: 15px 20px;
-        margin: 0;
+      .flex {
+        display: flex;
+      }
+      .flex-col {
+        flex-direction: column;
+      }
+      .items-center {
+        align-items: center;
+      }
+      .flex-center {
+        justify-content: center;
+      }
+      .flex-between {
+        justify-content: space-between;
+      }
+      .mr-20 {
+        margin-right: 20px;
+      }
+      a {
+        text-decoration: none;
+      }
+
+      .nav-logo {
+        width: 139px;
+        display: block;
+      }
+
+      .nav-logo img {
+        width: 100%;
+      }
+      .email-body {
+        padding: 24px 16px;
+      }
+
+      .content-body {
+        background-color: white;
+        padding: 24px 16px;
+      }
+      @media (min-width: 768px) {
+        .content-body {
+          padding: 40px 48px;
+        }
+      }
+      h1 {
+        font-size: 32px;
+        font-family: "Inter", sans-serif;
+        font-weight: 900;
+        line-height: 48px;
+        color: #101828;
+      }
+      @media (min-width: 768px) {
+        h1 {
+          font-size: 36px;
+        }
+      }
+      .mb-8 {
+        margin-bottom: 16px;
+      }
+      .mb-16 {
+        margin-bottom: 8px;
+      }
+      .mb-24 {
+        margin-bottom: 24px;
+      }
+      .mb-36 {
+        margin-bottom: 36px;
+      }
+      .mb-32 {
+        margin-bottom: 32px;
+      }
+      .self-center {
+        align-self: center;
+      }
+      .salutation {
+        line-height: 27px;
+        font-size: 16px;
+      }
+      .button {
+        padding: 12px 32px;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: #000000;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .support-text {
+        color: #667085;
+        text-align: center;
+        font-size: 12px;
+        line-height: 20px;
+      }
+      .expectations {
+        padding: 24px 16px;
+      }
+
+      .expectations-title {
+        color: #101828;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 36px;
+      }
+      @media (min-width: 768px) {
+        .expection-item {
+          width: 550px;
+        }
+      }
+      @media (min-width: 768px) {
+        .expectations-title {
+          text-align: center;
+          font-size: 28px;
+        }
+      }
+      .m-0-auto {
+        margin: 0 auto;
+      }
+      .expection-item-img {
+        width: 48px;
+      }
+      .expection-item-img img {
+        width: 100%;
+      }
+      .expection-sub-title {
+        color: #101828;
+        font-size: 20px;
+        line-height: 28px;
+        text-align: center;
+        font-weight: 600;
+      }
+      .expection-sub-title-text {
+        font-size: 15px;
+        text-align: center;
+        color: #667085;
+        line-height: 24px;
+        font-weight: 400;
       }
 
       .footer {
-        margin-top: 42px;
-        padding-top: 20px;
-
-        font-size: 14px;
+        padding: 24px 16px;
+        background-color: #ffffff;
       }
 
-      .footer .title {
-        color: #7d7d89;
-      }
-
-      a.btn {
-        width: auto;
-        display: block;
-        justify-content: center;
-        align-items: center;
-        padding: 12px 16px;
-        font-weight: 500;
-        cursor: pointer;
-        border-radius: 4px;
-        border: 1px solid;
-        font-size: 16px;
-        text-decoration: none;
-        background-color: #3f56e3;
-        border: 1px solid #3f56e3;
-        color: white;
-        font-weight: 500;
+      .copyright-text {
         text-align: center;
-      }
-
-      .a-btn {
-        display: block;
-        padding: 24px 32px;
-        border-radius: 8px;
-        background: #256ee5;
-        color: white !important;
-        width: fit-content;
-        text-decoration: none;
-        font-size: 20px;
-      }
-
-      .a-btn:hover {
-        color: white !important;
-        font-size: 20px;
-      }
-
-      .wellat-banner-area {
-        width: 100%;
-        height: 100px;
-        background-image: url("https://wellat-files.s3.eu-north-1.amazonaws.com/email_header.png");
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-
-      @media (min-width: 768px) {
-        .wellat-banner-area {
-          height: 80px;
-          background-size: 100%;
-        }
-      }
-
-      .email_header_text {
-        color: #000;
-        text-align: center;
-        font-family: Sora;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        padding: 32px 16px 32px 16px;
-        width: auto;
-        margin: 0 auto;
-      }
-
-      @media (min-width: 768px) {
-        .email_header_text {
-          font-size: 40px;
-          padding: 32px 0px 32px 0px;
-          width: 650px;
-        }
-      }
-
-      .social_media_icon {
-        display: block;
-        margin-right: 16px;
-        width: 40px;
-        height: 40px;
-      }
-
-      .social_media_icon img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-
-      .social_media_icon img.adjust-tiktok-icon {
-        object-fit: cover;
-        width: 49px;
-        height: 40px;
-      }
-
-      .social_media_icon img.adjust-x-icon {
-        object-fit: cover;
-        width: 49px;
-        height: 40px;
-      }
-
-      .social_icon_container {
-        display: flex;
-        justify-content: center;
-        border-bottom: 2px solid #e3e3e4;
-        padding-bottom: 32px;
-      }
-
-      .social_icon_container .social_media_icon:last-child {
-        margin-right: 0;
-      }
-
-      .footer-links {
-        padding: 32px 16px;
-        display: flex;
-        justify-content: center;
-      }
-
-      .footer-links a {
-        color: #05152e;
         font-size: 16px;
+        color: #667085;
         font-weight: 400;
-        text-decoration: none;
-        display: block;
-        margin-right: 16px;
       }
 
-      .footer-links a:last-child {
-        margin-right: 0;
+      .verification-code-card {
+        font-size: 24px;
+        font-weight: 900;
+        padding: 16px;
+        background-color: #e7f3ff;
+        width: fit-content;
+        border-radius: 8px;
       }
     </style>
   </head>
   <body>
     <div class="main">
-      <div class="mail">
-        <div class="wellat-banner-area"></div>
-        <div class="mail-container">
-          <div class="mail-body">
-            <!-- Mail content goes here -->
-            <div style="margin-top: 16px">
-              <h4>Dear {{fullname}}</h4>
-
-              <p>
-                Welcome to Wellat, your destination for an enriched crypto
-                experience! To ensure the security of your account and the
-                success of your crypto journey, we need to verify your email
-                address.
-              </p>
-
-              <p>
-                Click the button below to confirm your email and unlock the full
-                potential of Wellat:
-              </p>
-
-              <div style="margin-bottom: 16px">
-                <a href="{{VerificationLink}}" class="a-btn"
-                  >Verify Your Email</a
-                >
-              </div>
-
-              <p>
-                By verifying your email, you'll gain access to all our features,
-                including becoming a Fund Manager, exploring profitable funds,
-                and earning passively through referral
-              </p>
-
-              <p>
-                If you have any questions or need assistance, our team is here
-                for you – just hit reply.
-              </p>
-
-              <p>Let's make your crypto journey secure and prosperous!</p>
-
-              <p style="margin-bottom: 40px">
-                To your crypto success, <br />
-                Wellat Team
-              </p>
+      <div class="nav-header">
+        <div class="container">
+          <div class="flex flex-between">
+            <a
+              href="https://trackabl.io?utm_origin=email_nav_logo"
+              class="nav-logo"
+              target="_blank"
+            >
+              <img
+                src="https://res.cloudinary.com/dsvppsml4/image/upload/v1715712399/trackabl/app_icons/mleucztzxjiekbwikh1h.png"
+                alt=""
+                srcset=""
+              />
+            </a>
+            <div class="self-center">
+              <a
+                href="https://www.facebook.com/61559650231999"
+                target="_blank"
+                class="mr-20"
+              >
+                <img
+                  src="https://res.cloudinary.com/dsvppsml4/image/upload/v1715637230/trackabl/app_icons/fgebhrsk2j31eaj0znph.svg"
+                />
+              </a>
+              <a
+                href="https://www.instagram.com/trackabl/"
+                target="_blank"
+                class="mr-20"
+              >
+                <img
+                  src="https://res.cloudinary.com/dsvppsml4/image/upload/v1715637230/trackabl/app_icons/zjpde51a2snq8k9qeqmo.svg"
+                />
+              </a>
+              <a href="https://twitter.com/officialtrackbl" target="_blank">
+                <img
+                  src="https://res.cloudinary.com/dsvppsml4/image/upload/v1715637230/trackabl/app_icons/mkyeexmqwrppmmkdk5rd.svg"
+                />
+              </a>
             </div>
-            <!-- footer -->
-            <div class="footer">
-              <div class="social_icon_container">
-                <a
-                  class="social_media_icon"
-                  href="https://web.facebook.com/0xwellat"
-                >
-                  <img
-                    src="https://wellat-files.s3.eu-north-1.amazonaws.com/facebook.png"
-                  />
-                </a>
+          </div>
+        </div>
+      </div>
 
-                <a
-                  class="social_media_icon"
-                  href="https://www.instagram.com/0xwellat/"
-                >
-                  <img
-                    src="https://wellat-files.s3.eu-north-1.amazonaws.com/instagram.png"
-                  />
-                </a>
-
-                <a
-                  class="social_media_icon"
-                  href="https://www.linkedin.com/company/wellat/"
-                >
-                  <img
-                    class="adjust-tiktok-icon"
-                    src="https://wellat-files.s3.eu-north-1.amazonaws.com/linkedin.png"
-                  />
-                </a>
-
-                <a
-                  class="social_media_icon"
-                  href="https://twitter.com/0xWellat"
-                >
-                  <img
-                    class="adjust-x-icon"
-                    src="https://wellat-files.s3.eu-north-1.amazonaws.com/x.png"
-                  />
-                </a>
-
-                <a
-                  class="social_media_icon"
-                  href="https://www.tiktok.com/@0xwellat"
-                >
-                  <img
-                    class="adjust-tiktok-icon"
-                    src="https://wellat-files.s3.eu-north-1.amazonaws.com/tiktok.png"
-                  />
-                </a>
+      <div class="email-body">
+        <div class="container">
+          <div class="content-body">
+            <h1 class="email-header mb-24">Verify your email</h1>
+            <div class="salutation">
+              <div class="mb-24">Hello {{fullname}},</div>
+              <div class="mb-24">
+                Thanks for signing up to track you expenses
               </div>
-              <div class="footer-links">
-                <a href="mailto:support@mywellat.com"> Contact </a>
-                <a href="mywellat.com"> Platform </a>
+              <div class="mb-24">
+                To complete your registration and unlock all the features of
+                <b>Trackabl</b>, please verify your email address.
               </div>
+
+              <div class="verification-code-card mb-24">{{Code}}</div>
+
+              <div class="mb-24">
+                Simply copy and paste this code into the verification field on
+                our website or app.
+              </div>
+
+              <div class="mb-24"><b>Welcome aboard!</b></div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="container">
+          <div class="flex flex-center mb-16">
+            <a
+              href="https://trackabl.io?utm_origin=email_footer_logo"
+              class="nav-logo"
+              target="_blank"
+            >
+              <img
+                src="https://res.cloudinary.com/dsvppsml4/image/upload/v1715712399/trackabl/app_icons/mleucztzxjiekbwikh1h.png"
+                alt=""
+                srcset=""
+              />
+            </a>
+          </div>
+          <div class="copyright-text">
+            © 2024 Trackable.io. All rights reserved.
           </div>
         </div>
       </div>

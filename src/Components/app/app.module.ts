@@ -104,7 +104,7 @@ const port = isProduction
     SequelizeModule.forFeature(DatabaseModels),
     SequelizeModule.forRoot({
       dialect: "postgres",
-      logging: true,
+      logging: false,
       host: DBHost,
       port: Number(port) ?? 0,
       username: DBUsername,

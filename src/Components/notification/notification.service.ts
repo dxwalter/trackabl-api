@@ -9,10 +9,11 @@ import {
 } from "../waitlist/types/waitlist.types";
 
 import {
-  JoinedWellatSendEmail,
-  JoinedWellatVerifyEmailSendEmail,
+  JoinedTrackablSendEmail,
+  JoinedTrackablVerifyEmailSendEmail,
   RecoverPasswordSendEmail,
   ReferralCodeUsedEmail,
+  ReferralCodeGenerated,
 } from "../user/types/user.types";
 
 import configuration from "../../Config/app.config";
@@ -34,13 +35,13 @@ export class NotificationService {
   ) {
     if (process.env.NODE_ENV === "test") return true;
 
-    let senderEmailAddress = "noreply@mywellat.com";
+    let senderEmailAddress = "noreply@trackabl.io";
     const referralLink =
       configuration().environment.env === "development"
         ? `https://${
-            configuration().zeptoMail.wellatDevelopmentDomain
+            configuration().zeptoMail.trackablDevelopmentDomain
           }/referral/`
-        : `https://${configuration().zeptoMail.wellatDomain}/referral/`;
+        : `https://${configuration().zeptoMail.trackablDomain}/referral/`;
 
     let emailBody = "";
 
@@ -77,34 +78,34 @@ export class NotificationService {
 
   @OnEvent("send.email.authentication")
   async GetEmailBodyForAuthentication(
-    data: JoinedWellatSendEmail &
-      JoinedWellatVerifyEmailSendEmail &
+    data: JoinedTrackablSendEmail &
+      JoinedTrackablVerifyEmailSendEmail &
       RecoverPasswordSendEmail &
-      ReferralCodeUsedEmail
+      ReferralCodeUsedEmail &
+      ReferralCodeGenerated
   ) {
     if (process.env.NODE_ENV === "test") return true;
     /**
      * AUTHENTICATION EMAIL
      */
 
-    let senderEmailAddress = "noreply@mywellat.com";
+    let senderEmailAddress = "noreply@trackabl.io";
     const referralLink =
       configuration().environment.env === "development"
-        ? `https://${configuration().zeptoMail.wellatDevelopmentDomain}/create`
-        : `https://${configuration().zeptoMail.wellatDomain}/create`;
+        ? `https://${
+            configuration().zeptoMail.trackablDevelopmentDomain
+          }/create`
+        : `https://${configuration().zeptoMail.trackablDomain}/create`;
 
     let emailBody = "";
 
     if (data.emailType === "NewUserAccountSignUp") {
       // When a user signs up
-      emailBody = GetEmailBodyWithPath("/Authentication/WelcomeToWellat.html");
+      emailBody = GetEmailBodyWithPath(
+        "/Authentication/WelcomeToTrackabl.html"
+      );
 
-      emailBody = emailBody
-        .replace(/{{fullname}}/, data.recipientName)
-        .replace(
-          /{{ReferralLink}}/,
-          `${referralLink}?referralCode=${data.referralCode}`
-        );
+      emailBody = emailBody.replace(/{{fullname}}/, data.recipientName);
     }
 
     if (data.emailType === "NewUserAccountEmailVerification") {
@@ -113,10 +114,7 @@ export class NotificationService {
 
       emailBody = emailBody
         .replace(/{{fullname}}/, data.recipientName)
-        .replace(
-          /{{VerificationLink}}/,
-          `${referralLink}?token=${data.verificationCode}&email=${data.recipientEmail}`
-        );
+        .replace(/{{Code}}/, data.verificationCode);
     }
 
     if (data.emailType === "RecoverUserPassword") {
@@ -140,6 +138,16 @@ export class NotificationService {
       emailBody = emailBody
         .replace(/{{fullname}}/, data.fullname)
         .replace(/{{FriendsName}}/, data.FriendsName);
+    }
+
+    if (data.emailType === "GenerateReferralCode") {
+      emailBody = GetEmailBodyWithPath(
+        "/Authentication/ReferralCodeGenerationMessage.html"
+      );
+
+      emailBody = emailBody
+        .replace(/{{firstName}}/, data.recipientName.split(" ")[0])
+        .replace(/{{fullname}}/, data.recipientName);
     }
 
     if (emailBody.length) {

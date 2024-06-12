@@ -62,6 +62,8 @@ import { APIs } from "../utils/apis";
 
 import { models as DatabaseModels } from "../../models";
 
+const fs = require("fs");
+
 const isProduction = process.env.NODE_ENV === "production";
 const isTest = process.env.NODE_ENV === "test";
 
@@ -112,7 +114,11 @@ const port = isProduction
       database: DBName,
       ssl: false,
       dialectOptions: {
-        ssl: false,
+        ssl: isTest
+          ? false
+          : {
+              ca: fs.readFileSync("postgress.ca.crt"),
+            },
       },
       autoLoadModels: true,
       synchronize: false,

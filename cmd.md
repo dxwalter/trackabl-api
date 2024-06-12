@@ -25,3 +25,5 @@ Build docker image  - docker build -t dockerfile .
 ```
 sequelize migration:generate --name <filename>
 ```
+
+https://faceless.video/about

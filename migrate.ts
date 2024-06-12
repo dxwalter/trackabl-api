@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import * as dotenv from "dotenv";
+const fs = require("fs");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Umzug, SequelizeStorage } = require("umzug");
 
@@ -57,6 +58,11 @@ const sequelize = new Sequelize({
   username: username,
   password: password,
   database: database,
+  dialectOptions: {
+    ssl: {
+      ca: fs.readFileSync("postgress.ca.crt"),
+    },
+  },
 });
 
 const umzug = new Umzug({

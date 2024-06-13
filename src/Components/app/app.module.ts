@@ -58,6 +58,10 @@ import { ExpenseService } from "../expense/expense.service";
 
 import { CacheModule } from "@nestjs/cache-manager";
 
+import { EntrypointModule } from "../entrypoint/entrypoint.module";
+import { EntrypointController } from "../entrypoint/entrypoint.controller";
+import { EntrypointService } from "../entrypoint/entrypoint.service";
+
 import { APIs } from "../utils/apis";
 
 import { models as DatabaseModels } from "../../models";
@@ -138,6 +142,7 @@ const port = isProduction
     forwardRef(() => UserSubscriptionModel),
     forwardRef(() => CategoryModule),
     forwardRef(() => ExpenseModule),
+    forwardRef(() => EntrypointModule),
   ],
   controllers: [
     WaitlistController,
@@ -153,6 +158,7 @@ const port = isProduction
     SubscriptionController,
     CategoryController,
     ExpenseController,
+    EntrypointController,
   ],
   providers: [
     WaitlistService,
@@ -170,6 +176,7 @@ const port = isProduction
     CategoryService,
     SuggestedCategoryService,
     ExpenseService,
+    EntrypointService,
   ],
 })
 export class AppModule {}

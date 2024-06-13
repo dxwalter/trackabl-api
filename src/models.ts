@@ -19,6 +19,7 @@ import { SubcategoriesModel } from "./Components/category/model/subcatgories.mod
 import { SuggestedSubcategoriesModel } from "./Components/category/model/suggested-subcatgories.model";
 import { ExpenseModel } from "./Components/expense/model/expense.model";
 import { CurrencyModel } from "./Components/expense/model/currencies.model";
+import { EntrypointModel } from "./Components/entrypoint/model/entrypoint.model";
 
 export const models = [
   WaitlistUsersPoint,
@@ -42,4 +43,5 @@ export const models = [
   SuggestedSubcategoriesModel,
   ExpenseModel,
   CurrencyModel,
+  EntrypointModel,
 ];

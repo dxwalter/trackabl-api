@@ -28,5 +28,5 @@ jobs:
       - run: cd /var/www/trackabl-api/actions-runner/_work/trackabl-api/trackabl-api
       - run: npm install
       - run: npm run build
-      - run: pm2 restart 10
+      - run: pm2 restart 2
       - run: echo 'Deployment successful to digital ocean'

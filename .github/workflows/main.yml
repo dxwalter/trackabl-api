@@ -1,10 +1,32 @@
-name: test workflow
+name: TRACKABL_API
+
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+
 jobs:
-  first-job:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
-      - name: "Print Greeting"
-        run: echo "Hello world"
+      - uses: actions/checkout@v3
+        with:
+          clean: false
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - run: cd /var/www/trackabl-api/actions-runner/_work/trackabl-api/trackabl-api
+      - run: npm install
+      - run: npm run build
+      - run: pm2 restart 10
+      - run: echo 'Deployment successful to digital ocean'

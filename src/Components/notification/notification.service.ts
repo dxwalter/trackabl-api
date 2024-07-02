@@ -33,6 +33,7 @@ export class NotificationService {
   async GetEmailBodyForWaitlist(
     data: JoinWaitlistEmail & ReferredUserJoinedWithReferralLinkSendEmail
   ) {
+    console.log(process.env.NODE_ENV);
     if (process.env.NODE_ENV === "test") return true;
 
     let senderEmailAddress = "noreply@trackabl.io";
@@ -208,6 +209,7 @@ export class NotificationService {
     // try {
     // } catch (error) {
     // }
+    console.log(data);
     return data;
   }
 }

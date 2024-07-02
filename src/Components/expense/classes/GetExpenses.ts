@@ -48,7 +48,7 @@ export class QueryExpense {
     let aggreagate = {
       data: [],
     };
-    console.log(data.aggregate);
+
     if (data.aggregate.toLowerCase() === "category") {
       if (data.categoryId) {
         aggreagate =

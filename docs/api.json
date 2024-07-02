@@ -60,8 +60,8 @@
                 }
               },
               "example": {
-                "email": "ccc@gmail.com",
-                "password": "cccddedded",
+                "email": "wzohe@cupluv.pramerica",
+                "password": "P4rvXLw",
                 "trial_count": 0
               }
             }
@@ -75,51 +75,21 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "fullname": {
-                          "type": "string"
-                        },
-                        "email": {
-                          "type": "string"
-                        },
-                        "accessLevel": {
-                          "type": "string"
-                        },
-                        "createdAt": {
-                          "type": "string"
-                        },
-                        "updatedAt": {
-                          "type": "string"
-                        },
-                        "deletedAt": {},
-                        "token": {
-                          "type": "string"
-                        }
-                      }
-                    },
                     "message": {
                       "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "statusCode": {
+                      "type": "number"
                     }
                   }
                 },
                 "example": {
-                  "data": {
-                    "id": 1,
-                    "fullname": "Daniel",
-                    "email": "ccc@gmail.com",
-                    "accessLevel": "ADMIN",
-                    "createdAt": "2024-06-18T05:10:57.215Z",
-                    "updatedAt": "2024-06-18T05:10:57.215Z",
-                    "deletedAt": null,
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJEYW5pZWwiLCJlbWFpbCI6ImNjY0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2UkVKYnRsbFBqWDRiMUFjeEk3bzhPUURHMmNLemdsZ1hab0RucWRTTmQ0WFE1WFd2LllUZSIsInBhc3N3b3JkUmVjb3ZlcnlDb2RlIjpudWxsLCJhY2Nlc3NMZXZlbCI6IkFETUlOIiwiY3JlYXRlZEF0IjoiMjAyNC0wNi0xOFQwNToxMDo1Ny4yMTVaIiwidXBkYXRlZEF0IjoiMjAyNC0wNi0xOFQwNToxMDo1Ny4yMTVaIiwiZGVsZXRlZEF0IjpudWxsLCJpYXQiOjE3MTg2ODc0Njd9.-U8Ej4yjoD9k7lz0_85UBTomu2443USwRxSSELhLcGc"
-                  },
-                  "message": "Your login was successful",
-                  "status": true
+                  "message": "Failed login attempt",
+                  "error": "Bad Request",
+                  "statusCode": 400
                 }
               }
             }
@@ -163,8 +133,8 @@
                 }
               },
               "example": {
-                "email": "lalup@em.otsuka",
-                "password": "sVSGGpf",
+                "email": "zohe@cupluv.pramerica",
+                "password": "P4rvXLw",
                 "fullname": "Daniel",
                 "accessLevel": "ADMIN"
               }
@@ -187,182 +157,6 @@
                 "example": {
                   "status": true,
                   "message": "An admin was created successfully"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscription/markets": {
-      "get": {
-        "description": "",
-        "tags": [
-          "Subscription"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Accept",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          },
-                          "countryName": {
-                            "type": "string"
-                          },
-                          "countryCode": {
-                            "type": "string"
-                          },
-                          "currencyCode": {
-                            "type": "string"
-                          },
-                          "currencyName": {
-                            "type": "string"
-                          },
-                          "currencySymbol": {
-                            "type": "string"
-                          },
-                          "paymentProcessor": {
-                            "type": "string"
-                          },
-                          "vat": {
-                            "type": "number"
-                          },
-                          "createdAt": {
-                            "type": "string"
-                          },
-                          "updatedAt": {
-                            "type": "string"
-                          },
-                          "deletedAt": {}
-                        }
-                      }
-                    }
-                  }
-                },
-                "example": {
-                  "status": true,
-                  "message": "Ok",
-                  "data": [
-                    {
-                      "id": 1,
-                      "countryName": "Nigeria",
-                      "countryCode": "NG",
-                      "currencyCode": "NGN",
-                      "currencyName": "Naira",
-                      "currencySymbol": "₦",
-                      "paymentProcessor": "paystack",
-                      "vat": 7.5,
-                      "createdAt": "2024-06-18T05:10:57.244Z",
-                      "updatedAt": "2024-06-18T05:10:57.244Z",
-                      "deletedAt": null
-                    },
-                    {
-                      "id": 2,
-                      "countryName": "United States of America",
-                      "countryCode": "US",
-                      "currencyCode": "USD",
-                      "currencyName": "United States Dollar",
-                      "currencySymbol": "$",
-                      "paymentProcessor": "stripe",
-                      "vat": 0,
-                      "createdAt": "2024-06-18T05:10:57.244Z",
-                      "updatedAt": "2024-06-18T05:10:57.244Z",
-                      "deletedAt": null
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/entrypoint": {
-      "post": {
-        "description": "",
-        "tags": [
-          "Admin"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Accept",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "heroBannerUrl": {
-                    "type": "string"
-                  },
-                  "mobileHeroBannerImage": {
-                    "type": "string"
-                  },
-                  "benefitBannerUrl": {
-                    "type": "string"
-                  },
-                  "mobileBenefitBanner": {
-                    "type": "string"
-                  },
-                  "marketId": {
-                    "type": "number"
-                  }
-                }
-              },
-              "example": {
-                "heroBannerUrl": "https://res.cloudinary.com/dsvppsml4/image/upload/v1718264886/trackabl/entrypoint/gncgtxr5wmtnuh1r3zjx.png",
-                "mobileHeroBannerImage": "https://res.cloudinary.com/dsvppsml4/image/upload/v1718264886/trackabl/entrypoint/qybkexl5rgoc5ihvd5m7.png",
-                "benefitBannerUrl": "https://res.cloudinary.com/dsvppsml4/image/upload/v1718264869/trackabl/entrypoint/bdj6xda8o2kq59goso4a.png",
-                "mobileBenefitBanner": "",
-                "marketId": 1
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "example": {
-                  "status": true,
-                  "message": "Entrypoint data created"
                 }
               }
             }

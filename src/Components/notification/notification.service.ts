@@ -180,7 +180,7 @@ export class NotificationService {
       const makeRequest = await client.sendMail({
         from: {
           address: data.senderEmailAddress,
-          name: "Wellat",
+          name: "Trackabl.io",
         },
         to: [
           {

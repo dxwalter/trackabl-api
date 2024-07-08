@@ -52,6 +52,11 @@ export class AuthCreateUserAccount {
       9999
     );
 
+    console.log(
+      randomStringForEmailVerification,
+      randomStringForEmailVerification.toString()
+    );
+
     // Generate referral code
     const referralCode = this.utils.generateReferralCode();
 
@@ -152,6 +157,7 @@ export class AuthCreateUserAccount {
     recipientName: string;
     verificationCode: string;
   }) {
+    console.log(data.verificationCode);
     // Send email verification
     this.eventEmitter.emit("send.email.authentication", {
       emailBody: "text",

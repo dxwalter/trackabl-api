@@ -43,7 +43,10 @@ export class AuthGenerateEmailVerificationToken extends AuthCreateUserAccount {
       };
     }
 
-    const randomStringForEmailVerification = this.utils.generateEmailToken();
+    const randomStringForEmailVerification = this.utils.generateTokenWithRange(
+      1000,
+      9999
+    );
 
     const updateUserProfile = await this.userService.updateUserProfile(
       getEmail.id,
@@ -71,7 +74,7 @@ export class AuthGenerateEmailVerificationToken extends AuthCreateUserAccount {
       message: UserStatusMessages.EmailVerification.generateNewToken,
       emailVerificationCode:
         process.env.NODE_ENV === "test"
-          ? randomStringForEmailVerification
+          ? randomStringForEmailVerification.toString()
           : undefined,
     };
   }

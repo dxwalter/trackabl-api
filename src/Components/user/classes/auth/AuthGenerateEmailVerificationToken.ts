@@ -49,7 +49,7 @@ export class AuthGenerateEmailVerificationToken extends AuthCreateUserAccount {
       getEmail.id,
       {
         isEmailVerified: false,
-        emailVerificationCode: randomStringForEmailVerification,
+        emailVerificationCode: randomStringForEmailVerification.toString(),
         updatedAt: new Date(),
       }
     );
@@ -63,7 +63,7 @@ export class AuthGenerateEmailVerificationToken extends AuthCreateUserAccount {
     this.sendEmailVerification({
       recipientEmail: userEmail,
       recipientName: getEmail.firstName,
-      verificationCode: randomStringForEmailVerification,
+      verificationCode: randomStringForEmailVerification.toString(),
     });
 
     return {

@@ -55,7 +55,7 @@ export class AuthRecoverUserPassword {
     this.eventEmitter.emit("send.email.authentication", {
       emailBody: "text",
       recipientEmail: userEmail,
-      subject: `Your Wellat Password Reset - Get Back to Your Crypto Adventure!`,
+      subject: `Reset your Trackabl password!`,
       recipientName: getEmail.firstName,
       emailType: "RecoverUserPassword",
       recoveryCode: randomStringForEmailVerification,

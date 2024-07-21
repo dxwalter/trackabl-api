@@ -123,7 +123,7 @@ export class NotificationService {
       emailBody = GetEmailBodyWithPath("/Authentication/RecoverPassword.html");
 
       emailBody = emailBody
-        .replace(/{{fullname}}/, data.recipientName)
+        .replace(/{{Name}}/, data.recipientName)
         .replace(
           /{{LINK}}/,
           `${data.redirectPath}?token=${data.recoveryCode}&email=${data.recipientEmail}`
@@ -193,8 +193,6 @@ export class NotificationService {
         subject: data.subject,
         htmlbody: data.emailBody,
       });
-
-      console.log(makeRequest);
 
       return makeRequest;
     } catch (error) {

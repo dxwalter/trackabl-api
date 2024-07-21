@@ -113,10 +113,10 @@
                     "fullname": "Daniel",
                     "email": "ccc@gmail.com",
                     "accessLevel": "ADMIN",
-                    "createdAt": "2024-07-21T04:35:28.324Z",
-                    "updatedAt": "2024-07-21T04:35:28.324Z",
+                    "createdAt": "2024-07-21T04:40:11.295Z",
+                    "updatedAt": "2024-07-21T04:40:11.295Z",
                     "deletedAt": null,
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJEYW5pZWwiLCJlbWFpbCI6ImNjY0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2UkVKYnRsbFBqWDRiMUFjeEk3bzhPUURHMmNLemdsZ1hab0RucWRTTmQ0WFE1WFd2LllUZSIsInBhc3N3b3JkUmVjb3ZlcnlDb2RlIjpudWxsLCJhY2Nlc3NMZXZlbCI6IkFETUlOIiwiY3JlYXRlZEF0IjoiMjAyNC0wNy0yMVQwNDozNToyOC4zMjRaIiwidXBkYXRlZEF0IjoiMjAyNC0wNy0yMVQwNDozNToyOC4zMjRaIiwiZGVsZXRlZEF0IjpudWxsLCJpYXQiOjE3MjE1MzY1Mzd9.QnZoGQepGojicNv5IR9v_fAgxLRk9E_5MPkYdXlQ_YU"
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJEYW5pZWwiLCJlbWFpbCI6ImNjY0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2UkVKYnRsbFBqWDRiMUFjeEk3bzhPUURHMmNLemdsZ1hab0RucWRTTmQ0WFE1WFd2LllUZSIsInBhc3N3b3JkUmVjb3ZlcnlDb2RlIjpudWxsLCJhY2Nlc3NMZXZlbCI6IkFETUlOIiwiY3JlYXRlZEF0IjoiMjAyNC0wNy0yMVQwNDo0MDoxMS4yOTVaIiwidXBkYXRlZEF0IjoiMjAyNC0wNy0yMVQwNDo0MDoxMS4yOTVaIiwiZGVsZXRlZEF0IjpudWxsLCJpYXQiOjE3MjE1MzY4MjF9.2Z3UwiZ9xD0RAmPWU3R_xNCeITDDUOys-nSIpSEnexY"
                   },
                   "message": "Your login was successful",
                   "status": true
@@ -127,11 +127,11 @@
         }
       }
     },
-    "/admin/create": {
+    "/subscription/create-plan": {
       "post": {
         "description": "",
         "tags": [
-          "Admin"
+          "Subscription"
         ],
         "parameters": [
           {
@@ -148,25 +148,14 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "fullname": {
-                    "type": "string"
-                  },
-                  "accessLevel": {
+                  "name": {
                     "type": "string"
                   }
                 }
               },
               "example": {
-                "email": "efeceg@nu.ki",
-                "password": "zmcgAEd",
-                "fullname": "Daniel",
-                "accessLevel": "ADMIN"
+                "name": "Free-test",
+                "status": true
               }
             }
           }
@@ -181,12 +170,36 @@
                   "properties": {
                     "message": {
                       "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 },
                 "example": {
                   "status": true,
-                  "message": "An admin was created successfully"
+                  "message": "Subscription plan created successfully",
+                  "data": {
+                    "id": 8,
+                    "name": "Free-test",
+                    "status": true,
+                    "createdAt": "2024-07-21T04:40:21.941Z",
+                    "updatedAt": "2024-07-21T04:40:21.941Z"
+                  }
                 }
               }
             }
@@ -274,8 +287,8 @@
                       "currencySymbol": "₦",
                       "paymentProcessor": "paystack",
                       "vat": 7.5,
-                      "createdAt": "2024-07-21T04:35:28.341Z",
-                      "updatedAt": "2024-07-21T04:35:28.341Z",
+                      "createdAt": "2024-07-21T04:40:11.311Z",
+                      "updatedAt": "2024-07-21T04:40:11.311Z",
                       "deletedAt": null
                     },
                     {
@@ -287,8 +300,8 @@
                       "currencySymbol": "$",
                       "paymentProcessor": "stripe",
                       "vat": 0,
-                      "createdAt": "2024-07-21T04:35:28.341Z",
-                      "updatedAt": "2024-07-21T04:35:28.341Z",
+                      "createdAt": "2024-07-21T04:40:11.311Z",
+                      "updatedAt": "2024-07-21T04:40:11.311Z",
                       "deletedAt": null
                     }
                   ]
@@ -299,7 +312,100 @@
         }
       }
     },
-    "/entrypoint": {
+    "/subscription/admin-plans": {
+      "get": {
+        "description": "",
+        "tags": [
+          "Subscription"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Accept",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "deletedAt": {}
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "status": true,
+                  "message": "Ok",
+                  "data": [
+                    {
+                      "id": 1,
+                      "name": "Free",
+                      "status": true,
+                      "createdAt": "2024-07-21T04:40:11.324Z",
+                      "updatedAt": "2024-07-21T04:40:11.324Z",
+                      "deletedAt": null
+                    },
+                    {
+                      "id": 2,
+                      "name": "Regular",
+                      "status": true,
+                      "createdAt": "2024-07-21T04:40:11.324Z",
+                      "updatedAt": "2024-07-21T04:40:11.324Z",
+                      "deletedAt": null
+                    },
+                    {
+                      "id": 3,
+                      "name": "Premium",
+                      "status": true,
+                      "createdAt": "2024-07-21T04:40:11.324Z",
+                      "updatedAt": "2024-07-21T04:40:11.324Z",
+                      "deletedAt": null
+                    },
+                    {
+                      "id": 8,
+                      "name": "Free-test",
+                      "status": true,
+                      "createdAt": "2024-07-21T04:40:21.941Z",
+                      "updatedAt": "2024-07-21T04:40:21.941Z",
+                      "deletedAt": null
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscription/create-plan-price": {
       "post": {
         "description": "",
         "tags": [
@@ -320,33 +426,297 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "heroBannerUrl": {
-                    "type": "string"
-                  },
-                  "mobileHeroBannerImage": {
-                    "type": "string"
-                  },
-                  "benefitBannerUrl": {
-                    "type": "string"
-                  },
-                  "mobileBenefitBanner": {
-                    "type": "string"
+                  "planId": {
+                    "type": "number"
                   },
                   "marketId": {
+                    "type": "number"
+                  },
+                  "freePlanPriceInDays": {
+                    "type": "number"
+                  },
+                  "priceAMonth": {
                     "type": "number"
                   }
                 }
               },
               "example": {
-                "heroBannerUrl": "https://res.cloudinary.com/dsvppsml4/image/upload/v1718264886/trackabl/entrypoint/gncgtxr5wmtnuh1r3zjx.png",
-                "mobileHeroBannerImage": "https://res.cloudinary.com/dsvppsml4/image/upload/v1718264886/trackabl/entrypoint/qybkexl5rgoc5ihvd5m7.png",
-                "benefitBannerUrl": "https://res.cloudinary.com/dsvppsml4/image/upload/v1718264869/trackabl/entrypoint/bdj6xda8o2kq59goso4a.png",
-                "mobileBenefitBanner": "",
-                "marketId": 1
+                "planId": 3,
+                "marketId": 2,
+                "freePlanPriceInDays": 7,
+                "priceAMonth": 10
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "planId": {
+                          "type": "number"
+                        },
+                        "marketId": {
+                          "type": "number"
+                        },
+                        "freePlanPriceInDays": {
+                          "type": "number"
+                        },
+                        "priceAMonth": {
+                          "type": "number"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "deletedAt": {}
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "status": true,
+                  "message": "Subscription price created successfully",
+                  "data": {
+                    "id": 6,
+                    "planId": 3,
+                    "marketId": 2,
+                    "freePlanPriceInDays": 7,
+                    "priceAMonth": 10,
+                    "updatedAt": "2024-07-21T04:40:21.975Z",
+                    "createdAt": "2024-07-21T04:40:21.975Z",
+                    "deletedAt": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscription/admin-get-plans": {
+      "get": {
+        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Accept",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "marketId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "planId": {
+                            "type": "number"
+                          },
+                          "marketId": {
+                            "type": "number"
+                          },
+                          "freePlanPriceInDays": {
+                            "type": "number"
+                          },
+                          "priceAMonth": {
+                            "type": "number"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "deletedAt": {},
+                          "market": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "countryName": {
+                                "type": "string"
+                              },
+                              "countryCode": {
+                                "type": "string"
+                              },
+                              "currencyCode": {
+                                "type": "string"
+                              },
+                              "currencyName": {
+                                "type": "string"
+                              },
+                              "currencySymbol": {
+                                "type": "string"
+                              },
+                              "paymentProcessor": {
+                                "type": "string"
+                              },
+                              "vat": {
+                                "type": "number"
+                              },
+                              "createdAt": {
+                                "type": "string"
+                              },
+                              "updatedAt": {
+                                "type": "string"
+                              },
+                              "deletedAt": {}
+                            }
+                          },
+                          "subscriptionPlan": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "createdAt": {
+                                "type": "string"
+                              },
+                              "updatedAt": {
+                                "type": "string"
+                              },
+                              "deletedAt": {}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "status": true,
+                  "message": "Ok",
+                  "data": [
+                    {
+                      "id": 4,
+                      "planId": 1,
+                      "marketId": 2,
+                      "freePlanPriceInDays": 7,
+                      "priceAMonth": 0,
+                      "createdAt": "2024-07-21T04:40:15.855Z",
+                      "updatedAt": "2024-07-21T04:40:15.855Z",
+                      "deletedAt": null,
+                      "market": {
+                        "id": 2,
+                        "countryName": "United States of America",
+                        "countryCode": "US",
+                        "currencyCode": "USD",
+                        "currencyName": "United States Dollar",
+                        "currencySymbol": "$",
+                        "paymentProcessor": "stripe",
+                        "vat": 0,
+                        "createdAt": "2024-07-21T04:40:11.311Z",
+                        "updatedAt": "2024-07-21T04:40:11.311Z",
+                        "deletedAt": null
+                      },
+                      "subscriptionPlan": {
+                        "id": 1,
+                        "name": "Free",
+                        "status": true,
+                        "createdAt": "2024-07-21T04:40:11.324Z",
+                        "updatedAt": "2024-07-21T04:40:11.324Z",
+                        "deletedAt": null
+                      }
+                    },
+                    {
+                      "id": 6,
+                      "planId": 3,
+                      "marketId": 2,
+                      "freePlanPriceInDays": 7,
+                      "priceAMonth": 10,
+                      "createdAt": "2024-07-21T04:40:21.975Z",
+                      "updatedAt": "2024-07-21T04:40:21.975Z",
+                      "deletedAt": null,
+                      "market": {
+                        "id": 2,
+                        "countryName": "United States of America",
+                        "countryCode": "US",
+                        "currencyCode": "USD",
+                        "currencyName": "United States Dollar",
+                        "currencySymbol": "$",
+                        "paymentProcessor": "stripe",
+                        "vat": 0,
+                        "createdAt": "2024-07-21T04:40:11.311Z",
+                        "updatedAt": "2024-07-21T04:40:11.311Z",
+                        "deletedAt": null
+                      },
+                      "subscriptionPlan": {
+                        "id": 3,
+                        "name": "Premium",
+                        "status": true,
+                        "createdAt": "2024-07-21T04:40:11.324Z",
+                        "updatedAt": "2024-07-21T04:40:11.324Z",
+                        "deletedAt": null
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscription/price/5": {
+      "delete": {
+        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Accept",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -362,7 +732,83 @@
                 },
                 "example": {
                   "status": true,
-                  "message": "Entrypoint data created"
+                  "message": "Subscription plan price deleted successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscription/price/6": {
+      "delete": {
+        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Accept",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "status": true,
+                  "message": "Subscription plan price deleted successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscription/plan/8": {
+      "delete": {
+        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Accept",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "status": true,
+                  "message": "Subscription plan deleted successfully"
                 }
               }
             }

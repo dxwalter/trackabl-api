@@ -60,8 +60,8 @@
                 }
               },
               "example": {
-                "email": "wjinod@momme.fund",
-                "password": "4ILLkpF",
+                "email": "ccc@gmail.com",
+                "password": "cccddedded",
                 "trial_count": 0
               }
             }
@@ -75,21 +75,51 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "fullname": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "accessLevel": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "deletedAt": {},
+                        "token": {
+                          "type": "string"
+                        }
+                      }
+                    },
                     "message": {
                       "type": "string"
-                    },
-                    "error": {
-                      "type": "string"
-                    },
-                    "statusCode": {
-                      "type": "number"
                     }
                   }
                 },
                 "example": {
-                  "message": "Failed login attempt",
-                  "error": "Bad Request",
-                  "statusCode": 400
+                  "data": {
+                    "id": 1,
+                    "fullname": "Daniel",
+                    "email": "ccc@gmail.com",
+                    "accessLevel": "ADMIN",
+                    "createdAt": "2024-07-21T04:35:28.324Z",
+                    "updatedAt": "2024-07-21T04:35:28.324Z",
+                    "deletedAt": null,
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJEYW5pZWwiLCJlbWFpbCI6ImNjY0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2UkVKYnRsbFBqWDRiMUFjeEk3bzhPUURHMmNLemdsZ1hab0RucWRTTmQ0WFE1WFd2LllUZSIsInBhc3N3b3JkUmVjb3ZlcnlDb2RlIjpudWxsLCJhY2Nlc3NMZXZlbCI6IkFETUlOIiwiY3JlYXRlZEF0IjoiMjAyNC0wNy0yMVQwNDozNToyOC4zMjRaIiwidXBkYXRlZEF0IjoiMjAyNC0wNy0yMVQwNDozNToyOC4zMjRaIiwiZGVsZXRlZEF0IjpudWxsLCJpYXQiOjE3MjE1MzY1Mzd9.QnZoGQepGojicNv5IR9v_fAgxLRk9E_5MPkYdXlQ_YU"
+                  },
+                  "message": "Your login was successful",
+                  "status": true
                 }
               }
             }
@@ -133,8 +163,8 @@
                 }
               },
               "example": {
-                "email": "jinod@momme.fund",
-                "password": "4ILLkpF",
+                "email": "efeceg@nu.ki",
+                "password": "zmcgAEd",
                 "fullname": "Daniel",
                 "accessLevel": "ADMIN"
               }
@@ -157,6 +187,182 @@
                 "example": {
                   "status": true,
                   "message": "An admin was created successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscription/markets": {
+      "get": {
+        "description": "",
+        "tags": [
+          "Subscription"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Accept",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "countryName": {
+                            "type": "string"
+                          },
+                          "countryCode": {
+                            "type": "string"
+                          },
+                          "currencyCode": {
+                            "type": "string"
+                          },
+                          "currencyName": {
+                            "type": "string"
+                          },
+                          "currencySymbol": {
+                            "type": "string"
+                          },
+                          "paymentProcessor": {
+                            "type": "string"
+                          },
+                          "vat": {
+                            "type": "number"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "deletedAt": {}
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "status": true,
+                  "message": "Ok",
+                  "data": [
+                    {
+                      "id": 1,
+                      "countryName": "Nigeria",
+                      "countryCode": "NG",
+                      "currencyCode": "NGN",
+                      "currencyName": "Naira",
+                      "currencySymbol": "₦",
+                      "paymentProcessor": "paystack",
+                      "vat": 7.5,
+                      "createdAt": "2024-07-21T04:35:28.341Z",
+                      "updatedAt": "2024-07-21T04:35:28.341Z",
+                      "deletedAt": null
+                    },
+                    {
+                      "id": 2,
+                      "countryName": "United States of America",
+                      "countryCode": "US",
+                      "currencyCode": "USD",
+                      "currencyName": "United States Dollar",
+                      "currencySymbol": "$",
+                      "paymentProcessor": "stripe",
+                      "vat": 0,
+                      "createdAt": "2024-07-21T04:35:28.341Z",
+                      "updatedAt": "2024-07-21T04:35:28.341Z",
+                      "deletedAt": null
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entrypoint": {
+      "post": {
+        "description": "",
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Accept",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "heroBannerUrl": {
+                    "type": "string"
+                  },
+                  "mobileHeroBannerImage": {
+                    "type": "string"
+                  },
+                  "benefitBannerUrl": {
+                    "type": "string"
+                  },
+                  "mobileBenefitBanner": {
+                    "type": "string"
+                  },
+                  "marketId": {
+                    "type": "number"
+                  }
+                }
+              },
+              "example": {
+                "heroBannerUrl": "https://res.cloudinary.com/dsvppsml4/image/upload/v1718264886/trackabl/entrypoint/gncgtxr5wmtnuh1r3zjx.png",
+                "mobileHeroBannerImage": "https://res.cloudinary.com/dsvppsml4/image/upload/v1718264886/trackabl/entrypoint/qybkexl5rgoc5ihvd5m7.png",
+                "benefitBannerUrl": "https://res.cloudinary.com/dsvppsml4/image/upload/v1718264869/trackabl/entrypoint/bdj6xda8o2kq59goso4a.png",
+                "mobileBenefitBanner": "",
+                "marketId": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "status": true,
+                  "message": "Entrypoint data created"
                 }
               }
             }

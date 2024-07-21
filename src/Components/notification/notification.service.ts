@@ -194,6 +194,8 @@ export class NotificationService {
         htmlbody: data.emailBody,
       });
 
+      console.log(makeRequest);
+
       return makeRequest;
     } catch (error) {
       await this.saveEmailResponseLog({

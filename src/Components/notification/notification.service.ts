@@ -125,7 +125,7 @@ export class NotificationService {
       emailBody = emailBody
         .replace(/{{fullname}}/, data.recipientName)
         .replace(
-          /{{RecoverPassordLink}}/,
+          /{{LINK}}/,
           `${data.redirectPath}?token=${data.recoveryCode}&email=${data.recipientEmail}`
         );
     }

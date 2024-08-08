@@ -34,6 +34,7 @@ export class ManageExpense {
     file: fileType | null | undefined
   ): Promise<createExpenseResponse> {
     let fileUrl = "";
+
     if (file) {
       fileUrl = await this.utils.uploadImageToCloudinary({
         imagePath: file.path,
@@ -41,25 +42,28 @@ export class ManageExpense {
       });
     }
 
-    if (!data.categoryId) {
+    const categoryId = Number(data.categoryId);
+    const subcategoryId = Number(data.subcategoryId);
+    const currencyId = Number(data.currencyId);
+    const amount = Number(data.amount);
+
+    if (!categoryId) {
       throw new CategoryRequiredException();
     }
 
-    const getCategory = await this.categoryService.findCategoryUsingId(
-      data.categoryId
-    );
+    const getCategory =
+      await this.categoryService.findCategoryUsingId(categoryId);
 
     if (!getCategory) {
       throw new CategoryNotFoundException();
     }
 
-    if (!data.subcategoryId) {
+    if (!subcategoryId) {
       throw new SubcategoryRequiredException();
     }
 
-    const getSubcategory = await this.categoryService.findSubcategoryUsingId(
-      data.subcategoryId
-    );
+    const getSubcategory =
+      await this.categoryService.findSubcategoryUsingId(subcategoryId);
 
     if (!getSubcategory) {
       throw new SubcategoryNotFoundException();
@@ -69,9 +73,8 @@ export class ManageExpense {
       throw new CurrencyRequiredException();
     }
 
-    const getCurrency = await this.expenseService.findCurrencyUsingID(
-      data.currencyId
-    );
+    const getCurrency =
+      await this.expenseService.findCurrencyUsingID(currencyId);
     if (!getCurrency) {
       throw new CurrencyNotFoundException();
     }
@@ -83,13 +86,13 @@ export class ManageExpense {
       status: true,
       message: ExpenseStatusMessages.Create.success,
       data: await this.expenseService.createExpense({
-        categoryId: data.categoryId,
+        categoryId: categoryId,
         expenseDate,
         expenseDateInUnixTimestamp: expenseDateToUnix,
-        amount: data.amount,
-        currencyId: data.currencyId,
+        amount,
+        currencyId: currencyId,
         note: data.note,
-        subcategoryId: data.subcategoryId,
+        subcategoryId: subcategoryId,
         userId,
         receipt: fileUrl.length > 0 ? fileUrl : null,
       }),
@@ -102,6 +105,10 @@ export class ManageExpense {
     file: fileType | null | undefined,
     expenseId: number
   ): Promise<createExpenseResponse> {
+    const categoryId = Number(data.categoryId);
+    const subcategoryId = Number(data.subcategoryId);
+    const currencyId = Number(data.currencyId);
+    const amount = Number(data.amount);
     const getExpense = await this.expenseService.findExpense(expenseId);
 
     if (!getExpense) {
@@ -123,11 +130,11 @@ export class ManageExpense {
     const expenseDate = new Date(data.expenseDate);
     const expenseDateToUnix = dayjs(data.expenseDate).unix();
 
-    if (getExpense.categoryId !== data.categoryId) {
+    if (getExpense.categoryId !== categoryId) {
       updatedFields["categoryId"] = data.categoryId;
     }
 
-    if (getExpense.subcategoryId !== data.subcategoryId) {
+    if (getExpense.subcategoryId !== subcategoryId) {
       updatedFields["subcategoryId"] = data.subcategoryId;
     }
 
@@ -147,12 +154,12 @@ export class ManageExpense {
       updatedFields["receipt"] = null;
     }
 
-    if (getExpense.currencyId !== data.currencyId) {
+    if (getExpense.currencyId !== currencyId) {
       updatedFields["currencyId"] = data.currencyId;
     }
 
-    if (getExpense.amount !== data.amount) {
-      updatedFields["amount"] = data.amount;
+    if (getExpense.amount !== amount) {
+      updatedFields["amount"] = amount;
     }
 
     if (getExpense.note !== data.note) {

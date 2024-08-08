@@ -16,35 +16,35 @@ import {
 } from "class-validator";
 
 import { TrialCount } from "../../../Config/global.dto";
-export class CreateExpenseDto extends TrialCount {
-  @IsNumber()
+export class CreateExpenseDto {
+  @IsString()
   @IsNotEmpty({
     message: "Select a category",
   })
-  public categoryId: number;
+  public categoryId: string;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty({
     message: "Select a subcategory",
   })
-  public subcategoryId: number;
+  public subcategoryId: string;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty({
     message: "Select a currency",
   })
-  public currencyId: number;
+  public currencyId: string;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty({
     message: "Enter an amount for this expense",
   })
-  public amount: number;
+  public amount: string;
 
   @IsOptional()
   public receipt?: any;
 
-  @IsDateString()
+  @IsString()
   @IsNotEmpty({
     message: "Enter a date this expense was made",
   })
@@ -53,6 +53,10 @@ export class CreateExpenseDto extends TrialCount {
   @IsString()
   @IsOptional()
   public note: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public trial_count: string;
 }
 
 export class EditExpenseDto extends CreateExpenseDto {

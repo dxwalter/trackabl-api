@@ -15,7 +15,7 @@ export interface getExpenseSqlQueryInterface {
   categoryId?: number;
   subcategoryId?: number;
   userId: number;
-  pageNumber: number;
+  pageNumber?: number;
 }
 
 type categoryAggregate = {
@@ -65,9 +65,13 @@ export class ExpenseSqlQuery {
   async getExpensesInChronologicalOrder(
     data: getExpenseSqlQueryInterface
   ): Promise<ExpenseModel[]> {
-    const limit = 15;
+    const limit = data.pageNumber ? 15 : 100000000;
 
-    const offset = data.pageNumber === 1 ? 0 : (data.pageNumber - 1) * limit;
+    const offset = data.pageNumber
+      ? data.pageNumber === 1
+        ? 0
+        : (data.pageNumber - 1) * limit
+      : 1;
 
     try {
       return await this.expenseModel.findAll({
@@ -104,6 +108,7 @@ export class ExpenseSqlQuery {
         ],
       });
     } catch (error) {
+      console.log(error);
       Error.captureStackTrace(error);
       this.eventEmitter.emit("log.system.error", {
         message: `An error occurred getting expenses`,

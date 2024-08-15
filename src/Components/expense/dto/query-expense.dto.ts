@@ -12,9 +12,9 @@ export class QueryExpensesDto {
   @IsOptional()
   readonly categoryId?: number;
 
-  @IsNotEmpty()
-  readonly pageNumber: number;
+  @IsOptional()
+  readonly pageNumber?: number;
 
-  @IsNotEmpty()
-  readonly aggregate: string;
+  @IsOptional()
+  readonly aggregate?: string;
 }

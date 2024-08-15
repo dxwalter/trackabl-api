@@ -36,7 +36,8 @@ export interface getCurrenciesResponse extends GlobalRequestResponse {
 
 export interface getExpensesResponse extends GlobalRequestResponse {
   data: {
-    expense: ExpenseModel[];
+    expense: ExpenseModel[] | undefined;
     aggregation: any;
+    expenseTotal?: number | undefined;
   };
 }
